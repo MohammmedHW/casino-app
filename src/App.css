@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+/* src/index.css or src/App.css */
+@font-face {
+  font-family: 'BigNoodleTitling';
+  src: url('../assets/fonts/big_noodle_titling_oblique.ttf') format('opentype'); /* Adjust the path based on your folder structure */
+  font-weight: normal;
+  font-style: normal;
+}
+
