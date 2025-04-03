@@ -25,7 +25,7 @@ import Expert3 from '../assets/images/expert3.png';
 import Expert4 from '../assets/images/expert4.png';
 import Expert5 from '../assets/images/expert5.png';
 import Expert6 from '../assets/images/expert6.png';
-import Expert7 from '../assets/images/expert7.png';
+
 
 import certified from '../assets/images/Certified.png';
 import Footer from "../components/Footer";

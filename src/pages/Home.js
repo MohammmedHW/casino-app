@@ -7,7 +7,7 @@ import GameIcon1 from '../assets/images/Game Icon.png';
 import GameIcon2 from '../assets/images/Game Icon (1).png';
 import GameIcon3 from '../assets/images/Game Icon (2).png';
 import GameIcon4 from '../assets/images/Game Icon (3).png';
-import GameIcon5 from '../assets/images/Game Icon 4.png';
+
 
 import cardImage1 from '../assets/images/bulletz.png';
 import cardImage2 from '../assets/images/image 7.png';
@@ -18,7 +18,7 @@ import CasinoCard from '../components/CasinoCard';
 
 import casinocard1 from '../assets/images/wazbee.png';
 import casinocard2 from '../assets/images/compeon.png';
-import casinocard3 from '../assets/images/Frame 650 (2).png';
+
 
 
 const Home = () => {
