@@ -1,58 +1,71 @@
-import { useState } from "react";
+
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from '../components/Navbar';
+import { useAuth } from "../context/AuthContext";
+import Navbar from "../components/Navbar";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Hardcoded credentials
-    if (email === "admin@gmail.com" && password === "admin") {
-      localStorage.setItem("token", "admin-token");
+    try {
+      await login(email, password);
       navigate("/dashboard");
-    } else {
-      alert("Invalid credentials");
+    } catch (err) {
+      setError(err.message || "Login failed");
     }
   };
 
   return (
-
     <>
-    <Navbar />
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-semibold text-center mb-4">Admin Login</h2>
-        <form onSubmit={handleLogin} className="space-y-4">
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full p-2 border rounded"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full p-2 border rounded"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-            Login
-          </button>
-        </form>
+      <Navbar />
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="bg-white p-8 rounded-lg shadow-md w-96">
+          <h2 className="text-2xl font-semibold text-center mb-4">
+            Admin Login
+          </h2>
+          {error && (
+            <div className="text-red-500 mb-4 text-center">{error}</div>
+          )}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="flex flex-col">
+              <label className="text-sm font-medium mb-1">Email</label>
+              <input
+                type="email"
+                placeholder="Email"
+                className="w-full p-2 border rounded"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className="text-sm font-medium mb-1">Password</label>
+              <input
+                type="password"
+                placeholder="Password"
+                className="w-full p-2 border rounded"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition"
+            >
+              Login
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
- 
     </>
- );
+  );
 };
-    
 
 export default Login;

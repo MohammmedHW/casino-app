@@ -11,10 +11,11 @@ import BlogsAdmin from "./pages/BlogsAdmin";
 import SettingsAdmin from "./pages/SettingsAdmin";
 import CreateCasino from "./pages/CreateCasino";
 import CreateBlog from "./pages/CreateBlog";
+import EditCasino from "./pages/EditCasino";
+import EditBlog from "./pages/EditBlog";
 function App() {
   return (
     <>
-     
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/casinos" element={<Casinos />} />
@@ -28,9 +29,8 @@ function App() {
         <Route path="/settings-admin" element={<SettingsAdmin />} />
         <Route path="/create-casino" element={<CreateCasino />} />
         <Route path="/create-blog" element={<CreateBlog />} />
-
-
-       
+        <Route path="/edit-casino/:id" element={<EditCasino />} />
+        <Route path="/edit-blog/:id" element={<EditBlog />} />
       </Routes>
     </>
   );

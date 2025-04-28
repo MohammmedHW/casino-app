@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
+import { createBlog } from "../api/blogs.js";
 
 const CreateBlog = () => {
   const [blog, setBlog] = useState({
     title: "",
     author: "",
     content: "",
-    publishDate: new Date().toLocaleDateString("en-CA"), // Ensures proper format for date input
+    publishDate: new Date().toLocaleDateString("en-CA"),
   });
 
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const CreateBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/blogs", blog);
+      await createBlog(blog);
       navigate("/blogs-admin");
     } catch (error) {
       console.error("Error adding blog:", error);
@@ -32,7 +33,6 @@ const CreateBlog = () => {
     <div className="flex">
       <Sidebar />
       <div className="flex-1 p-6">
-      
         <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex flex-col">
@@ -86,11 +86,14 @@ const CreateBlog = () => {
             </div>
 
             <div className="flex space-x-2">
-              <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+              <button
+                type="submit"
+                className="bg-blue-500 text-white px-4 py-2 rounded"
+              >
                 Add Blog
               </button>
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="bg-gray-500 text-white px-4 py-2 rounded"
                 onClick={() => navigate("/blogs-admin")}
               >

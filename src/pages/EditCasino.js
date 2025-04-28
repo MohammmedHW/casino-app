@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { createCasino } from "../api/casinos.js";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { getCasinoById, updateCasino } from "../api/casinos";
 import { uploadImage } from "../api/upload";
 import Sidebar from "../components/Sidebar";
 
-const CreateCasino = () => {
+const EditCasino = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [casino, setCasino] = useState({
     name: "",
     logo: "",
@@ -35,14 +37,26 @@ const CreateCasino = () => {
     customerSupportDescription: "",
     responsibleGamblingDescription: "",
   });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchCasino = async () => {
+      try {
+        const data = await getCasinoById(id);
+        setCasino(data);
+      } catch (err) {
+        setError(err.message || "Failed to load casino");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCasino();
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Handle nested fields
     if (name.includes(".")) {
       const [parent, child] = name.split(".");
       setCasino((prev) => ({
@@ -77,20 +91,42 @@ const CreateCasino = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      await createCasino(casino);
+      await updateCasino(id, casino);
       navigate("/casinos-admin");
     } catch (err) {
-      setError(err.message || "Failed to create casino");
+      setError(err.message || "Failed to update casino");
     } finally {
       setLoading(false);
     }
   };
 
+  if (loading && !casino.name) {
+    return (
+      <div className="flex">
+        <Sidebar />
+        <div className="flex-1 p-6">
+          <div className="text-center">Loading casino data...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex">
+        <Sidebar />
+        <div className="flex-1 p-6">
+          <div className="text-red-500 text-center">{error}</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex">
       <Sidebar />
       <div className="flex-1 p-6">
-        <h2 className="text-2xl font-bold mb-6">Create Casino</h2>
+        <h2 className="text-2xl font-bold mb-6">Edit Casino</h2>
         {error && <div className="text-red-500 mb-4">{error}</div>}
         <form
           onSubmit={handleSubmit}
@@ -222,7 +258,7 @@ const CreateCasino = () => {
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
               disabled={loading}
             >
-              {loading ? "Creating..." : "Create Casino"}
+              {loading ? "Updating..." : "Update Casino"}
             </button>
             <button
               type="button"
@@ -238,4 +274,4 @@ const CreateCasino = () => {
   );
 };
 
-export default CreateCasino;
+export default EditCasino;
