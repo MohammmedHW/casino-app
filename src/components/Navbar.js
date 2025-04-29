@@ -2,47 +2,140 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation(); // Use the router's location hook
+  const location = useLocation();
+  const [activeMenuIndex, setActiveMenuIndex] = useState(null);
+  const [hoverTimeout, setHoverTimeout] = useState(null);
 
-  const getActiveClass = (path) => {
-    return location.pathname === path ? 'text-red-600' : 'hover:text-red-600';
+  const getActiveClass = (path) =>
+    location.pathname === path ? 'text-red-600' : 'hover:text-red-600';
+
+  const menuItems = [
+    { name: 'Home', path: '/', submenu: [] },
+    {
+      name: 'Casinos',
+      path: '/casinos',
+      submenu: [
+        { name: 'Crypto Casino', path: '/casinos/crypto' },
+        { name: 'Online Casino', path: '/casinos/online' },
+        { name: 'Certified Casino', path: '/casinos/certified' },
+        { name: 'Mobile Casino', path: '/casinos/mobile' },
+        { name: 'Newest Casino', path: '/casinos/newest' },
+      ],
+    },
+    {
+      name: 'Bonuses',
+      path: '/bonuses',
+      submenu: [
+        { name: 'Latest Bonus', path: '/bonuses/latest' },
+        { name: 'Exclusive Bonus', path: '/bonuses/exclusive' },
+        { name: 'Welcome Bonus', path: '/bonuses/welcome' },
+        { name: 'No Deposit', path: '/bonuses/no-deposit' },
+        { name: 'Free Spins Bonus', path: '/bonuses/free-spins' },
+        { name: 'Cashback Bonus', path: '/bonuses/cashback' },
+        { name: 'No Wagering Bonus', path: '/bonuses/no-wagering' },
+      ],
+    },
+    {
+      name: 'Games',
+      path: '/games',
+      submenu: [
+        { name: 'Casino Games', path: '/games/casino' },
+        { name: 'Table Games', path: '/games/table' },
+        { name: 'Card Games', path: '/games/card' },
+        { name: 'Dice Games', path: '/games/dice' },
+        { name: 'Real Money Online Slots', path: '/games/real-money-slots' },
+        { name: 'Poker', path: '/games/poker' },
+        { name: 'Bingo', path: '/games/bingo' },
+        { name: 'Lottery Games', path: '/games/lottery' },
+      ],
+    },
+    {
+      name: 'Slots',
+      path: '/slots',
+      submenu: [
+        { name: 'Video', path: '/slots/video' },
+        { name: 'Classic Slots', path: '/slots/classic' },
+        { name: 'Progressive Slots', path: '/slots/progressive' },
+        { name: 'New Slots', path: '/slots/new' },
+      ],
+    },
+    {
+      name: 'Betting',
+      path: '/betting',
+      submenu: [
+        { name: 'Sports Betting', path: '/betting/sports' },
+        { name: 'New Betting Sites', path: '/betting/new-sites' },
+        { name: 'Bet Types', path: '/betting/types' },
+        { name: 'Betting Bonuses', path: '/betting/bonuses' },
+        { name: 'Free Bets', path: '/betting/free-bets' },
+      ],
+    },
+    { name: 'About Us', path: '/about-us', submenu: [] },
+  ];
+
+  const handleMouseEnter = (index) => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+    setActiveMenuIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setActiveMenuIndex(null);
+    }, 200); // 200ms delay before closing
+    setHoverTimeout(timeout);
   };
 
   return (
     <nav className="bg-black bg-opacity-70 text-white p-4 fixed w-full top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <div className="text-3xl ml-10" style={{ fontFamily: 'BigNoodleTitling', letterSpacing: '0.1em' }}>MR GAMBLERS</div>
-
-        {/* Hamburger Menu for mobile */}
-        <div className="md:hidden">
-          <button onClick={() => setIsOpen(!isOpen)}>
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path>
-            </svg>
-          </button>
+        <div className="text-3xl ml-10" style={{ fontFamily: 'BigNoodleTitling', letterSpacing: '0.1em' }}>
+          MR GAMBLERS
         </div>
 
-        {/* Links */}
-        <div className={`md:flex mr-10 space-x-8 hidden text-xl md:block`} style={{ fontFamily: 'BigNoodleTitling', letterSpacing: '0.08em' }}>
-          <Link to="/" className={getActiveClass("/")}>Home</Link>
-          <Link to="/casinos" className={getActiveClass("/casinos")}>Casinos</Link>
-          <Link to="/bonuses" className={getActiveClass("/bonuses")}>Bonuses</Link>
-          <Link to="/games" className={getActiveClass("/games")}>Games</Link>
-          <Link to="/about-us" className={getActiveClass("/about-us")}>About Us</Link>
-        </div>
+        <div
+          className="hidden md:flex mr-10 space-x-8 text-xl relative"
+          style={{ fontFamily: 'BigNoodleTitling', letterSpacing: '0.08em' }}
+        >
+          {menuItems.map((item, idx) => (
+            <div
+              key={idx}
+              className="relative group"
+              onMouseEnter={() => handleMouseEnter(idx)}
+              onMouseLeave={handleMouseLeave}
+            >
+              <Link to={item.path} className={`block ${getActiveClass(item.path)} px-2`}>
+                {item.name}
+              </Link>
 
-        {/* Mobile Links */}
-        {isOpen && (
-          <div className="md:hidden flex flex-col items-center space-y-4 absolute top-14 left-0 w-full bg-black p-4">
-            <Link to="/" className={getActiveClass("/")} onClick={() => setIsOpen(false)}>Home</Link>
-            <Link to="/casinos" className={getActiveClass("/casinos")} onClick={() => setIsOpen(false)}>Casinos</Link>
-            <Link to="/bonuses" className={getActiveClass("/bonuses")} onClick={() => setIsOpen(false)}>Bonuses</Link>
-            <Link to="/games" className={getActiveClass("/games")} onClick={() => setIsOpen(false)}>Games</Link>
-            <Link to="/about-us" className={getActiveClass("/about-us")} onClick={() => setIsOpen(false)}>About Us</Link>
-          </div>
-        )}
+              {item.submenu.length > 0 && (
+                <div
+                  className={`absolute left-0 top-full pt-2 transition-all duration-300 ease-in-out ${
+                    activeMenuIndex === idx ? 'opacity-100 visible' : 'opacity-0 invisible'
+                  }`}
+                >
+                  <div
+                    className="bg-black text-white rounded shadow-lg z-50 w-64 border border-gray-700"
+                    onMouseEnter={() => handleMouseEnter(idx)}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    {item.submenu.map((sub, subIdx) => (
+                      <Link
+                        key={subIdx}
+                        to={sub.path}
+                        className="block px-6 py-3 hover:bg-red-600 transition duration-200"
+                      >
+                        {sub.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </nav>
   );

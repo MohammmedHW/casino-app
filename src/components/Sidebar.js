@@ -2,10 +2,10 @@ import { Link, useLocation } from "react-router-dom";
 import { FaTachometerAlt, FaGamepad, FaBlog, FaCog } from "react-icons/fa";
 
 const Sidebar = () => {
-  const location = useLocation(); // Get the current route
+  const location = useLocation();
 
   return (
-    <div className="w-64 h-screen bg-gray-900 text-white p-5">
+    <div className="w-64 sticky top-0 h-[100dvh] bg-gray-900 text-white p-5 overflow-y-auto">
       <h2 className="text-2xl font-bold mb-5">Admin Panel</h2>
       <ul className="space-y-4">
         <li>

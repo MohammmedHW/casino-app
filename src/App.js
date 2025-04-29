@@ -13,6 +13,22 @@ import CreateCasino from "./pages/CreateCasino";
 import CreateBlog from "./pages/CreateBlog";
 import EditCasino from "./pages/EditCasino";
 import EditBlog from "./pages/EditBlog";
+
+import CryptoCasinoPage from './SubMenu/CryptoCasinoPage';
+import OnlineCasinoPage from './SubMenu/OnlineCasinoPage';
+import CertifiedCasinoPage from './SubMenu/CertifiedCasinoPage';
+import MobileCasinoPage from './SubMenu/MobileCasinoPage';
+import NewestCasinoPage from './SubMenu/NewestCasinoPage';
+
+// Importing Bonus Type Pages
+import LatestBonus from "./SubMenu/LatestBonus";
+import ExclusiveBonus from "./SubMenu/ExclusiveBonus";
+import WelcomeBonus from "./SubMenu/WelcomeBonus";
+import NoDepositBonus from "./SubMenu/NoDeposit.js";
+import FreeSpinsBonus from "./SubMenu/FreeSpinsBonus";
+import CashbackBonus from "./SubMenu/CashbackBonus";
+import NoWageringBonus from "./SubMenu/NoWageringBonus";
+
 function App() {
   return (
     <>
@@ -31,6 +47,22 @@ function App() {
         <Route path="/create-blog" element={<CreateBlog />} />
         <Route path="/edit-casino/:id" element={<EditCasino />} />
         <Route path="/edit-blog/:id" element={<EditBlog />} />
+
+        <Route path="/casinos/crypto" element={<CryptoCasinoPage />} />
+        <Route path="/casinos/online" element={<OnlineCasinoPage />} />
+        <Route path="/casinos/certified" element={<CertifiedCasinoPage />} />
+        <Route path="/casinos/mobile" element={<MobileCasinoPage />} />
+        <Route path="/casinos/newest" element={<NewestCasinoPage />} />
+
+        {/* Routes for Bonus Types */}
+        <Route path="/bonuses/latest" element={<LatestBonus />} />
+        <Route path="/bonuses/exclusive" element={<ExclusiveBonus />} />
+        <Route path="/bonuses/welcome" element={<WelcomeBonus />} />
+        <Route path="/bonuses/no-deposit" element={<NoDepositBonus />} />
+        <Route path="/bonuses/free-spins" element={<FreeSpinsBonus />} />
+        <Route path="/bonuses/cashback" element={<CashbackBonus />} />
+        <Route path="/bonuses/no-wagering" element={<NoWageringBonus />} />
+
       </Routes>
     </>
   );

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { Editor } from "@tinymce/tinymce-react";
 import Sidebar from "../components/Sidebar";
 import { createBlog } from "../api/blogs.js";
 
@@ -19,8 +19,11 @@ const CreateBlog = () => {
     setBlog({ ...blog, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleEditorChange = (content) => {
+    setBlog({ ...blog, content });
+  };
+
+  const handleSubmit = async () => {
     try {
       await createBlog(blog);
       navigate("/blogs-admin");
@@ -33,74 +36,83 @@ const CreateBlog = () => {
     <div className="flex">
       <Sidebar />
       <div className="flex-1 p-6">
-        <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="flex flex-col">
-              <label className="text-sm font-semibold">Title</label>
-              <input
-                type="text"
-                name="title"
-                placeholder="Enter blog title"
-                value={blog.title}
-                onChange={handleChange}
-                className="w-full p-2 border rounded mt-1"
-                required
-              />
-            </div>
+        <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg space-y-6">
+          
+          <div>
+            <label className="block text-sm font-semibold mb-1">Title</label>
+            <input
+              type="text"
+              name="title"
+              value={blog.title}
+              onChange={handleChange}
+              placeholder="Enter blog title"
+              className="w-full p-3 border rounded"
+              required
+            />
+          </div>
 
-            <div className="flex flex-col">
-              <label className="text-sm font-semibold">Author</label>
-              <input
-                type="text"
-                name="author"
-                placeholder="Enter author name"
-                value={blog.author}
-                onChange={handleChange}
-                className="w-full p-2 border rounded mt-1"
-                required
-              />
-            </div>
+          <div>
+            <label className="block text-sm font-semibold mb-1">Author</label>
+            <input
+              type="text"
+              name="author"
+              value={blog.author}
+              onChange={handleChange}
+              placeholder="Author name"
+              className="w-full p-3 border rounded"
+              required
+            />
+          </div>
 
-            <div className="flex flex-col">
-              <label className="text-sm font-semibold">Content</label>
-              <textarea
-                name="content"
-                placeholder="Enter blog content"
-                value={blog.content}
-                onChange={handleChange}
-                className="w-full p-2 border rounded mt-1 h-32"
-                required
-              ></textarea>
-            </div>
+          <div>
+            <label className="block text-sm font-semibold mb-1">Content</label>
+            <Editor
+              apiKey="your-tinymce-api-key"
+              value={blog.content}
+              onEditorChange={handleEditorChange}
+              init={{
+                height: 300,
+                menubar: false,
+                plugins: [
+                  "advlist autolink lists link image charmap preview anchor",
+                  "searchreplace visualblocks code fullscreen",
+                  "insertdatetime media table paste code help wordcount",
+                ],
+                toolbar:
+                  "undo redo | formatselect | bold italic backcolor | " +
+                  "alignleft aligncenter alignright alignjustify | " +
+                  "bullist numlist outdent indent | removeformat | help",
+              }}
+            />
+          </div>
 
-            <div className="flex flex-col">
-              <label className="text-sm font-semibold">Publish Date</label>
-              <input
-                type="date"
-                name="publishDate"
-                value={blog.publishDate}
-                onChange={handleChange}
-                className="w-full p-2 border rounded mt-1"
-                required
-              />
-            </div>
+          <div>
+            <label className="block text-sm font-semibold mb-1">Publish Date</label>
+            <input
+              type="date"
+              name="publishDate"
+              value={blog.publishDate}
+              onChange={handleChange}
+              className="w-full p-3 border rounded"
+              required
+            />
+          </div>
 
-            <div className="flex space-x-2">
-              <button
-                type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded"
-              >
-                Add Blog
-              </button>
-              <button
-                type="button"
-                className="bg-gray-500 text-white px-4 py-2 rounded"
-                onClick={() => navigate("/blogs-admin")}
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
+          <div className="flex space-x-4">
+            <button
+              onClick={handleSubmit}
+              className="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700"
+            >
+              Add Blog
+            </button>
+            <button
+              onClick={() => navigate("/blogs-admin")}
+              className="bg-gray-500 text-white px-5 py-2 rounded hover:bg-gray-600"
+            >
+              Cancel
+            </button>
+          </div>
+
         </div>
       </div>
     </div>
