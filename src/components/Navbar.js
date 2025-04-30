@@ -51,7 +51,7 @@ const Navbar = () => {
     },
     {
       name: 'Slots',
-      path: '/slots',
+      path: '/casino',
       submenu: [
         { name: 'Video', path: '/slots/video' },
         { name: 'Classic Slots', path: '/slots/classic' },

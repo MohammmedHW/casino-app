@@ -281,11 +281,10 @@ const CreateCasino = () => {
                     key={tag}
                     type="button"
                     onClick={() => handleAddTag(tag)}
-                    className={`px-3 py-1 rounded-full text-sm ${
-                      casino.tags.includes(tag)
+                    className={`px-3 py-1 rounded-full text-sm ${casino.tags.includes(tag)
                         ? "bg-green-500 text-white"
                         : "bg-gray-200 hover:bg-gray-300"
-                    }`}
+                      }`}
                     disabled={casino.tags.includes(tag)}
                   >
                     {tag}
@@ -334,11 +333,10 @@ const CreateCasino = () => {
                     key={country}
                     type="button"
                     onClick={() => handleAddCountry(country)}
-                    className={`px-3 py-1 rounded-full text-sm ${
-                      casino.availableCountries.includes(country)
+                    className={`px-3 py-1 rounded-full text-sm ${casino.availableCountries.includes(country)
                         ? "bg-green-500 text-white"
                         : "bg-gray-200 hover:bg-gray-300"
-                    }`}
+                      }`}
                     disabled={casino.availableCountries.includes(country)}
                   >
                     {country}
@@ -474,7 +472,12 @@ const CreateCasino = () => {
           </button>
         </form>
       </div>
+
+      
+
     </div>
+
+
   );
 };
 

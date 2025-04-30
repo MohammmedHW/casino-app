@@ -14,6 +14,8 @@ import CreateBlog from "./pages/CreateBlog";
 import EditCasino from "./pages/EditCasino";
 import EditBlog from "./pages/EditBlog";
 
+import CasinoDetail from "./pages/CasinoDetail";
+
 import CryptoCasinoPage from './SubMenu/CryptoCasinoPage';
 import OnlineCasinoPage from './SubMenu/OnlineCasinoPage';
 import CertifiedCasinoPage from './SubMenu/CertifiedCasinoPage';
@@ -47,6 +49,8 @@ function App() {
         <Route path="/create-blog" element={<CreateBlog />} />
         <Route path="/edit-casino/:id" element={<EditCasino />} />
         <Route path="/edit-blog/:id" element={<EditBlog />} />
+
+        <Route path="/casino" element={<CasinoDetail />} />
 
         <Route path="/casinos/crypto" element={<CryptoCasinoPage />} />
         <Route path="/casinos/online" element={<OnlineCasinoPage />} />
