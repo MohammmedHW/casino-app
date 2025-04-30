@@ -1,8 +1,8 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCasinos, deleteCasino } from "../api/casinos.js";
+import { getCasinos, deleteCasino, updateCasinoOrder } from "../api/casinos";
 import Sidebar from "../components/Sidebar";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 const CasinosAdmin = () => {
   const [casinos, setCasinos] = useState([]);
@@ -14,7 +14,9 @@ const CasinosAdmin = () => {
     const fetchCasinos = async () => {
       try {
         const data = await getCasinos();
-        setCasinos(data);
+        // Sort casinos by order before setting state
+        const sortedCasinos = [...data].sort((a, b) => a.order - b.order);
+        setCasinos(sortedCasinos);
       } catch (err) {
         setError(err.message || "Failed to load casinos");
       } finally {
@@ -33,8 +35,55 @@ const CasinosAdmin = () => {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  const onDragEnd = async (result) => {
+    if (!result.destination) return;
+
+    const items = Array.from(casinos);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    // Update local state immediately for smooth UI
+    setCasinos(items);
+
+    try {
+      // Update order in backend
+      await updateCasinoOrder(reorderedItem._id, result.destination.index + 1);
+
+      // Update local order values
+      const updatedCasinos = items.map((casino, index) => ({
+        ...casino,
+        order: index + 1,
+      }));
+
+      setCasinos(updatedCasinos);
+    } catch (err) {
+      setError(err.message || "Failed to update order");
+      // Revert to previous state if update fails
+      const data = await getCasinos();
+      const sortedCasinos = [...data].sort((a, b) => a.order - b.order);
+      setCasinos(sortedCasinos);
+    }
+  };
+
+  if (loading)
+    return (
+      <div className="flex">
+        <Sidebar />
+        <div className="flex-1 p-6 flex items-center justify-center">
+          <div>Loading casinos...</div>
+        </div>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="flex">
+        <Sidebar />
+        <div className="flex-1 p-6 flex items-center justify-center">
+          <div className="text-red-500">{error}</div>
+        </div>
+      </div>
+    );
 
   return (
     <div className="flex">
@@ -48,42 +97,90 @@ const CasinosAdmin = () => {
           Create Casino
         </button>
         {error && <div className="text-red-500 mb-4">{error}</div>}
-        <div className="overflow-x-auto">
-          <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
-            <thead className="bg-gray-200">
-              <tr>
-                <th className="p-3 text-left">Logo</th>
-                <th className="p-3 text-left">Name</th>
-                <th className="p-3 text-left">Rating</th>
-                <th className="p-3 text-left">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {casinos.map((casino) => (
-                <tr key={casino._id} className="border-b hover:bg-gray-50">
-                  <td className="p-3">
-                    <img src={casino.logo} alt={casino.name} className="h-10" />
-                  </td>
-                  <td className="p-3">{casino.name}</td>
-                  <td className="p-3">{casino.rating} ⭐</td>
-                  <td className="p-3">
-                    <button
-                      className="bg-red-500 text-white px-3 py-1 rounded mr-2 hover:bg-red-600 transition"
-                      onClick={() => handleDelete(casino._id)}
-                    >
-                      Delete
-                    </button>
-                    <button
-                      className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
-                      onClick={() => navigate(`/edit-casino/${casino._id}`)}
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+
+        <div className="bg-white shadow-md rounded-lg overflow-hidden">
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="casinos">
+              {(provided) => (
+                <table
+                  className="w-full"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  <thead className="bg-gray-200">
+                    <tr>
+                      <th className="p-3 text-left">Order</th>
+                      <th className="p-3 text-left">Logo</th>
+                      <th className="p-3 text-left">Name</th>
+                      <th className="p-3 text-left">Rating</th>
+                      <th className="p-3 text-left">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {casinos.map((casino, index) => (
+                      <Draggable
+                        key={casino._id}
+                        draggableId={casino._id}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <tr
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            className="border-b hover:bg-gray-50"
+                          >
+                            <td className="p-3" {...provided.dragHandleProps}>
+                              <div className="flex items-center">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-5 w-5 text-gray-400 mr-2"
+                                  viewBox="0 0 20 20"
+                                  fill="currentColor"
+                                >
+                                  <path
+                                    fillRule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                                    clipRule="evenodd"
+                                  />
+                                </svg>
+                                {casino.order}
+                              </div>
+                            </td>
+                            <td className="p-3">
+                              <img
+                                src={casino.logo}
+                                alt={casino.name}
+                                className="h-10"
+                              />
+                            </td>
+                            <td className="p-3">{casino.name}</td>
+                            <td className="p-3">{casino.rating} ⭐</td>
+                            <td className="p-3">
+                              <button
+                                className="bg-red-500 text-white px-3 py-1 rounded mr-2 hover:bg-red-600 transition"
+                                onClick={() => handleDelete(casino._id)}
+                              >
+                                Delete
+                              </button>
+                              <button
+                                className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
+                                onClick={() =>
+                                  navigate(`/edit-casino/${casino._id}`)
+                                }
+                              >
+                                Edit
+                              </button>
+                            </td>
+                          </tr>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </tbody>
+                </table>
+              )}
+            </Droppable>
+          </DragDropContext>
         </div>
       </div>
     </div>

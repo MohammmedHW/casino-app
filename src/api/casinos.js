@@ -44,3 +44,12 @@ export const getCasinoById = async (id) => {
     throw error.response.data.message || "Failed to fetch casino";
   }
 };
+
+export const updateCasinoOrder = async (id, newOrder) => {
+  try {
+    const response = await API.put(`/casinos/reorder/${id}`, { newOrder });
+    return response.data;
+  } catch (error) {
+    throw error.response.data.message || "Failed to update casino order";
+  }
+};
