@@ -16,11 +16,11 @@ import EditBlog from "./pages/EditBlog";
 
 import CasinoDetail from "./pages/CasinoDetail";
 
-import CryptoCasinoPage from './SubMenu/CryptoCasinoPage';
-import OnlineCasinoPage from './SubMenu/OnlineCasinoPage';
-import CertifiedCasinoPage from './SubMenu/CertifiedCasinoPage';
-import MobileCasinoPage from './SubMenu/MobileCasinoPage';
-import NewestCasinoPage from './SubMenu/NewestCasinoPage';
+import CryptoCasinoPage from "./SubMenu/CryptoCasinoPage";
+import OnlineCasinoPage from "./SubMenu/OnlineCasinoPage";
+import CertifiedCasinoPage from "./SubMenu/CertifiedCasinoPage";
+import MobileCasinoPage from "./SubMenu/MobileCasinoPage";
+import NewestCasinoPage from "./SubMenu/NewestCasinoPage";
 
 // Importing Bonus Type Pages
 import LatestBonus from "./SubMenu/LatestBonus";
@@ -57,6 +57,7 @@ function App() {
         <Route path="/casinos/certified" element={<CertifiedCasinoPage />} />
         <Route path="/casinos/mobile" element={<MobileCasinoPage />} />
         <Route path="/casinos/newest" element={<NewestCasinoPage />} />
+        <Route path="/casinos/:slug" element={<CasinoDetail />} />
 
         {/* Routes for Bonus Types */}
         <Route path="/bonuses/latest" element={<LatestBonus />} />
@@ -66,7 +67,6 @@ function App() {
         <Route path="/bonuses/free-spins" element={<FreeSpinsBonus />} />
         <Route path="/bonuses/cashback" element={<CashbackBonus />} />
         <Route path="/bonuses/no-wagering" element={<NoWageringBonus />} />
-
       </Routes>
     </>
   );

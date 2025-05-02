@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getCasinoById, updateCasino } from "../api/casinos";
+import { getCasinoById, updateCasino, getCasinos } from "../api/casinos";
 import { uploadImage } from "../api/upload";
 import Sidebar from "../components/Sidebar";
 
@@ -39,23 +39,37 @@ const EditCasino = () => {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [maxOrder, setMaxOrder] = useState(0);
 
   useEffect(() => {
-    const fetchCasino = async () => {
+    const fetchData = async () => {
       try {
-        const data = await getCasinoById(id);
-        setCasino(data);
+        // Fetch current casino
+        const casinoData = await getCasinoById(id);
+        setCasino(casinoData);
+
+        // Fetch all casinos to determine max order
+        const allCasinos = await getCasinos();
+        const currentMax = Math.max(...allCasinos.map((c) => c.order), 0);
+        setMaxOrder(currentMax);
       } catch (err) {
-        setError(err.message || "Failed to load casino");
+        setError(err.message || "Failed to load data");
       } finally {
         setLoading(false);
       }
     };
-    fetchCasino();
+    fetchData();
   }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === "order") {
+      // Validate order input
+      const numValue = parseInt(value);
+      if (numValue < 1) return; // Minimum order is 1
+      if (numValue > maxOrder + 1) return; // Maximum is current max + 1
+    }
 
     if (name.includes(".")) {
       const [parent, child] = name.split(".");
@@ -182,10 +196,15 @@ const EditCasino = () => {
                 <input
                   type="number"
                   name="order"
+                  min="1"
+                  max={maxOrder + 1}
                   className="w-full p-2 border rounded"
                   value={casino.order}
                   onChange={handleChange}
                 />
+                <p className="text-xs text-gray-500 mt-1">
+                  Current order range: 1 - {maxOrder + 1}
+                </p>
               </div>
             </div>
           </div>
