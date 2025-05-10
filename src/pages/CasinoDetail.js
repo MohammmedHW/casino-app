@@ -77,7 +77,6 @@ const CasinoDetail = () => {
   const renderTabContent = () => {
     if (!casino) return null;
 
-    // Helper function to safely handle both arrays and strings
     const safeJoin = (value, fallback = "") => {
       if (Array.isArray(value)) return value.join(", ");
       if (value) return value;
@@ -88,6 +87,25 @@ const CasinoDetail = () => {
       case "general":
         return (
           <div className="space-y-4 text-sm text-gray-100 mt-4">
+            {/* Badges for boolean fields */}
+            <div className="flex gap-2 mb-4">
+              {casino.hotCasino && (
+                <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">
+                  Hot Casino
+                </span>
+              )}
+              {casino.recommendedByExperts && (
+                <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                  Expert Recommended
+                </span>
+              )}
+              {casino.certifiedCasino && (
+                <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
+                  Certified
+                </span>
+              )}
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <p>
@@ -144,6 +162,18 @@ const CasinoDetail = () => {
                 </p>
                 <p>{safeJoin(casino.generalInfo?.licences, "Not specified")}</p>
               </div>
+              <div>
+                <p>
+                  <strong className="text-gray-300">Features:</strong>
+                </p>
+                <p>{safeJoin(casino.generalInfo?.features, "Not specified")}</p>
+              </div>
+              <div>
+                <p>
+                  <strong className="text-gray-300">Editor View:</strong>
+                </p>
+                <p>{casino.editorView || "Not specified"}</p>
+              </div>
             </div>
           </div>
         );
@@ -172,15 +202,13 @@ const CasinoDetail = () => {
                 <p>
                   <strong className="text-gray-300">Withdrawal Time:</strong>
                 </p>
-                <p>
-                  {casino.paymentInfo?.withdrawalTime || "1-3 business days"}
-                </p>
+                <p>{casino.paymentInfo?.withdrawalTime || "Not specified"}</p>
               </div>
               <div>
                 <p>
                   <strong className="text-gray-300">Fees:</strong>
                 </p>
-                <p>{casino.paymentInfo?.fees || "No fees"}</p>
+                <p>{casino.paymentInfo?.fees || "Not specified"}</p>
               </div>
             </div>
           </div>
@@ -188,26 +216,36 @@ const CasinoDetail = () => {
       case "games":
         return (
           <div className="space-y-4 text-sm text-gray-100 mt-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="flex items-center">
+                <span
+                  className={`h-3 w-3 rounded-full mr-2 ${
+                    casino.games?.slots ? "bg-green-500" : "bg-red-500"
+                  }`}
+                ></span>
                 <p>
-                  <strong className="text-gray-300">Slots:</strong>
+                  Slots: {casino.games?.slots ? "Available" : "Not available"}
                 </p>
-                <p>{casino.games?.slots ? "Available" : "Not available"}</p>
               </div>
-              <div>
+              <div className="flex items-center">
+                <span
+                  className={`h-3 w-3 rounded-full mr-2 ${
+                    casino.games?.liveCasino ? "bg-green-500" : "bg-red-500"
+                  }`}
+                ></span>
                 <p>
-                  <strong className="text-gray-300">Live Casino:</strong>
-                </p>
-                <p>
+                  Live Casino:{" "}
                   {casino.games?.liveCasino ? "Available" : "Not available"}
                 </p>
               </div>
-              <div>
+              <div className="flex items-center">
+                <span
+                  className={`h-3 w-3 rounded-full mr-2 ${
+                    casino.games?.sportsBetting ? "bg-green-500" : "bg-red-500"
+                  }`}
+                ></span>
                 <p>
-                  <strong className="text-gray-300">Sports Betting:</strong>
-                </p>
-                <p>
+                  Sports Betting:{" "}
                   {casino.games?.sportsBetting ? "Available" : "Not available"}
                 </p>
               </div>
@@ -223,20 +261,29 @@ const CasinoDetail = () => {
                   <strong className="text-gray-300">Tools:</strong>
                 </p>
                 <p>
-                  {safeJoin(
-                    casino.responsibleGaming?.tools,
-                    "Deposit limits, Self-exclusion"
-                  )}
+                  {safeJoin(casino.responsibleGaming?.tools, "Not specified")}
                 </p>
               </div>
               <div>
                 <p>
                   <strong className="text-gray-300">Support:</strong>
                 </p>
-                <p>
-                  {casino.responsibleGaming?.support || "24/7 customer support"}
-                </p>
+                <p>{casino.responsibleGaming?.support || "Not specified"}</p>
               </div>
+            </div>
+            <div className="mt-4">
+              <p>
+                <strong className="text-gray-300">
+                  Responsible Gambling Description:
+                </strong>
+              </p>
+              <div
+                className="prose prose-sm max-w-none text-gray-300"
+                dangerouslySetInnerHTML={{
+                  __html:
+                    casino.responsibleGamblingDescription || "Not available",
+                }}
+              />
             </div>
           </div>
         );
