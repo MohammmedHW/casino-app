@@ -14,7 +14,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@tinymce/tinymce-react": "^6.1.0",
     "@tiptap/react": "^2.11.7",
-    "axios": "^1.8.4",
+    "axios": "^1.9.0",
     "colorthief": "^2.6.0",
     "quill": "^2.0.3",
     "react": "^19.0.0",
