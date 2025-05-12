@@ -306,7 +306,7 @@ import CasinoCard from "../components/CasinoCard";
 import CategoryCard from "../components/CategoryCard";
 import ExpertCard from "../components/ExpertCard";
 import { getCasinos } from "../api/casinos.js";
-
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 // Import images
 import GameIcon1 from "../assets/images/Game Icon.png";
 import GameIcon2 from "../assets/images/Game Icon (1).png";
@@ -338,6 +338,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [activeSection, setActiveSection] = useState("casinos");
+
 
   useEffect(() => {
     // Change body background color
@@ -387,6 +388,24 @@ const Home = () => {
 
   const handleSectionChange = (section) => {
     setActiveSection(section);
+  };
+  const [currentPage, setCurrentPage] = useState(1);
+  const casinosPerPage = 5;
+  const totalPages = Math.ceil(casinos.length / casinosPerPage);
+  const indexOfLastCasino = currentPage * casinosPerPage;
+  const indexOfFirstCasino = indexOfLastCasino - casinosPerPage;
+  const currentCasinos = casinos.slice(indexOfFirstCasino, indexOfLastCasino);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   if (loading) {
@@ -472,33 +491,30 @@ const Home = () => {
         >
           <button
             onClick={() => handleSectionChange("casinos")}
-            className={`${
-              activeSection === "casinos"
-                ? "bg-gradient-to-r from-red-500 to-red-700 text-white scale-125 py-4 px-8 sm:px-16"
-                : "bg-white text-red-800"
-            } py-3 px-6 sm:px-14 text-xl sm:text-3xl hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 hover:text-white hover:scale-125 hover:py-4 hover:px-8 sm:hover:px-16 transition-all duration-300 ease-in-out`}
+            className={`${activeSection === "casinos"
+              ? "bg-gradient-to-r from-red-500 to-red-700 text-white scale-125 py-4 px-8 sm:px-16"
+              : "bg-white text-red-800"
+              } py-3 px-6 sm:px-14 text-xl sm:text-3xl hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 hover:text-white hover:scale-125 hover:py-4 hover:px-8 sm:hover:px-16 transition-all duration-300 ease-in-out`}
           >
             Casinos
           </button>
 
           <button
             onClick={() => handleSectionChange("bonuses")}
-            className={`${
-              activeSection === "bonuses"
-                ? "bg-gradient-to-r from-red-500 to-red-700 text-white scale-125 py-4 px-8 sm:px-16"
-                : "bg-white text-red-800"
-            } py-3 px-6 sm:px-14 text-xl sm:text-3xl hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 hover:text-white hover:scale-125 hover:py-4 hover:px-8 sm:hover:px-16 transition-all duration-300 ease-in-out`}
+            className={`${activeSection === "bonuses"
+              ? "bg-gradient-to-r from-red-500 to-red-700 text-white scale-125 py-4 px-8 sm:px-16"
+              : "bg-white text-red-800"
+              } py-3 px-6 sm:px-14 text-xl sm:text-3xl hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 hover:text-white hover:scale-125 hover:py-4 hover:px-8 sm:hover:px-16 transition-all duration-300 ease-in-out`}
           >
             Bonuses
           </button>
 
           <button
             onClick={() => handleSectionChange("games")}
-            className={`${
-              activeSection === "games"
-                ? "bg-gradient-to-r from-red-500 to-red-700 text-white scale-125 py-4 px-8 sm:px-16"
-                : "bg-white text-red-800"
-            } py-3 px-6 sm:px-14 text-xl sm:text-3xl hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 hover:text-white hover:scale-125 hover:py-4 hover:px-8 sm:hover:px-16 transition-all duration-300 ease-in-out`}
+            className={`${activeSection === "games"
+              ? "bg-gradient-to-r from-red-500 to-red-700 text-white scale-125 py-4 px-8 sm:px-16"
+              : "bg-white text-red-800"
+              } py-3 px-6 sm:px-14 text-xl sm:text-3xl hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 hover:text-white hover:scale-125 hover:py-4 hover:px-8 sm:hover:px-16 transition-all duration-300 ease-in-out`}
           >
             Games
           </button>
@@ -686,19 +702,42 @@ const Home = () => {
 
       <section className="flex flex-col bg-black100 items-center justify-center pb-20">
         <div className="container m-10 mx-auto px-4">
-          {casinos.slice(0, 2).map((casino) => (
+          {currentCasinos.map((casino) => (
             <CasinoCard
               key={casino._id}
               image={casino.logo}
               title={casino.name}
-              depositBonus={
-                casino.depositBonus || "Up to €1000 + 200 Free Spins"
-              }
-              welcomeBonus={casino.welcomeBonus || "200% Match Bonus"}
+              depositBonus={casino.depositBonus || 'Up to €1000 + 200 Free Spins'}
+              welcomeBonus={casino.welcomeBonus || '200% Match Bonus'}
               rating={casino.rating}
-              visits={`${casino.visits || 0} `}
+              visits={`${casino.visits || 0}`}
             />
           ))}
+
+          {/* Pagination Controls */}
+          <div className="flex justify-center mt-6 space-x-6 items-center">
+            <button
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
+              aria-label="Previous page"
+              className="bg-gray-700 hover:bg-gray-600 transition-colors text-white p-3 rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <FaChevronLeft className="w-4 h-4" />
+            </button>
+
+            <span className="text-white text-lg font-semibold">
+              Page {currentPage} of {totalPages}
+            </span>
+
+            <button
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+              aria-label="Next page"
+              className="bg-gray-700 hover:bg-gray-600 transition-colors text-white p-3 rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <FaChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </section>
 

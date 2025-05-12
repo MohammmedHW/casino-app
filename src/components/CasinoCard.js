@@ -26,7 +26,12 @@ const CasinoCard = ({
         style={{ backgroundColor: "#1d1d1d" }}
       >
         <div className="casino-info flex flex-col md:flex-row items-center md:space-x-12 space-y-4 md:space-y-0 text-center md:text-left">
-          <img src={image} alt={title} className="w-42 h-32 rounded-md" />
+          <img
+            src={image}
+            alt={title}
+            className="w-40 h-28 object-contain rounded-md"
+          />
+
           <div className="space-y-2 md:space-y-6 pl-0 md:pl-10">
             <p className="text-gray-400">
               Deposit Bonus:{" "}

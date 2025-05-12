@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { FiMenu, FiX } from 'react-icons/fi';
 
 const Navbar = () => {
   const location = useLocation();
   const [activeMenuIndex, setActiveMenuIndex] = useState(null);
   const [hoverTimeout, setHoverTimeout] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileSubmenuIndex, setMobileSubmenuIndex] = useState(null);
 
   const getActiveClass = (path) =>
     location.pathname === path ? 'text-red-600' : 'hover:text-red-600';
@@ -13,7 +16,6 @@ const Navbar = () => {
     { name: 'Home', path: '/', submenu: [] },
     {
       name: 'Casinos',
-      path: '/casinos',
       submenu: [
         { name: 'Crypto Casino', path: '/casinos/crypto' },
         { name: 'Online Casino', path: '/casinos/online' },
@@ -24,7 +26,6 @@ const Navbar = () => {
     },
     {
       name: 'Bonuses',
-      path: '/bonuses',
       submenu: [
         { name: 'Latest Bonus', path: '/bonuses/latest' },
         { name: 'Exclusive Bonus', path: '/bonuses/exclusive' },
@@ -37,7 +38,6 @@ const Navbar = () => {
     },
     {
       name: 'Games',
-      path: '/games',
       submenu: [
         { name: 'Casino Games', path: '/games/casino' },
         { name: 'Table Games', path: '/games/table' },
@@ -51,7 +51,6 @@ const Navbar = () => {
     },
     {
       name: 'Slots',
-      path: '/casino',
       submenu: [
         { name: 'Video', path: '/slots/video' },
         { name: 'Classic Slots', path: '/slots/classic' },
@@ -61,7 +60,6 @@ const Navbar = () => {
     },
     {
       name: 'Betting',
-      path: '/betting',
       submenu: [
         { name: 'Sports Betting', path: '/betting/sports' },
         { name: 'New Betting Sites', path: '/betting/new-sites' },
@@ -74,29 +72,39 @@ const Navbar = () => {
   ];
 
   const handleMouseEnter = (index) => {
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout);
-      setHoverTimeout(null);
-    }
+    if (hoverTimeout) clearTimeout(hoverTimeout);
     setActiveMenuIndex(index);
   };
 
   const handleMouseLeave = () => {
-    const timeout = setTimeout(() => {
-      setActiveMenuIndex(null);
-    }, 200); // 200ms delay before closing
+    const timeout = setTimeout(() => setActiveMenuIndex(null), 200);
     setHoverTimeout(timeout);
   };
 
+  const toggleMobileMenu = () => {
+    setMobileOpen(!mobileOpen);
+    setMobileSubmenuIndex(null); // Reset submenu when main toggles
+  };
+
+  const toggleMobileSubmenu = (index) => {
+    setMobileSubmenuIndex(mobileSubmenuIndex === index ? null : index);
+  };
+
   return (
-    <nav className="bg-black bg-opacity-70 text-white p-4 fixed w-full top-0 z-50">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-3xl ml-10" style={{ fontFamily: 'BigNoodleTitling', letterSpacing: '0.1em' }}>
+    <nav className="bg-black bg-opacity-80 text-white fixed w-full top-0 z-50">
+      <div className="container mx-auto flex justify-between items-center px-4 py-3">
+        <div className="text-3xl" style={{ fontFamily: 'BigNoodleTitling', letterSpacing: '0.1em' }}>
           MR GAMBLERS
         </div>
 
+        {/* Hamburger */}
+        <div className="md:hidden text-2xl" onClick={toggleMobileMenu}>
+          {mobileOpen ? <FiX /> : <FiMenu />}
+        </div>
+
+        {/* Desktop Menu */}
         <div
-          className="hidden md:flex mr-10 space-x-8 text-xl relative"
+          className="hidden md:flex space-x-8 text-xl"
           style={{ fontFamily: 'BigNoodleTitling', letterSpacing: '0.08em' }}
         >
           {menuItems.map((item, idx) => (
@@ -116,11 +124,7 @@ const Navbar = () => {
                     activeMenuIndex === idx ? 'opacity-100 visible' : 'opacity-0 invisible'
                   }`}
                 >
-                  <div
-                    className="bg-black text-white rounded shadow-lg z-50 w-64 border border-gray-700"
-                    onMouseEnter={() => handleMouseEnter(idx)}
-                    onMouseLeave={handleMouseLeave}
-                  >
+                  <div className="bg-black text-white rounded shadow-lg z-50 w-64 max-h-60 overflow-y-auto border border-gray-700">
                     {item.submenu.map((sub, subIdx) => (
                       <Link
                         key={subIdx}
@@ -137,6 +141,42 @@ const Navbar = () => {
           ))}
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {mobileOpen && (
+        <div className="md:hidden px-4 py-2 bg-black space-y-2 text-lg" style={{ fontFamily: 'BigNoodleTitling' }}>
+          {menuItems.map((item, idx) => (
+            <div key={idx}>
+              <div
+                onClick={() => item.submenu.length > 0 ? toggleMobileSubmenu(idx) : setMobileOpen(false)}
+                className="flex justify-between items-center py-2 border-b border-gray-700 cursor-pointer"
+              >
+                <Link to={item.path} className={getActiveClass(item.path)}>
+                  {item.name}
+                </Link>
+                {item.submenu.length > 0 && (
+                  <span>{mobileSubmenuIndex === idx ? '▲' : '▼'}</span>
+                )}
+              </div>
+
+              {mobileSubmenuIndex === idx && item.submenu.length > 0 && (
+                <div className="ml-4 border-l border-gray-600 max-h-52 overflow-y-auto">
+                  {item.submenu.map((sub, subIdx) => (
+                    <Link
+                      key={subIdx}
+                      to={sub.path}
+                      onClick={() => setMobileOpen(false)}
+                      className="block py-2 px-2 hover:bg-red-600 transition"
+                    >
+                      {sub.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </nav>
   );
 };
