@@ -308,10 +308,10 @@ import ExpertCard from "../components/ExpertCard";
 import { getCasinos } from "../api/casinos.js";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 // Import images
-import GameIcon1 from "../assets/images/Game Icon.png";
-import GameIcon2 from "../assets/images/Game Icon (1).png";
-import GameIcon3 from "../assets/images/Game Icon (2).png";
-import GameIcon4 from "../assets/images/Game Icon (3).png";
+// import GameIcon1 from "../assets/images/Game Icon.png";
+// import GameIcon2 from "../assets/images/Game Icon (1).png";
+// import GameIcon3 from "../assets/images/Game Icon (2).png";
+// import GameIcon4 from "../assets/images/Game Icon (3).png";
 import certified from "../assets/images/Certified.png";
 import leftCircle from "../assets/images/lefteclipse.png";
 import rightCircle from "../assets/images/righteclipse.png";

@@ -32,7 +32,6 @@ import Footer from "../components/Footer";
 
 const LatestBonus = () => {
   useEffect(() => {
-    // Change body background color
     document.body.style.backgroundColor = "#1e1e1e"; // Set your desired color
 
     // Cleanup function to revert color when component unmounts

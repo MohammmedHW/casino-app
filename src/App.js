@@ -42,6 +42,7 @@ function App() {
       <Route path="/edit-blog/:id" element={<EditBlog />} />
       <Route path="/casino" element={<CasinoDetail />} />
       <Route path="/casinos/:slug" element={<CasinoDetail />} />
+      
 
       {/* Filtered Casinos */}
       <Route path="/casinos/crypto" element={<Casinos type="crypto" />} />
@@ -51,13 +52,23 @@ function App() {
       <Route path="/casinos/newest" element={<Casinos type="newest" />} />
 
       {/* Bonus Types */}
-      <Route path="/bonuses/latest" element={<LatestBonus />} />
-      <Route path="/bonuses/exclusive" element={<ExclusiveBonus />} />
-      <Route path="/bonuses/welcome" element={<WelcomeBonus />} />
-      <Route path="/bonuses/no-deposit" element={<NoDepositBonus />} />
-      <Route path="/bonuses/free-spins" element={<FreeSpinsBonus />} />
-      <Route path="/bonuses/cashback" element={<CashbackBonus />} />
-      <Route path="/bonuses/no-wagering" element={<NoWageringBonus />} />
+      <Route path="/bonuses/latest" element={<Bonuses type="latest" />} />
+      <Route path="/bonuses/exclusive" element={<Bonuses type="exclusive" />} />
+      <Route path="/bonuses/welcome" element={<Bonuses type="welcome" />} />
+      <Route path="/bonuses/no-deposit" element={<Bonuses type="no-deposit"/>} />
+      <Route path="/bonuses/free-spins" element={<Bonuses type="freespins"/>} />
+      <Route path="/bonuses/cashback" element={<Bonuses type="cashback"/>} />
+      <Route path="/bonuses/no-wagering" element={<Bonuses type="no-wagering" />} />
+
+        {/* Games Types */}
+      <Route path="/games/casino" element={<Games type="casino" />} />
+      <Route path="/games/table" element={<Games type="table" />} />
+      <Route path="/games/card" element={<Games type="card" />} />
+      <Route path="/games/dice" element={<Games type="dice"/>} />
+      <Route path="/games/real-money-slots" element={<Games type="Real Money Online Slots"/>} />
+      <Route path="/games/poker" element={<Games type="poker"/>} />
+      <Route path="/games/bingo" element={<Games type="bingo"/>} />
+      <Route path="/games/lottery" element={<Games type="lottery" />} />
     </Routes>
   );
 }

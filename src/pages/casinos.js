@@ -4,12 +4,12 @@ import Navbar from '../components/Navbar';
 import casinoBg from '../assets/images/casino-bg.png';
 import SearchBox from '../components/searchbox';
 import Card from '../components/Card';
-import cardImage1 from '../assets/images/bulletz.png';
-import cardImage2 from '../assets/images/image 7.png';
-import cardImage3 from '../assets/images/image 8.png';
-import cardImage4 from '../assets/images/oneslot.png';
-import cardImage5 from '../assets/images/taika.png';
-import CategoryCard from '../components/CategoryCard';
+// import cardImage1 from '../assets/images/bulletz.png';
+// import cardImage2 from '../assets/images/image 7.png';
+// import cardImage3 from '../assets/images/image 8.png';
+// import cardImage4 from '../assets/images/oneslot.png';
+// import cardImage5 from '../assets/images/taika.png';
+// import CategoryCard from '../components/CategoryCard';
 import ExpertCard from '../components/ExpertCard';
 
 import categoriesImg1 from '../assets/images/image15.png';
@@ -166,12 +166,13 @@ function filt(data) {
           </h2>
 
           <div className="flex justify-center mb-10 rounded-2xl mx-auto max-w-[900px] p-10 bg-green-800 sm:mx-6 mx-8 lg:mx-auto">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 w-full">
-              {categories.map((category, index) => (
-                <CategoryCard key={index} icon={category.icon} label={category.label} />
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-50 w-full">
+              {filteredData.map((casino, index) => (
+                <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} />
               ))}
             </div>
           </div>
+          
 
           <h2
             className="text-3xl font-bold text-white mb-10 mt-40 text-2xl md:text-3xl lg:text-4xl text-white"
@@ -223,13 +224,26 @@ function filt(data) {
             </div>
 
             <div className="flex justify-center items-center">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 m-10 mt-5">
+              {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 m-10 mt-5">
                 <Card name="BULLETZ" rating="4.5" bgImage={cardImage1} />
                 <Card name="STARS" rating="4.7" bgImage={cardImage2} />
                 <Card name="SPINS" rating="4.8" bgImage={cardImage3} />
                 <Card name="BULLETZ" rating="4.5" bgImage={cardImage4} />
 
-              </div>
+              </div> */}
+               <div className="flex justify-center items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+              {loading ? (
+                <p>Loading...</p>
+              ) : error ? (
+                <p>Error: {error}</p>
+              ) : (
+                filteredData.map((casino, index) => (
+                  <ExpertCard key={index} logo={casino.logo} name={casino.name} />
+                ))
+              )}
+            </div>
+          </div>
             </div>
           </div>
 
@@ -254,14 +268,27 @@ function filt(data) {
             </div>
 
             <div className="flex justify-center items-center">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 m-10 mt-5">
+              {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 m-10 mt-5">
                 <Card name="BULLETZ" rating="4.5" bgImage={cardImage1} />
                 <Card name="STARS" rating="4.7" bgImage={cardImage2} />
                 <Card name="SPINS" rating="4.8" bgImage={cardImage3} />
                 <Card name="BULLETZ" rating="4.5" bgImage={cardImage4} />
                 <Card name="STARS" rating="4.7" bgImage={cardImage5} />
-
-              </div>
+              
+              </div> */}
+                 <div className="flex justify-center items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+              {loading ? (
+                <p>Loading...</p>
+              ) : error ? (
+                <p>Error: {error}</p>
+              ) : (
+                filteredData.map((casino, index) => (
+                  <ExpertCard key={index} logo={casino.logo} name={casino.name} />
+                ))
+              )}
+            </div>
+          </div>
             </div>
           </div>
 
