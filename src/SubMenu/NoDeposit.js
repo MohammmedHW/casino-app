@@ -31,7 +31,6 @@ import certified from '../assets/images/Certified.png';
 import Footer from "../components/Footer";
 const NoDeposit = () => {
   useEffect(() => {
-    // Change body background color
     document.body.style.backgroundColor = "#1e1e1e"; // Set your desired color
 
     // Cleanup function to revert color when component unmounts

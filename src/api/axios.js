@@ -5,6 +5,7 @@ const API = axios.create({
     process.env.NODE_ENV === "production"
       ? "https://casino-backened.onrender.com/api"
       : "http://localhost:4000/api",
+      
   withCredentials: true,
 });
 
