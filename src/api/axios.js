@@ -4,7 +4,8 @@ const API = axios.create({
   baseURL:
     process.env.NODE_ENV === "production"
       ? "https://your-production-domain.com/api"
-      : "http://localhost:4000/api",
+      // : "http://localhost:4000/api",
+      : "https://casino-backened.onrender.com/api",
   withCredentials: true,
 });
 
