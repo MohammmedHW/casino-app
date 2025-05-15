@@ -1,5 +1,3 @@
-
-
 import { createContext, useState, useEffect, useContext } from "react";
 import { login, logout, getCurrentUser, register } from "../api/auth";
 
@@ -23,13 +21,30 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
+  // const fetchCurrentUser = async () => {
+  //   try {
+  //     const user = await getCurrentUser();
+  //     setCurrentUser(user);
+  //   } catch (err) {
+  //     localStorage.removeItem("token");
+  //     setError("Session expired. Please login again.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  // AuthContext.js
   const fetchCurrentUser = async () => {
     try {
       const user = await getCurrentUser();
       setCurrentUser(user);
+      setError(null);
     } catch (err) {
-      localStorage.removeItem("token");
-      setError("Session expired. Please login again.");
+      // Only clear token if it's an actual auth error
+      if (err.response?.status === 401) {
+        localStorage.removeItem("token");
+      }
+      setError(err.message || "Session expired. Please login again.");
     } finally {
       setLoading(false);
     }
