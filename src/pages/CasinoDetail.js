@@ -303,8 +303,8 @@ const CasinoDetail = () => {
     <>
       <Navbar />
       <div className="min-h-screen w-full bg-[#181818]">
-        <header
-  className="relative bg-cover bg-center h-[100vh] md:h-screen"
+      <header
+  className="relative bg-cover bg-center min-h-screen"
   style={{ backgroundImage: `url(${bonusesBg})` }}
 >
   <div className="absolute inset-0 bg-black bg-opacity-10"></div>
@@ -321,7 +321,7 @@ const CasinoDetail = () => {
         {/* Card */}
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row w-full border border-blue-200 relative z-10">
           {/* Logo */}
-          <div className="flex items-center justify-center p-6 md:w-1/3" style={{ backgroundColor: bgColor }}>
+          <div className="flex items-center justify-center p-6 md:w-1/3 w-full" style={{ backgroundColor: bgColor }}>
             {casino.logo ? (
               <img
                 ref={imgRef}
@@ -339,7 +339,7 @@ const CasinoDetail = () => {
           </div>
 
           {/* Details */}
-          <div className="p-4 sm:p-6 md:p-8 pt-10 text-left md:w-2/3">
+          <div className="p-4 sm:p-6 md:p-8 pt-10 text-left md:w-2/3 w-full">
             <p className="text-xs text-gray-400 uppercase font-semibold tracking-widest text-center md:text-left">
               Online Casino of the Month {casino.month || "May"} {casino.year || "2025"}
             </p>
@@ -393,25 +393,25 @@ const CasinoDetail = () => {
               </p>
             </div>
 
-            {/* Features & CTA */}
+            {/* Features and CTA */}
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Features */}
               {casino.generalInfo?.features?.length > 0 && (
-                <div className="order-2 sm:order-none">
+                <div>
                   <h3 className="font-semibold text-sm mb-2">Features</h3>
                   <ul className="text-sm text-gray-700 grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
                     {casino.generalInfo.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-1">
-                        ️‍🔥 <span>{feature}</span>
+                        🔥 <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               )}
 
-              {/* CTA Section - Appears first on mobile but visually at bottom */}
-              <div className="order-1 sm:order-none sm:relative h-full">
-                <div className="sm:absolute sm:bottom-0 sm:left-0 w-full flex justify-center px-4 pb-4 sm:pb-0">
+              {/* CTA Section */}
+              <div className="sm:self-end">
+                <div className="w-full flex justify-center sm:justify-start px-4 pb-4 sm:pb-0">
                   <div className="flex flex-col items-center space-y-2 w-full max-w-xs">
                     <p className="text-sm text-gray-600 text-center whitespace-nowrap">
                       {casino.visits || 0} Has Already Visited!
@@ -434,7 +434,6 @@ const CasinoDetail = () => {
     </div>
   )}
 </header>
-
 
 
         <main className="max-w-6xl mx-auto px-4 py-8">
