@@ -44,9 +44,9 @@ const CasinoDetail = () => {
         data.generalInfo = data.generalInfo || {};
         data.generalInfo.website =
           data.generalInfo.website || "https://examplecasino.com";
-        data.generalInfo.features =
+       data.generalInfo.features =
           data.generalInfo.features?.length > 0
-            ? data.generalInfo.features
+            ? casino.generalInfo?.features
             : [
               "24/7 Customer Support",
               "Fast Withdrawals",

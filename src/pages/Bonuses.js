@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from '../components/Navbar';
-import casinoBg from '../assets/images/casino-bg.png';
+import casinoBg from '../assets/images/bonuses-bg.png';
 import SearchBox from '../components/searchbox';
 import Card from '../components/Card';
 import ExpertCard from '../components/ExpertCard';
@@ -26,7 +26,7 @@ const TYPE_TO_TAG_MAP = {
   'freespins': 'Free Spins Bonus',
   'cashback': 'Cashback Bonus',
   'no-wagering': 'No Wagering Bonus',
-  
+
   // Additional mappings for other possible routes
   // 'crypto': 'Crypto Casino',
   // 'online': 'Online Casino',
@@ -104,7 +104,7 @@ const Bonuses = ({ type }) => {
     }
 
     // Filter using exact tag matching
-    const filtered = data.filter(casino => 
+    const filtered = data.filter(casino =>
       Array.isArray(casino.tags) && casino.tags.includes(exactTag)
     );
 
@@ -126,7 +126,7 @@ const Bonuses = ({ type }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black100 to-transparent"></div>
 
         <div className="container mx-auto text-center absolute z-10 top-5 h-full flex flex-col justify-center items-center px-2">
-          <h1
+          {/* <h1
             className="text-3xl md:text-5xl lg:text-6xl max-w-4xl text-white"
             style={{
               fontFamily: 'BigNoodleTitling',
@@ -149,10 +149,13 @@ const Bonuses = ({ type }) => {
             }}
           >
             Compare top-rated casino platforms, claim exclusive bonuses, and start playing today!
-          </p>
-          <div className="m-10">
-            <SearchBox />
+          </p> */}
+          <div className="mt-32 px-4 w-full flex justify-center">
+            <div className="w-full max-w-2xl">
+              <SearchBox />
+            </div>
           </div>
+
         </div>
       </header>
 
@@ -205,7 +208,7 @@ const Bonuses = ({ type }) => {
               ))}
             </div>
           </div>
-          
+
 
           <h2
             className="text-3xl font-bold text-white mb-10 mt-40 text-2xl md:text-3xl lg:text-4xl text-white"
@@ -235,9 +238,9 @@ const Bonuses = ({ type }) => {
           </div>
         </div>
       </section>
-            
 
-               <section className="py-10 bg-black100 text-center">
+
+      <section className="py-10 bg-black100 text-center">
         <div className="flex  mt-10 flex-col items-center ">
           <div
             className="relative text-white p-10 w-full max-w-full"
@@ -264,19 +267,19 @@ const Bonuses = ({ type }) => {
                 <Card name="BULLETZ" rating="4.5" bgImage={cardImage4} />
 
               </div> */}
-               <div className="flex justify-center items-center">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-              {loading ? (
-                <p>Loading...</p>
-              ) : error ? (
-                <p>Error: {error}</p>
-              ) : (
-                filteredData.map((casino, index) => (
-                  <ExpertCard key={index} logo={casino.logo} name={casino.name} />
-                ))
-              )}
-            </div>
-          </div>
+              <div className="flex justify-center items-center">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                  {loading ? (
+                    <p>Loading...</p>
+                  ) : error ? (
+                    <p>Error: {error}</p>
+                  ) : (
+                    filteredData.map((casino, index) => (
+                      <ExpertCard key={index} logo={casino.logo} name={casino.name} />
+                    ))
+                  )}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -309,19 +312,19 @@ const Bonuses = ({ type }) => {
                 <Card name="STARS" rating="4.7" bgImage={cardImage5} />
               
               </div> */}
-                 <div className="flex justify-center items-center">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-              {loading ? (
-                <p>Loading...</p>
-              ) : error ? (
-                <p>Error: {error}</p>
-              ) : (
-                filteredData.map((casino, index) => (
-                  <ExpertCard key={index} logo={casino.logo} name={casino.name} />
-                ))
-              )}
-            </div>
-          </div>
+              <div className="flex justify-center items-center">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                  {loading ? (
+                    <p>Loading...</p>
+                  ) : error ? (
+                    <p>Error: {error}</p>
+                  ) : (
+                    filteredData.map((casino, index) => (
+                      <ExpertCard key={index} logo={casino.logo} name={casino.name} />
+                    ))
+                  )}
+                </div>
+              </div>
             </div>
           </div>
 
