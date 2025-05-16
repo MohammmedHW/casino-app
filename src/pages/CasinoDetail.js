@@ -30,31 +30,7 @@ const CasinoDetail = () => {
           if (!data) throw new Error("Casino not found");
         }
 
-        // Add dummy data if not provided from API
-        data.rating = data.rating || 4.6;
-        data.depositBonus = data.depositBonus || "Up to 1000 € cash bonus + 25k";
-        data.welcomeBonus = data.welcomeBonus || "32 Free Spins";
-        data.overview =
-          data.overview ||
-          "Experience top-tier online gaming with our featured casino of the month! Enjoy unmatched bonuses, exciting games, and a premium user experience.";
-        data.month = data.month || "May";
-        data.year = data.year || "2025";
-        data.visits = data.visits || 1023;
 
-        data.generalInfo = data.generalInfo || {};
-        data.generalInfo.website =
-          data.generalInfo.website || "https://examplecasino.com";
-       data.generalInfo.features =
-          data.generalInfo.features?.length > 0
-            ? casino.generalInfo?.features
-            : [
-              "24/7 Customer Support",
-              "Fast Withdrawals",
-              "Live Casino Games",
-              "Mobile Friendly",
-              "SSL Secured",
-              "VIP Program",
-            ];
 
         setCasino(data);
       } catch (err) {
@@ -426,7 +402,7 @@ const CasinoDetail = () => {
                           <ul className="text-sm text-gray-700 grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
                             {casino.generalInfo.features.map((feature, idx) => (
                               <li key={idx} className="flex items-start gap-1">
-                                ✅ <span>{feature}</span>
+                                ️‍🔥 <span>{feature}</span>
                               </li>
                             ))}
                           </ul>
@@ -434,19 +410,24 @@ const CasinoDetail = () => {
                       )}
 
                       {/* CTA Section */}
-                      <div className="flex flex-col items-center sm:items-end justify-between h-full">
-                        <p className="text-sm text-gray-600 text-center sm:text-right whitespace-nowrap mb-2">
-                          {casino.visits || 0} Has Already Visited!
-                        </p>
-                        <a
-                          href={casino.generalInfo?.website || "#"}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:from-red-600 hover:to-red-800 text-white font-semibold py-3 px-8 rounded-full transition duration-200 text-base w-full text-center"
-                        >
-                          Play now
-                        </a>
+                      <div className="relative h-full">
+                        <div className="absolute bottom-0 left-0 w-full flex justify-center px-4 pb-4">
+                          <div className="flex flex-col items-center space-y-2 w-full max-w-xs">
+                            <p className="text-sm text-gray-600 text-center whitespace-nowrap">
+                              {casino.visits || 0} Has Already Visited!
+                            </p>
+                            <a
+                              href={casino.generalInfo?.website || "#"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:from-red-600 hover:to-red-800 text-white font-semibold py-3 px-6 rounded-[10px] transition duration-200 text-base w-full text-center"
+                            >
+                              Play now
+                            </a>
+                          </div>
+                        </div>
                       </div>
+
                     </div>
                   </div>
                 </div>
@@ -466,8 +447,8 @@ const CasinoDetail = () => {
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`flex-shrink-0 text-sm sm:text-lg font-semibold px-6 sm:px-10 py-2 sm:py-4 border border-[#3d3d3d] rounded-[30px] whitespace-nowrap ${activeTab === tab
-                    ? "bg-[#00000040] text-white"
-                    : "text-white hover:text-red-600"
+                  ? "bg-[#00000040] text-white"
+                  : "text-white hover:text-red-600"
                   }`}
               >
                 {tab === "general" && "General Info"}
@@ -479,8 +460,8 @@ const CasinoDetail = () => {
           </div>
 
           {/* Tab Content */}
-           <div className="flex justify-start mt-6 px-4 sm:justify-center pb-4 overflow-x-auto scrollbar-hide space-x-3 sm:space-x-6">
-         
+          <div className="flex justify-start mt-6 px-4 sm:justify-center pb-4 overflow-x-auto scrollbar-hide space-x-3 sm:space-x-6">
+
             {renderTabContent()}
           </div>
 
