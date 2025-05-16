@@ -15,6 +15,8 @@ import EditCasino from "./pages/EditCasino";
 import EditBlog from "./pages/EditBlog";
 import CasinoDetail from "./pages/CasinoDetail";
 
+import Login from "./pages/Login";
+
 import LatestBonus from "./SubMenu/LatestBonus";
 import ExclusiveBonus from "./SubMenu/ExclusiveBonus";
 import WelcomeBonus from "./SubMenu/WelcomeBonus";
@@ -32,6 +34,8 @@ function App() {
       <Route path="/games" element={<Games />} />
       <Route path="/about-us" element={<AboutUs />} />
 
+      <Route path="/login" element={<Login />} />
+
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/casinos-admin" element={<CasinosAdmin />} />
       <Route path="/blogs-admin" element={<BlogsAdmin />} />
@@ -42,7 +46,6 @@ function App() {
       <Route path="/edit-blog/:id" element={<EditBlog />} />
       <Route path="/casino" element={<CasinoDetail />} />
       <Route path="/casinos/:slug" element={<CasinoDetail />} />
-      
 
       {/* Filtered Casinos */}
       <Route path="/casinos/crypto" element={<Casinos type="crypto" />} />
@@ -55,19 +58,31 @@ function App() {
       <Route path="/bonuses/latest" element={<Bonuses type="latest" />} />
       <Route path="/bonuses/exclusive" element={<Bonuses type="exclusive" />} />
       <Route path="/bonuses/welcome" element={<Bonuses type="welcome" />} />
-      <Route path="/bonuses/no-deposit" element={<Bonuses type="no-deposit"/>} />
-      <Route path="/bonuses/free-spins" element={<Bonuses type="freespins"/>} />
-      <Route path="/bonuses/cashback" element={<Bonuses type="cashback"/>} />
-      <Route path="/bonuses/no-wagering" element={<Bonuses type="no-wagering" />} />
+      <Route
+        path="/bonuses/no-deposit"
+        element={<Bonuses type="no-deposit" />}
+      />
+      <Route
+        path="/bonuses/free-spins"
+        element={<Bonuses type="freespins" />}
+      />
+      <Route path="/bonuses/cashback" element={<Bonuses type="cashback" />} />
+      <Route
+        path="/bonuses/no-wagering"
+        element={<Bonuses type="no-wagering" />}
+      />
 
-        {/* Games Types */}
+      {/* Games Types */}
       <Route path="/games/casino" element={<Games type="casino" />} />
       <Route path="/games/table" element={<Games type="table" />} />
       <Route path="/games/card" element={<Games type="card" />} />
-      <Route path="/games/dice" element={<Games type="dice"/>} />
-      <Route path="/games/real-money-slots" element={<Games type="Real Money Online Slots"/>} />
-      <Route path="/games/poker" element={<Games type="poker"/>} />
-      <Route path="/games/bingo" element={<Games type="bingo"/>} />
+      <Route path="/games/dice" element={<Games type="dice" />} />
+      <Route
+        path="/games/real-money-slots"
+        element={<Games type="Real Money Online Slots" />}
+      />
+      <Route path="/games/poker" element={<Games type="poker" />} />
+      <Route path="/games/bingo" element={<Games type="bingo" />} />
       <Route path="/games/lottery" element={<Games type="lottery" />} />
     </Routes>
   );

@@ -90,6 +90,7 @@ export function AuthProvider({ children }) {
     loading,
     error,
     setError,
+    fetchCurrentUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
