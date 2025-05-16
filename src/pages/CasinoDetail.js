@@ -303,139 +303,137 @@ const CasinoDetail = () => {
     <>
       <Navbar />
       <div className="min-h-screen w-full bg-[#181818]">
-        <header
-          className="relative bg-cover bg-center h-[100vh] md:h-screen"
-          style={{ backgroundImage: `url(${bonusesBg})` }}
-        >
-          <div className="absolute inset-0 bg-black bg-opacity-10"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+      <header
+  className="relative bg-cover bg-center min-h-screen"
+  style={{ backgroundImage: `url(${bonusesBg})` }}
+>
+  <div className="absolute inset-0 bg-black bg-opacity-10"></div>
+  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
 
-          {casino && (
-            <div className="absolute inset-0 mt-24 z-10 flex justify-center items-start px-4 sm:px-6 md:px-20">
-              <div className="relative w-full max-w-6xl">
-                {/* Crown */}
-                <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 bg-white w-12 h-12 sm:w-14 sm:h-14 rounded-full border-4 border-white z-20 flex items-center justify-center" style={{ boxShadow: 'inset 0 0 0 3px red' }}>
-                  <img src={crown} alt="Crown" className="w-6 h-6 sm:w-8 sm:h-8" />
+  {casino && (
+    <div className="absolute inset-0 mt-24 z-10 flex justify-center items-start px-4 sm:px-6 md:px-20">
+      <div className="relative w-full max-w-6xl">
+        {/* Crown */}
+        <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 bg-white w-12 h-12 sm:w-14 sm:h-14 rounded-full border-4 border-white z-20 flex items-center justify-center" style={{ boxShadow: 'inset 0 0 0 3px red' }}>
+          <img src={crown} alt="Crown" className="w-6 h-6 sm:w-8 sm:h-8" />
+        </div>
+
+        {/* Card */}
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row w-full border border-blue-200 relative z-10">
+          {/* Logo */}
+          <div className="flex items-center justify-center p-6 md:w-1/3 w-full" style={{ backgroundColor: bgColor }}>
+            {casino.logo ? (
+              <img
+                ref={imgRef}
+                src={casino.logo}
+                alt={casino.name || "Casino"}
+                className="max-h-20 sm:max-h-24 object-contain"
+                crossOrigin="anonymous"
+                onError={(e) => {
+                  e.target.src = "https://via.placeholder.com/150";
+                }}
+              />
+            ) : (
+              <div className="text-white text-lg">No logo available</div>
+            )}
+          </div>
+
+          {/* Details */}
+          <div className="p-4 sm:p-6 md:p-8 pt-10 text-left md:w-2/3 w-full">
+            <p className="text-xs text-gray-400 uppercase font-semibold tracking-widest text-center md:text-left">
+              Online Casino of the Month {casino.month || "May"} {casino.year || "2025"}
+            </p>
+
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-2 gap-2">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center sm:text-left">
+                {casino.name || "Casino Name"}
+              </h2>
+              <div className="flex items-center justify-center sm:justify-start space-x-2">
+                <span className="text-red-500 text-lg font-bold">
+                  {(casino.rating || 4.6).toFixed(1)}
+                </span>
+                <span className="text-red-500 text-sm">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i}>
+                      {i < Math.floor(casino.rating || 4.6) ? "★" : "☆"}
+                    </span>
+                  ))}
+                </span>
+              </div>
+            </div>
+
+            {/* Bonuses */}
+            <div className="flex flex-col sm:flex-row gap-4 mt-4">
+              <div className="flex items-center border border-red-200 rounded-xl px-4 py-3 gap-3 bg-red-50 w-full sm:w-1/2">
+                <span className="text-2xl">💰</span>
+                <div>
+                  <p className="text-xs text-gray-500">Deposit Bonus</p>
+                  <p className="text-sm font-semibold">
+                    {casino.depositBonus || "Up to 1000 € cash bonus + 25k"}
+                  </p>
                 </div>
+              </div>
+              <div className="flex items-center border border-red-200 rounded-xl px-4 py-3 gap-3 bg-red-50 w-full sm:w-1/2">
+                <span className="text-2xl">🎰</span>
+                <div>
+                  <p className="text-xs text-gray-500">Welcome Bonus</p>
+                  <p className="text-sm font-semibold">
+                    {casino.welcomeBonus || "32 Free Spins"}
+                  </p>
+                </div>
+              </div>
+            </div>
 
-                {/* Card */}
-                <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row w-full border border-blue-200 relative z-10">
-                  {/* Logo */}
-                  <div className="flex items-center justify-center p-6 md:w-1/3" style={{ backgroundColor: bgColor }}>
-                    {casino.logo ? (
-                      <img
-                        ref={imgRef}
-                        src={casino.logo}
-                        alt={casino.name || "Casino"}
-                        className="max-h-20 sm:max-h-24 object-contain"
-                        crossOrigin="anonymous"
-                        onError={(e) => {
-                          e.target.src = "https://via.placeholder.com/150";
-                        }}
-                      />
-                    ) : (
-                      <div className="text-white text-lg">No logo available</div>
-                    )}
-                  </div>
+            {/* Overview */}
+            <div className="mt-4 text-sm text-gray-700">
+              <h3 className="font-semibold mb-1">Overview</h3>
+              <p>
+                {casino.overview ||
+                  "Experience top-tier online gaming with our featured casino of the month!"}
+              </p>
+            </div>
 
-                  {/* Details */}
-                  <div className="p-4 sm:p-6 md:p-8 pt-10 text-left md:w-2/3">
-                    <p className="text-xs text-gray-400 uppercase font-semibold tracking-widest text-center md:text-left">
-                      Online Casino of the Month {casino.month || "May"} {casino.year || "2025"}
+            {/* Features and CTA */}
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Features */}
+              {casino.generalInfo?.features?.length > 0 && (
+                <div>
+                  <h3 className="font-semibold text-sm mb-2">Features</h3>
+                  <ul className="text-sm text-gray-700 grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
+                    {casino.generalInfo.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-1">
+                        🔥 <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* CTA Section */}
+              <div className="sm:self-end">
+                <div className="w-full flex justify-center sm:justify-start px-4 pb-4 sm:pb-0">
+                  <div className="flex flex-col items-center space-y-2 w-full max-w-xs">
+                    <p className="text-sm text-gray-600 text-center whitespace-nowrap">
+                      {casino.visits || 0} Has Already Visited!
                     </p>
-
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-2 gap-2">
-                      <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center sm:text-left">
-                        {casino.name || "Casino Name"}
-                      </h2>
-                      <div className="flex items-center justify-center sm:justify-start space-x-2">
-                        <span className="text-red-500 text-lg font-bold">
-                          {(casino.rating || 4.6).toFixed(1)}
-                        </span>
-                        <span className="text-red-500 text-sm">
-                          {[...Array(5)].map((_, i) => (
-                            <span key={i}>
-                              {i < Math.floor(casino.rating || 4.6) ? "★" : "☆"}
-                            </span>
-                          ))}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Bonuses */}
-                    <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                      <div className="flex items-center border border-red-200 rounded-xl px-4 py-3 gap-3 bg-red-50 w-full sm:w-1/2">
-                        <span className="text-2xl">💰</span>
-                        <div>
-                          <p className="text-xs text-gray-500">Deposit Bonus</p>
-                          <p className="text-sm font-semibold">
-                            {casino.depositBonus || "Up to 1000 € cash bonus + 25k"}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center border border-red-200 rounded-xl px-4 py-3 gap-3 bg-red-50 w-full sm:w-1/2">
-                        <span className="text-2xl">🎰</span>
-                        <div>
-                          <p className="text-xs text-gray-500">Welcome Bonus</p>
-                          <p className="text-sm font-semibold">
-                            {casino.welcomeBonus || "32 Free Spins"}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Overview */}
-                    <div className="mt-4 text-sm text-gray-700">
-                      <h3 className="font-semibold mb-1">Overview</h3>
-                      <p>
-                        {casino.overview ||
-                          "Experience top-tier online gaming with our featured casino of the month!"}
-                      </p>
-                    </div>
-
-                    {/* Features & CTA */}
-                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {/* Features */}
-                      {casino.generalInfo?.features?.length > 0 && (
-                        <div>
-                          <h3 className="font-semibold text-sm mb-2">Features</h3>
-                          <ul className="text-sm text-gray-700 grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
-                            {casino.generalInfo.features.map((feature, idx) => (
-                              <li key={idx} className="flex items-start gap-1">
-                                ️‍🔥 <span>{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      {/* CTA Section */}
-                      <div className="relative h-full">
-                        <div className="absolute bottom-0 left-0 w-full flex justify-center px-4 pb-4">
-                          <div className="flex flex-col items-center space-y-2 w-full max-w-xs">
-                            <p className="text-sm text-gray-600 text-center whitespace-nowrap">
-                              {casino.visits || 0} Has Already Visited!
-                            </p>
-                            <a
-                              href={casino.generalInfo?.website || "#"}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:from-red-600 hover:to-red-800 text-white font-semibold py-3 px-6 rounded-[10px] transition duration-200 text-base w-full text-center"
-                            >
-                              Play now
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
+                    <a
+                      href={casino.generalInfo?.website || "#"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:from-red-600 hover:to-red-800 text-white font-semibold py-3 px-6 rounded-[10px] transition duration-200 text-base w-full text-center"
+                    >
+                      Play now
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
-          )}
-        </header>
-
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
+</header>
 
 
         <main className="max-w-6xl mx-auto px-4 py-8">
