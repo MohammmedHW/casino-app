@@ -50,7 +50,7 @@ const Login = () => {
                 placeholder="Password"
                 className="w-full p-2 border rounded"
                 value={password}
-                onChange={(e) => setPassword(e.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
