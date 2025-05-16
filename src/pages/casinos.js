@@ -39,37 +39,37 @@ const Casinos = ({ type }) => {
     };
   }, []);
 
-useEffect(() => {
-  const fetchCasinos = async () => {
-    setLoading(true);
-    try {
-      let url = "http://localhost:4000/api/casinos";
-      const response = await axios.get(url);
-      setCasinosData(response.data);
-      filt(response.data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    const fetchCasinos = async () => {
+      setLoading(true);
+      try {
+        let url = "http://localhost:4000/api/casinos";
+        const response = await axios.get(url);
+        setCasinosData(response.data);
+        filt(response.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchCasinos();
-}, [type]);
-const [filteredData, setFilteredData] = useState([]);
+    fetchCasinos();
+  }, [type]);
+  const [filteredData, setFilteredData] = useState([]);
 
-function filt(data) {
-  if (!type || typeof type !== "string") return; //to prevent error of lowercase
+  function filt(data) {
+    if (!type || typeof type !== "string") return; //to prevent error of lowercase
 
-  const filtered = data.filter(casino =>
-    Array.isArray(casino.tags) &&
-    casino.tags.some(tag =>
-      tag.toLowerCase().includes(type.toLowerCase())
-    )
-  );
-  setFilteredData(filtered); // set global state
-  console.log("filtered:", filtered);
-}
+    const filtered = data.filter(casino =>
+      Array.isArray(casino.tags) &&
+      casino.tags.some(tag =>
+        tag.toLowerCase().includes(type.toLowerCase())
+      )
+    );
+    setFilteredData(filtered); // set global state
+    console.log("filtered:", filtered);
+  }
 
 
   const categories = [
@@ -166,13 +166,19 @@ function filt(data) {
           </h2>
 
           <div className="flex justify-center mb-10 rounded-2xl mx-auto max-w-[900px] p-10 bg-green-800 sm:mx-6 mx-8 lg:mx-auto">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-50 w-full">
-              {filteredData.map((casino, index) => (
-                <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} />
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
+              {filteredData.slice(0, 4).map((casino, index) => (
+                <Card
+                  key={index}
+                  name={casino.name}
+                  rating={casino.rating}
+                  bgImage={casino.logo}
+                />
               ))}
             </div>
           </div>
-          
+
+
 
           <h2
             className="text-3xl font-bold text-white mb-10 mt-40 text-2xl md:text-3xl lg:text-4xl text-white"
@@ -202,9 +208,9 @@ function filt(data) {
           </div>
         </div>
       </section>
-            
 
-               <section className="py-10 bg-black100 text-center">
+
+      <section className="py-10 bg-black100 text-center">
         <div className="flex  mt-10 flex-col items-center ">
           <div
             className="relative text-white p-10 w-full max-w-full"
@@ -231,19 +237,19 @@ function filt(data) {
                 <Card name="BULLETZ" rating="4.5" bgImage={cardImage4} />
 
               </div> */}
-               <div className="flex justify-center items-center">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-              {loading ? (
-                <p>Loading...</p>
-              ) : error ? (
-                <p>Error: {error}</p>
-              ) : (
-                filteredData.map((casino, index) => (
-                  <ExpertCard key={index} logo={casino.logo} name={casino.name} />
-                ))
-              )}
-            </div>
-          </div>
+              <div className="flex justify-center items-center">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                  {loading ? (
+                    <p>Loading...</p>
+                  ) : error ? (
+                    <p>Error: {error}</p>
+                  ) : (
+                    filteredData.map((casino, index) => (
+                      <ExpertCard key={index} logo={casino.logo} name={casino.name} />
+                    ))
+                  )}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -276,19 +282,19 @@ function filt(data) {
                 <Card name="STARS" rating="4.7" bgImage={cardImage5} />
               
               </div> */}
-                 <div className="flex justify-center items-center">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-              {loading ? (
-                <p>Loading...</p>
-              ) : error ? (
-                <p>Error: {error}</p>
-              ) : (
-                filteredData.map((casino, index) => (
-                  <ExpertCard key={index} logo={casino.logo} name={casino.name} />
-                ))
-              )}
-            </div>
-          </div>
+              <div className="flex justify-center items-center">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                  {loading ? (
+                    <p>Loading...</p>
+                  ) : error ? (
+                    <p>Error: {error}</p>
+                  ) : (
+                    filteredData.map((casino, index) => (
+                      <ExpertCard key={index} logo={casino.logo} name={casino.name} />
+                    ))
+                  )}
+                </div>
+              </div>
             </div>
           </div>
 

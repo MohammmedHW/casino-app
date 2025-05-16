@@ -1009,7 +1009,7 @@ const CreateCasino = () => {
                   required
                 />
               </div>
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium mb-1">Order</label>
                 <input
                   type="number"
@@ -1018,7 +1018,7 @@ const CreateCasino = () => {
                   value={casino.order}
                   onChange={handleChange}
                 />
-              </div>
+              </div> */}
               <div className="flex items-center">
                 <input
                   type="checkbox"
