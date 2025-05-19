@@ -331,6 +331,7 @@ import categoriesImg3 from "../assets/images/image 17.png";
 import categoriesImg4 from "../assets/images/image 18.png";
 import categoriesImg5 from "../assets/images/image 19.png";
 import categoriesImg6 from "../assets/images/image 20.png";
+import CountryCasinoList from "../components/CountryCasinoList";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -619,7 +620,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-
+     
       <section className="py-10 bg-black100 text-center">
         <div className="flex mt-10 flex-col items-center">
           <div
@@ -699,7 +700,9 @@ const Home = () => {
           </div>
         </div>
       </section>
-
+ <div>
+      <CountryCasinoList />
+    </div>
       <section className="flex flex-col bg-black100 items-center justify-center pb-20">
         <div className="container m-10 mx-auto px-4">
           {currentCasinos.map((casino) => (

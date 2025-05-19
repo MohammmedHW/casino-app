@@ -326,23 +326,23 @@ const CasinoDetail = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen w-full bg-[#181818]">
-        <header
-          className="relative bg-cover bg-center h-[100vh] md:h-screen"
+      <div className=" w-full bg-[#181818]">
+        <header className="relative bg-cover bg-center "
+
           style={{ backgroundImage: `url(${bonusesBg})` }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-10"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
 
           {casino && (
-            <div className="absolute inset-0 mt-24 z-10 flex justify-center items-start px-4 sm:px-6 md:px-20">
+              <div className="relative  z-10 pt-24 pb-8 px-4 sm:px-6 md:px-20">
               <div className="relative w-full max-w-6xl">
                 {/* Crown */}
                 <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 bg-white w-12 h-12 sm:w-14 sm:h-14 rounded-full border-4 border-white z-20 flex items-center justify-center" style={{ boxShadow: 'inset 0 0 0 3px red' }}>
                   <img src={crown} alt="Crown" className="w-6 h-6 sm:w-8 sm:h-8" />
                 </div>
 
-                {/* Card */}
+                 {/* Card */}
                 <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row w-full border border-blue-200 relative z-10">
                   {/* Logo */}
                   <div className="flex items-center justify-center p-6 md:w-1/3" style={{ backgroundColor: bgColor }}>
@@ -433,24 +433,24 @@ const CasinoDetail = () => {
                         </div>
                       )}
 
-                     {/* CTA Section */}
-<div className="relative h-full w-full">
-  <div className="sm:absolute sm:bottom-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-full px-4">
-    <div className="flex flex-col items-center w-full max-w-xs mx-auto">
-      <p className="text-sm text-gray-600 text-center whitespace-nowrap mb-2">
-        {casino.visits || 0} Has Already Visited!
-      </p>
-      <a
-        href={casino.generalInfo?.website || "#"}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:from-red-600 hover:to-red-800 text-white font-semibold py-3 px-8 rounded-full transition duration-200 text-base w-full text-center"
-      >
-        Play now
-      </a>
-    </div>
-  </div>
-</div>
+                      {/* CTA Section */}
+                      <div className="relative h-full w-full">
+                        <div className="sm:absolute sm:bottom-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-full px-4">
+                          <div className="flex flex-col items-center w-full max-w-xs mx-auto">
+                            <p className="text-sm text-gray-600 text-center whitespace-nowrap mb-2">
+                              {casino.visits || 0} Has Already Visited!
+                            </p>
+                            <a
+                              href={casino.generalInfo?.website || "#"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:from-red-600 hover:to-red-800 text-white font-semibold py-3 px-8 rounded-full transition duration-200 text-base w-full text-center"
+                            >
+                              Play now
+                            </a>
+                          </div>
+                        </div>
+                      </div>
 
                     </div>
                   </div>
@@ -459,40 +459,41 @@ const CasinoDetail = () => {
             </div>
           )}
         </header>
-
-
-
-        <main className="max-w-6xl mx-auto px-4 py-8">
-
-          {/* Tab Buttons */}
-          <div className="flex justify-start sm:justify-center pb-4 overflow-x-auto scrollbar-hide space-x-3 sm:space-x-6">
-            {["general", "payment", "games", "responsible"].map((tab, index) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`flex-shrink-0 text-sm sm:text-lg font-semibold px-6 sm:px-10 py-2 sm:py-4 border border-[#3d3d3d] rounded-[30px] whitespace-nowrap ${activeTab === tab
-                    ? "bg-[#00000040] text-white"
-                    : "text-white hover:text-red-600"
-                  }`}
-              >
-                {tab === "general" && "General Info"}
-                {tab === "payment" && "Payment Info"}
-                {tab === "games" && "Games"}
-                {tab === "responsible" && "Responsible Gaming"}
-              </button>
-            ))}
-          </div>
-
-          {/* Tab Content */}
-           <div className="flex justify-start mt-6 px-4 sm:justify-center pb-4 overflow-x-auto scrollbar-hide space-x-3 sm:space-x-6">
-         
-            {renderTabContent()}
-          </div>
-
-        </main>
-
-
       </div>
+
+
+      <section className="mt-2">   <main className="max-w-6xl  mx-auto px-4 py-8">
+
+        {/* Tab Buttons */}
+        <div className="flex justify-start sm:justify-center pb-4 overflow-x-auto scrollbar-hide space-x-3 sm:space-x-6">
+          {["general", "payment", "games", "responsible"].map((tab, index) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`flex-shrink-0 text-sm sm:text-lg font-semibold px-6 sm:px-10 py-2 sm:py-4 border border-[#3d3d3d] rounded-[30px] whitespace-nowrap ${activeTab === tab
+                ? "bg-[#00000040] text-white"
+                : "text-white hover:text-red-600"
+                }`}
+            >
+              {tab === "general" && "General Info"}
+              {tab === "payment" && "Payment Info"}
+              {tab === "games" && "Games"}
+              {tab === "responsible" && "Responsible Gaming"}
+            </button>
+          ))}
+        </div>
+
+        {/* Tab Content */}
+        <div className="flex justify-start mt-6 px-4 sm:justify-center pb-4 overflow-x-auto scrollbar-hide space-x-3 sm:space-x-6">
+
+          {renderTabContent()}
+        </div>
+
+      </main>
+      </section>
+
+
+
       <Footer />
     </>
   );
