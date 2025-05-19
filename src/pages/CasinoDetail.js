@@ -31,30 +31,30 @@ const CasinoDetail = () => {
         }
 
         // Add dummy data if not provided from API
-        data.rating = data.rating || 4.6;
-        data.depositBonus = data.depositBonus || "Up to 1000 € cash bonus + 25k";
-        data.welcomeBonus = data.welcomeBonus || "32 Free Spins";
-        data.overview =
-          data.overview ||
-          "Experience top-tier online gaming with our featured casino of the month! Enjoy unmatched bonuses, exciting games, and a premium user experience.";
-        data.month = data.month || "May";
-        data.year = data.year || "2025";
-        data.visits = data.visits || 1023;
+        // data.rating = data.rating || 4.6;
+        // data.depositBonus = data.depositBonus || "Up to 1000 € cash bonus + 25k";
+        // data.welcomeBonus = data.welcomeBonus || "32 Free Spins";
+        // data.overview =
+        //   data.overview ||
+        //   "Experience top-tier online gaming with our featured casino of the month! Enjoy unmatched bonuses, exciting games, and a premium user experience.";
+        // data.month = data.month || "May";
+        // data.year = data.year || "2025";
+        // data.visits = data.visits || 1023;
 
-        data.generalInfo = data.generalInfo || {};
-        data.generalInfo.website =
-          data.generalInfo.website || "https://examplecasino.com";
-        data.generalInfo.features =
-          data.generalInfo.features?.length > 0
-            ? casino.generalInfo?.features
-            : [
-              "24/7 Customer Support",
-              "Fast Withdrawals",
-              "Live Casino Games",
-              "Mobile Friendly",
-              "SSL Secured",
-              "VIP Program",
-            ];
+        // data.generalInfo = data.generalInfo || {};
+        // data.generalInfo.website =
+        //   data.generalInfo.website || "https://examplecasino.com";
+        // data.generalInfo.features =
+        //   data.generalInfo.features?.length > 0
+        //     ? casino.generalInfo?.features
+        //     : [
+        //       "24/7 Customer Support",
+        //       "Fast Withdrawals",
+        //       "Live Casino Games",
+        //       "Mobile Friendly",
+        //       "SSL Secured",
+        //       "VIP Program",
+        //     ];
 
         setCasino(data);
       } catch (err) {

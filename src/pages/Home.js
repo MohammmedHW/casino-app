@@ -333,6 +333,8 @@ import categoriesImg5 from "../assets/images/image 19.png";
 import categoriesImg6 from "../assets/images/image 20.png";
 import CountryCasinoList from "../components/CountryCasinoList";
 
+import CookieConsent from "../components/CookieConsent";
+
 const Home = () => {
   const navigate = useNavigate();
   const [casinos, setCasinos] = useState([]);
@@ -342,16 +344,16 @@ const Home = () => {
 
 
   useEffect(() => {
-      if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
       window.dataLayer = window.dataLayer || [];
-      function gtag(){window.dataLayer.push(arguments);}
+      function gtag() { window.dataLayer.push(arguments); }
       window.gtag = gtag;
       gtag('js', new Date());
       gtag('config', 'G-J8M10SL43W');
     }
     // Change body background color
     document.body.style.backgroundColor = "#1e1e1e";
- let scrollTracked = false;
+    let scrollTracked = false;
     const handleScroll = () => {
       const scrollPosition = window.scrollY + window.innerHeight;
       const pageHeight = document.documentElement.scrollHeight;
@@ -371,7 +373,7 @@ const Home = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-      if (window.gtag) {
+    if (window.gtag) {
       window.gtag('event', 'page_view', {
         page_title: document.title,
         page_path: window.location.pathname
@@ -394,7 +396,7 @@ const Home = () => {
     // Cleanup function
     return () => {
       document.body.style.backgroundColor = null;
-        window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -653,7 +655,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-     
+
       <section className="py-10 bg-black100 text-center">
         <div className="flex mt-10 flex-col items-center">
           <div
@@ -733,10 +735,10 @@ const Home = () => {
           </div>
         </div>
       </section>
- <div>
-      <CountryCasinoList />
+      <div>
+        <CountryCasinoList />
 
-    </div>
+      </div>
 
 
       <section className="flex flex-col bg-black100 items-center justify-center pb-20">
@@ -779,8 +781,18 @@ const Home = () => {
           </div>
         </div>
       </section>
+      {/* <button
+  onClick={() => {
+    localStorage.removeItem("cookie_consent");
+    window.location.reload();
+  }}
+  className="fixed top-4 right-4 z-50 bg-red-600 text-white px-4 py-2 rounded"
+>
+  Reset Cookie Consent
+</button> */}
 
       <Footer />
+      <CookieConsent />
     </>
   );
 };

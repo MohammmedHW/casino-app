@@ -17,6 +17,7 @@ import CasinoDetail from "./pages/CasinoDetail";
 
 import Login from "./pages/Login";
 
+import CookieConsent from "./components/CookieConsent";
 // import LatestBonus from "./SubMenu/LatestBonus";
 // import ExclusiveBonus from "./SubMenu/ExclusiveBonus";
 // import WelcomeBonus from "./SubMenu/WelcomeBonus";
@@ -27,12 +28,12 @@ import Login from "./pages/Login";
 
 import { trackPageView } from './utils/analytics';
 function App() {
-   const location = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     // Track initial pageview
     trackPageView(location.pathname);
-    
+
     // Cleanup function
     return () => {
       // Add any cleanup logic here if needed
@@ -97,6 +98,7 @@ function App() {
       <Route path="/games/poker" element={<Games type="poker" />} />
       <Route path="/games/bingo" element={<Games type="bingo" />} />
       <Route path="/games/lottery" element={<Games type="lottery" />} />
+
     </Routes>
   );
 }

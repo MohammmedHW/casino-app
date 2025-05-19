@@ -89,12 +89,12 @@ const AboutUs = () => {
               Welcome to MR Gambler
             </h2>
             <p className="mb-4 text-gray-300">
-              At MR Gambler, we're redefining online casino entertainment with 
-              cutting-edge gaming experiences. Established in 2020, we've become 
-              a trusted name in online gambling, offering premium casino games 
+              At MR Gambler, we're redefining online casino entertainment with
+              cutting-edge gaming experiences. Established in 2020, we've become
+              a trusted name in online gambling, offering premium casino games
               with fairness and transparency.
             </p>
-            
+
             <div className="grid md:grid-cols-2 gap-6 mt-8">
               <div className="bg-[#181818] p-4 rounded-lg">
                 <h3 className="text-xl font-semibold mb-3 text-red-600">
@@ -142,8 +142,8 @@ const AboutUs = () => {
                   🔒 Data Collection
                 </h3>
                 <p className="text-gray-300">
-                  We collect necessary information for account creation, transactions, 
-                  and personalization. This includes contact details, payment information, 
+                  We collect necessary information for account creation, transactions,
+                  and personalization. This includes contact details, payment information,
                   and gameplay history.
                 </p>
               </div>
@@ -153,8 +153,8 @@ const AboutUs = () => {
                   📊 Data Usage
                 </h3>
                 <p className="text-gray-300">
-                  Information is used to improve services, process transactions, 
-                  and ensure regulatory compliance. We never sell personal data 
+                  Information is used to improve services, process transactions,
+                  and ensure regulatory compliance. We never sell personal data
                   to third parties.
                 </p>
               </div>
@@ -174,7 +174,7 @@ const AboutUs = () => {
                   1. Eligibility
                 </h3>
                 <p className="text-gray-300">
-                  Users must be 18+ and comply with local gambling laws. 
+                  Users must be 18+ and comply with local gambling laws.
                   We reserve the right to verify age and location.
                 </p>
               </div>
@@ -184,7 +184,7 @@ const AboutUs = () => {
                   2. Account Responsibility
                 </h3>
                 <p className="text-gray-300">
-                  Users are responsible for maintaining account security. 
+                  Users are responsible for maintaining account security.
                   Immediately report unauthorized access.
                 </p>
               </div>
@@ -194,7 +194,7 @@ const AboutUs = () => {
                   3. Bonus Terms
                 </h3>
                 <p className="text-gray-300">
-                  Bonuses subject to wagering requirements. See individual 
+                  Bonuses subject to wagering requirements. See individual
                   promotion terms for details.
                 </p>
               </div>
@@ -202,7 +202,7 @@ const AboutUs = () => {
 
             <div className="mt-8 bg-red-900/20 p-4 rounded-lg">
               <p className="text-red-600 text-center">
-                By using MR Gambler, you agree to our Terms and confirm 
+                By using MR Gambler, you agree to our Terms and confirm
                 compliance with local laws.
               </p>
             </div>
