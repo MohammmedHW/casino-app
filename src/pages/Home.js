@@ -424,7 +424,7 @@ const Home = () => {
     setActiveSection(section);
   };
   const [currentPage, setCurrentPage] = useState(1);
-  const casinosPerPage = 5;
+  const casinosPerPage = 10;
   const totalPages = Math.ceil(casinos.length / casinosPerPage);
   const indexOfLastCasino = currentPage * casinosPerPage;
   const indexOfFirstCasino = indexOfLastCasino - casinosPerPage;
@@ -735,7 +735,10 @@ const Home = () => {
       </section>
  <div>
       <CountryCasinoList />
+
     </div>
+
+
       <section className="flex flex-col bg-black100 items-center justify-center pb-20">
         <div className="container m-10 mx-auto px-4">
           {currentCasinos.map((casino) => (
