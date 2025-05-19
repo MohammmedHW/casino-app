@@ -126,30 +126,7 @@ const Bonuses = ({ type }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black100 to-transparent"></div>
 
         <div className="container mx-auto text-center absolute z-10 top-5 h-full flex flex-col justify-center items-center px-2">
-          {/* <h1
-            className="text-3xl md:text-5xl lg:text-6xl max-w-4xl text-white"
-            style={{
-              fontFamily: 'BigNoodleTitling',
-              lineHeight: '1.2',
-              wordSpacing: '0.1em',
-              fontWeight: '100',
-              letterSpacing: '0.05em',
-            }}
-          >
-            Your Gateway to the Best Online Casinos & Big Wins!
-          </h1>
-          <p
-            className="mt-4 text-md md:text-lg max-w-2xl text-gray-200"
-            style={{
-              fontFamily: 'BigNoodleTitling',
-              lineHeight: '1.4',
-              wordSpacing: '0.1em',
-              fontWeight: '300',
-              letterSpacing: '0.05em',
-            }}
-          >
-            Compare top-rated casino platforms, claim exclusive bonuses, and start playing today!
-          </p> */}
+         
           <div className="mt-32 px-4 w-full flex justify-center">
             <div className="w-full max-w-2xl">
               <SearchBox />
@@ -168,7 +145,7 @@ const Bonuses = ({ type }) => {
             ) : error ? (
               <p className="text-red-500">Error: {error}</p>
             ) : (
-              filteredData.map((casino, index) => (
+               filteredData.slice(0, 5).map((casino, index) => (
                 <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} />
               ))
             )}
@@ -260,13 +237,7 @@ const Bonuses = ({ type }) => {
             </div>
 
             <div className="flex justify-center items-center">
-              {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 m-10 mt-5">
-                <Card name="BULLETZ" rating="4.5" bgImage={cardImage1} />
-                <Card name="STARS" rating="4.7" bgImage={cardImage2} />
-                <Card name="SPINS" rating="4.8" bgImage={cardImage3} />
-                <Card name="BULLETZ" rating="4.5" bgImage={cardImage4} />
-
-              </div> */}
+          
               <div className="flex justify-center items-center">
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                   {loading ? (
@@ -333,26 +304,7 @@ const Bonuses = ({ type }) => {
 
 
 
-      <section className="py-10 bg-black100 text-center">
-        <div className="flex mt-10 flex-col items-center ">
-          <div
-            className="relative text-white p-10 w-full max-w-full"
-            style={{
-              background: "linear-gradient(to right, #1A008E, #070028)",
-            }}
-          >
-            <div className="flex flex-row sm:flex-row justify-center items-center text-center mb-10">
-              <img src={certified} alt="Certified" className="w-12 h-12 sm:w-24 sm:h-24 sm:mr-4 mb-4 sm:mb-4" />
-              <h2 className="text-3xl font-bold text-white mb-6 text-2xl md:text-4xl lg:text-6xl text-white">
-                JOIN 1000s OF HAPPY GAMBLERS
-              </h2>
-            </div>
-            <div className="sm:w-[80%] w-[90%] mx-auto flex justify-center items-center">
-              <SearchBox />
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       <Footer />
     </>
