@@ -1,5 +1,5 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Casinos from "./pages/casinos";
 import Bonuses from "./pages/Bonuses";
@@ -17,15 +17,28 @@ import CasinoDetail from "./pages/CasinoDetail";
 
 import Login from "./pages/Login";
 
-import LatestBonus from "./SubMenu/LatestBonus";
-import ExclusiveBonus from "./SubMenu/ExclusiveBonus";
-import WelcomeBonus from "./SubMenu/WelcomeBonus";
-import NoDepositBonus from "./SubMenu/NoDeposit";
-import FreeSpinsBonus from "./SubMenu/FreeSpinsBonus";
-import CashbackBonus from "./SubMenu/CashbackBonus";
-import NoWageringBonus from "./SubMenu/NoWageringBonus";
+// import LatestBonus from "./SubMenu/LatestBonus";
+// import ExclusiveBonus from "./SubMenu/ExclusiveBonus";
+// import WelcomeBonus from "./SubMenu/WelcomeBonus";
+// import NoDepositBonus from "./SubMenu/NoDeposit";
+// import FreeSpinsBonus from "./SubMenu/FreeSpinsBonus";
+// import CashbackBonus from "./SubMenu/CashbackBonus";
+// import NoWageringBonus from "./SubMenu/NoWageringBonus";
 
+import { trackPageView } from './utils/analytics';
 function App() {
+   const location = useLocation();
+
+  useEffect(() => {
+    // Track initial pageview
+    trackPageView(location.pathname);
+    
+    // Cleanup function
+    return () => {
+      // Add any cleanup logic here if needed
+    };
+  }, [location.pathname]);
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />

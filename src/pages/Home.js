@@ -342,9 +342,41 @@ const Home = () => {
 
 
   useEffect(() => {
+      if (typeof window !== 'undefined') {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){window.dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-J8M10SL43W');
+    }
     // Change body background color
     document.body.style.backgroundColor = "#1e1e1e";
+ let scrollTracked = false;
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      const scrollPercent = (scrollPosition / pageHeight) * 100;
 
+      if (scrollPercent > 90 && !scrollTracked) {
+        if (window.gtag) {
+          window.gtag('event', 'scroll_depth', {
+            event_category: 'Engagement',
+            event_label: window.location.pathname,
+            value: scrollPercent.toFixed(2),
+            non_interaction: true
+          });
+        }
+        scrollTracked = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+      if (window.gtag) {
+      window.gtag('event', 'page_view', {
+        page_title: document.title,
+        page_path: window.location.pathname
+      });
+    }
     // Fetch casinos from backend
     const fetchCasinos = async () => {
       try {
@@ -362,6 +394,7 @@ const Home = () => {
     // Cleanup function
     return () => {
       document.body.style.backgroundColor = null;
+        window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
