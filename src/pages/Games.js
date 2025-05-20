@@ -5,14 +5,7 @@ import casinoBg from '../assets/images/games-bg.png';
 import SearchBox from '../components/searchbox';
 import Card from '../components/Card';
 import ExpertCard from '../components/ExpertCard';
-
-import categoriesImg1 from '../assets/images/image15.png';
-import categoriesImg2 from '../assets/images/image 16.png';
-import categoriesImg3 from '../assets/images/image 17.png';
-import categoriesImg4 from '../assets/images/image 18.png';
-import categoriesImg5 from '../assets/images/image 19.png';
-import categoriesImg6 from '../assets/images/image 20.png';
-
+import API from "../api/axios";
 import certified from '../assets/images/Certified.png';
 import Footer from "../components/Footer";
 
@@ -29,12 +22,7 @@ const TYPE_TO_TAG_MAP = {
   'bingo': 'Bingo',
   'lottery': 'Lottery Games',
 
-  // Additional mappings for other possible routes
-  // 'crypto': 'Crypto Casino',
-  // 'online': 'Online Casino',
-  // 'certified': 'Certified Casino',
-  // 'mobile': 'Mobile Casino',
-  // 'newest': 'Newest Casino'
+
 };
 const Games = ({ type }) => {
   const [casinosData, setCasinosData] = useState([]);
@@ -53,7 +41,7 @@ const Games = ({ type }) => {
     const fetchCasinos = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("http://localhost:4000/api/casinos");
+        const response = await API.get("/casinos");
         setCasinosData(response.data);
         filterCasinos(response.data);
       } catch (err) {
@@ -121,43 +109,22 @@ const Games = ({ type }) => {
       <Navbar />
 
       <header
-        className="relative bg-cover bg-center h-[60vh] md:h-screen"
+        className="relative bg-cover bg-center h-[60vh] min-h-[400px] md:h-screen"
         style={{ backgroundImage: `url(${casinoBg})` }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-5"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black100 to-transparent"></div>
+          <div className="absolute inset-0 bg-black/50 bg-gradient-to-t from-black100 to-transparent" />
+        <div className="container mx-auto px-4 h-full flex items-center justify-center relative z-10">
 
         <div className="container mx-auto text-center absolute z-10 top-5 h-full flex flex-col justify-center items-center px-2">
-          {/* <h1
-            className="text-3xl md:text-5xl lg:text-6xl max-w-4xl text-white"
-            style={{
-              fontFamily: 'BigNoodleTitling',
-              lineHeight: '1.2',
-              wordSpacing: '0.1em',
-              fontWeight: '100',
-              letterSpacing: '0.05em',
-            }}
-          >
-            Your Gateway to the Best Online Casinos & Big Wins!
-          </h1>
-          <p
-            className="mt-4 text-md md:text-lg max-w-2xl text-gray-200"
-            style={{
-              fontFamily: 'BigNoodleTitling',
-              lineHeight: '1.4',
-              wordSpacing: '0.1em',
-              fontWeight: '300',
-              letterSpacing: '0.05em',
-            }}
-          >
-            Compare top-rated casino platforms, claim exclusive bonuses, and start playing today!
-          </p> */}
+         
           <div className="mt-32 px-4 w-full flex justify-center">
             <div className="w-full max-w-2xl">
               <SearchBox />
             </div>
           </div>
         </div>
+           </div>
+        
       </header>
 
       <section className="py-10 bg-black100 text-center">
@@ -204,7 +171,7 @@ const Games = ({ type }) => {
 
           <div className="flex justify-center mb-10 rounded-2xl mx-auto max-w-[900px] p-10 bg-green-800 sm:mx-6 mx-8 lg:mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-50 w-full">
-              {filteredData.map((casino, index) => (
+              {filteredData.slice(0, 4).map((casino, index) => (
                 <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} />
               ))}
             </div>
@@ -231,7 +198,7 @@ const Games = ({ type }) => {
               ) : error ? (
                 <p>Error: {error}</p>
               ) : (
-                filteredData.map((casino, index) => (
+                filteredData.slice(0, 6).map((casino, index) => (
                   <ExpertCard key={index} logo={casino.logo} name={casino.name} />
                 ))
               )}
@@ -269,7 +236,7 @@ const Games = ({ type }) => {
                   ) : error ? (
                     <p>Error: {error}</p>
                   ) : (
-                    filteredData.map((casino, index) => (
+                    filteredData.slice(0, 6).map((casino, index) => (
                       <ExpertCard key={index} logo={casino.logo} name={casino.name} />
                     ))
                   )}
@@ -307,7 +274,7 @@ const Games = ({ type }) => {
                   ) : error ? (
                     <p>Error: {error}</p>
                   ) : (
-                    filteredData.map((casino, index) => (
+                    filteredData.slice(0, 6).map((casino, index) => (
                       <ExpertCard key={index} logo={casino.logo} name={casino.name} />
                     ))
                   )}

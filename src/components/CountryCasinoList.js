@@ -39,7 +39,7 @@ const CountryCasinoList = () => {
   };
 
   return (
-    <div className="min-h-screen text-white px-4 py-10">
+    <div className=" text-white px-4 py-10">
       <div className="max-w-6xl mx-auto text-center">
         <h1 className="text-4xl font-bold uppercase mb-2">
           Find Casinos by Country

@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import casinoBg from '../assets/images/casino-bg.png';
 import SearchBox from '../components/searchbox';
 import Card from '../components/Card';
-
+import API from "../api/axios";
 import ExpertCard from '../components/ExpertCard';
 
 import categoriesImg1 from '../assets/images/image15.png';
@@ -38,8 +38,7 @@ const Casinos = ({ type }) => {
     const fetchCasinos = async () => {
       setLoading(true);
       try {
-        let url = "http://localhost:4000/api/casinos";
-        const response = await axios.get(url);
+        const response = await API.get("/casinos");
         setCasinosData(response.data);
         filt(response.data);
       } catch (err) {
@@ -81,11 +80,11 @@ const Casinos = ({ type }) => {
       <Navbar />
 
       <header
-        className="relative bg-cover bg-center h-[60vh] md:h-screen"
+        className="relative bg-cover bg-center h-[60vh] min-h-[400px] md:h-screen"
         style={{ backgroundImage: `url(${casinoBg})` }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-5"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black100 to-transparent"></div>
+      <div className="absolute inset-0 bg-black/50 bg-gradient-to-t from-black100 to-transparent" />
+        <div className="container mx-auto px-4 h-full flex items-center justify-center relative z-10">
 
         <div className="container mx-auto text-center absolute z-10 top-5 h-full flex flex-col justify-center items-center px-2">
           <h1
@@ -116,6 +115,7 @@ const Casinos = ({ type }) => {
             <SearchBox />
           </div>
         </div>
+         </div>
       </header>
 
       <section className="py-10 bg-black100 text-center">
@@ -195,7 +195,7 @@ const Casinos = ({ type }) => {
               ) : error ? (
                 <p>Error: {error}</p>
               ) : (
-                filteredData.map((casino, index) => (
+                filteredData.slice(0, 6).map((casino, index) => (
                   <ExpertCard key={index} logo={casino.logo} name={casino.name} />
                 ))
               )}
@@ -233,7 +233,7 @@ const Casinos = ({ type }) => {
                   ) : error ? (
                     <p>Error: {error}</p>
                   ) : (
-                    filteredData.map((casino, index) => (
+                    filteredData.slice(0, 6).map((casino, index) => (
                       <ExpertCard key={index} logo={casino.logo} name={casino.name} />
                     ))
                   )}
@@ -271,7 +271,7 @@ const Casinos = ({ type }) => {
                   ) : error ? (
                     <p>Error: {error}</p>
                   ) : (
-                    filteredData.map((casino, index) => (
+                    filteredData.slice(0, 6).map((casino, index) => (
                       <ExpertCard key={index} logo={casino.logo} name={casino.name} />
                     ))
                   )}
