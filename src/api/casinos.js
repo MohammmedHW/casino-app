@@ -56,7 +56,7 @@ export const getCasinoById = async (id) => {
     const response = await API.get(`/casinos/${id}`);
     return response.data;
   } catch (error) {
-    throw error.response.data.message || "Failed to fetch casino";
+    throw error.response.data.message || "Failed to fetch casino by id";
   }
 };
 
