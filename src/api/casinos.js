@@ -56,7 +56,10 @@ export const getCasinoBySlug = async (slug) => {
   try {
     // Add full URL in development or ensure proxy is working
     const baseUrl =
-      process.env.NODE_ENV === "development" ? "http://localhost:4000" : "https://casino-backened.onrender.com";
+      // process.env.NODE_ENV === "development" ? "http://localhost:4000" : "https://casino-backened.onrender.com";
+      process.env.NODE_ENV === "development"
+        ? "https://casino-backened.onrender.com"
+        : "http://localhost:4000";
 
     const response = await fetch(`${baseUrl}/api/casinos/slug/${slug}`, {
       headers: {

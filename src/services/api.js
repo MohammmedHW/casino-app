@@ -52,20 +52,6 @@ export const authApi = {
   initAdmin: () => api.post("/auth/init-admin"),
 };
 
-// Upload API calls - for handling file uploads
-// export const uploadFile = async (file, type) => {
-//   const formData = new FormData();
-//   formData.append("file", file);
-
-//   const response = await axios.post(`${API_URL}/upload/${type}`, formData, {
-//     headers: {
-//       "Content-Type": "multipart/form-data",
-//       "x-auth-token": localStorage.getItem("token"),
-//     },
-//   });
-
-//   return response.data;
-// };
 export const uploadImage = async (file) => {
   try {
     const formData = new FormData();
