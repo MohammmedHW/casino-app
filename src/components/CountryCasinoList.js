@@ -3,6 +3,7 @@ import Card from "./Card"; // adjust the import path as needed
 import { getCasinos } from "../api/casinos.js"; // Make sure to import your API function
 
 const countries = [
+   { name: "India", code: "in" },
   { name: "Canada", code: "ca" },
   { name: "United States", code: "us" },
   { name: "Australia", code: "au" },
@@ -17,13 +18,13 @@ const countries = [
   { name: "Switzerland", code: "ch" },
   { name: "United Kingdom (UK)", code: "gb" },
   { name: "European Countries (General)", code: "eu" },
-  { name: "India", code: "in" },
-  { name: "Global", code: "gl" },
+ 
+
 ];
 
 const CountryCasinoList = () => {
-  const [selectedCountry, setSelectedCountry] = useState("Canada");
-  const [selectedCode, setSelectedCode] = useState("ca");
+  const [selectedCountry, setSelectedCountry] = useState("India");
+  const [selectedCode, setSelectedCode] = useState("in");
   const [allCasinos, setAllCasinos] = useState([]);
   const [filteredCasinos, setFilteredCasinos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -129,7 +130,8 @@ const CountryCasinoList = () => {
 
         {/* Casino Grid using Card Component */}
         {filteredCasinos.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 justify-center place-items-center">
+
             {filteredCasinos.map((casino) => (
               <Card
                 key={casino._id}
