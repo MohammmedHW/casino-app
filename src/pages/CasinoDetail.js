@@ -30,31 +30,7 @@ const CasinoDetail = () => {
           if (!data) throw new Error("Casino not found");
         }
 
-        // Add dummy data if not provided from API
-        // data.rating = data.rating || 4.6;
-        // data.depositBonus = data.depositBonus || "Up to 1000 € cash bonus + 25k";
-        // data.welcomeBonus = data.welcomeBonus || "32 Free Spins";
-        // data.overview =
-        //   data.overview ||
-        //   "Experience top-tier online gaming with our featured casino of the month! Enjoy unmatched bonuses, exciting games, and a premium user experience.";
-        // data.month = data.month || "May";
-        // data.year = data.year || "2025";
-        // data.visits = data.visits || 1023;
 
-        // data.generalInfo = data.generalInfo || {};
-        // data.generalInfo.website =
-        //   data.generalInfo.website || "https://examplecasino.com";
-        // data.generalInfo.features =
-        //   data.generalInfo.features?.length > 0
-        //     ? casino.generalInfo?.features
-        //     : [
-        //       "24/7 Customer Support",
-        //       "Fast Withdrawals",
-        //       "Live Casino Games",
-        //       "Mobile Friendly",
-        //       "SSL Secured",
-        //       "VIP Program",
-        //     ];
 
         setCasino(data);
       } catch (err) {
@@ -335,14 +311,14 @@ const CasinoDetail = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
 
           {casino && (
-              <div className="relative  z-10 pt-24 pb-8 px-4 sm:px-6 md:px-20">
+            <div className="relative  z-10 pt-24 pb-8 px-4 sm:px-6 md:px-20">
               <div className="relative w-full max-w-6xl">
                 {/* Crown */}
                 <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 bg-white w-12 h-12 sm:w-14 sm:h-14 rounded-full border-4 border-white z-20 flex items-center justify-center" style={{ boxShadow: 'inset 0 0 0 3px red' }}>
                   <img src={crown} alt="Crown" className="w-6 h-6 sm:w-8 sm:h-8" />
                 </div>
 
-                 {/* Card */}
+                {/* Card */}
                 <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row w-full border border-blue-200 relative z-10">
                   {/* Logo */}
                   <div className="flex items-center justify-center p-6 md:w-1/3" style={{ backgroundColor: bgColor }}>
@@ -418,9 +394,10 @@ const CasinoDetail = () => {
                     </div>
 
                     {/* Features & CTA */}
-                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {/* Features */}
-                      {casino.generalInfo?.features?.length > 0 && (
+                    {/* Card Wrapper */}
+                    <div className="mt-6 relative grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white  p-4">
+                      {/* Features Section */}
+                      {casino.generalInfo?.features?.length > 0 ? (
                         <div>
                           <h3 className="font-semibold text-sm mb-2">Features</h3>
                           <ul className="text-sm text-gray-700 grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
@@ -431,12 +408,15 @@ const CasinoDetail = () => {
                             ))}
                           </ul>
                         </div>
+                      ) : (
+                        // Maintain grid structure if features are missing
+                        <div className="hidden sm:block" />
                       )}
 
                       {/* CTA Section */}
-                      <div className="relative h-full w-full">
-                        <div className="sm:absolute sm:bottom-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 w-full px-4">
-                          <div className="flex flex-col items-center w-full max-w-xs mx-auto">
+                      <div className="relative">
+                        <div className=" sm:bottom-0 sm:right-0 w-full sm:w-auto">
+                          <div className="flex flex-col items-center sm:items-end">
                             <p className="text-sm text-gray-600 text-center whitespace-nowrap mb-2">
                               {casino.visits || 0} Has Already Visited!
                             </p>
@@ -444,15 +424,17 @@ const CasinoDetail = () => {
                               href={casino.generalInfo?.website || "#"}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:from-red-600 hover:to-red-800 text-white font-semibold py-3 px-8 rounded-full transition duration-200 text-base w-full text-center"
+                              className="bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:from-red-600 hover:to-red-800 text-white font-semibold py-3 px-8 rounded-full transition duration-200 text-base w-full sm:w-auto text-center"
                             >
                               Play now
                             </a>
                           </div>
                         </div>
                       </div>
-
                     </div>
+
+
+
                   </div>
                 </div>
               </div>
@@ -462,34 +444,35 @@ const CasinoDetail = () => {
       </div>
 
 
-      <section className="mt-2">   <main className="max-w-6xl  mx-auto px-4 py-8">
+      <section className="mt-2">
+        <main className="max-w-6xl  mx-auto px-8 py-8">
 
-        {/* Tab Buttons */}
-        <div className="flex justify-start sm:justify-center pb-4 overflow-x-auto scrollbar-hide space-x-3 sm:space-x-6">
-          {["general", "payment", "games", "responsible"].map((tab, index) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`flex-shrink-0 text-sm sm:text-lg font-semibold px-6 sm:px-10 py-2 sm:py-4 border border-[#3d3d3d] rounded-[30px] whitespace-nowrap ${activeTab === tab
-                ? "bg-[#00000040] text-white"
-                : "text-white hover:text-red-600"
-                }`}
-            >
-              {tab === "general" && "General Info"}
-              {tab === "payment" && "Payment Info"}
-              {tab === "games" && "Games"}
-              {tab === "responsible" && "Responsible Gaming"}
-            </button>
-          ))}
-        </div>
+          {/* Tab Buttons */}
+          <div className="flex justify-start sm:justify-center pb-4 overflow-x-auto scrollbar-hide space-x-6 sm:space-x-20">
+            {["general", "payment", "games", "responsible"].map((tab, index) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`flex-shrink-0 text-sm sm:text-lg font-semibold px-6 sm:px-10 py-2 sm:py-4 border border-[#3d3d3d] rounded-[30px] whitespace-nowrap ${activeTab === tab
+                  ? "bg-[#00000040] text-white"
+                  : "text-white hover:text-red-600"
+                  }`}
+              >
+                {tab === "general" && "General Info"}
+                {tab === "payment" && "Payment Info"}
+                {tab === "games" && "Games"}
+                {tab === "responsible" && "Responsible Gaming"}
+              </button>
+            ))}
+          </div>
 
-        {/* Tab Content */}
-        <div className="flex justify-start mt-6 px-4 sm:justify-center pb-4 overflow-x-auto scrollbar-hide space-x-3 sm:space-x-6">
+          {/* Tab Content */}
+          <div className="flex justify-start mt-6 px-4 sm:justify-center pb-4 overflow-x-auto scrollbar-hide space-x-3 sm:space-x-6">
 
-          {renderTabContent()}
-        </div>
+            {renderTabContent()}
+          </div>
 
-      </main>
+        </main>
       </section>
 
 
