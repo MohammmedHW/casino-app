@@ -1,13 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Card"; // adjust the import path as needed
-
-const casinos = [
-  { name: "WazBee", logo: "/images/wazbee.png", rating: 4.5 },
-  { name: "Spirit Casino", logo: "/images/spirit.png", rating: 4.2 },
-  { name: "Betfair Casino", logo: "/images/betfair.png", rating: 4.7 },
-  { name: "Cosmic", logo: "/images/cosmic.png", rating: 4.3 },
-  { name: "Ybets", logo: "/images/ybets.png", rating: 4.6 },
-];
+import { getCasinos } from "../api/casinos.js"; // Make sure to import your API function
 
 const countries = [
   { name: "Canada", code: "ca" },
@@ -29,23 +22,87 @@ const countries = [
 ];
 
 const CountryCasinoList = () => {
-  const [selectedCountry, setSelectedCountry] = useState("United Arab Emirates");
-  const [selectedCode, setSelectedCode] = useState("ae");
+  const [selectedCountry, setSelectedCountry] = useState("Canada");
+  const [selectedCode, setSelectedCode] = useState("ca");
+  const [allCasinos, setAllCasinos] = useState([]);
+  const [filteredCasinos, setFilteredCasinos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const handleCountryChange = (e) => {
-    const selected = countries.find((c) => c.name === e.target.value);
-    setSelectedCountry(selected.name);
-    setSelectedCode(selected.code);
+  // Fetch all casinos on component mount
+  useEffect(() => {
+    const fetchCasinos = async () => {
+      try {
+        setLoading(true);
+        const data = await getCasinos();
+        setAllCasinos(data);
+        // Initially filter for the default country
+        filterCasinosByCountry(data, selectedCountry);
+      } catch (err) {
+        setError(err.message || "Failed to load casinos");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCasinos();
+  }, []);
+
+  // Filter casinos by selected country
+  const filterCasinosByCountry = (casinos, country) => {
+    // If "Global" is selected, show all casinos
+    if (country === "Global") {
+      setFilteredCasinos(casinos);
+      return;
+    }
+
+    // Otherwise filter by available countries
+    const filtered = casinos.filter(
+      (casino) =>
+        casino.availableCountries && casino.availableCountries.includes(country)
+    );
+
+    setFilteredCasinos(filtered);
   };
 
+  const handleCountryChange = (e) => {
+    const selectedCountryName = e.target.value;
+    const selected = countries.find((c) => c.name === selectedCountryName);
+
+    setSelectedCountry(selected.name);
+    setSelectedCode(selected.code);
+
+    // Filter casinos based on newly selected country
+    filterCasinosByCountry(allCasinos, selected.name);
+  };
+
+  // Show a loading message while fetching data
+  if (loading) {
+    return (
+      <div className="text-white text-center py-10">
+        <p>Loading casinos...</p>
+      </div>
+    );
+  }
+
+  // Show an error message if fetching fails
+  if (error) {
+    return (
+      <div className="text-red-500 text-center py-10">
+        <p>Error: {error}</p>
+      </div>
+    );
+  }
+
   return (
-    <div className=" text-white px-4 py-10">
+    <div className="text-white px-4 py-10">
       <div className="max-w-6xl mx-auto text-center">
         <h1 className="text-4xl font-bold uppercase mb-2">
           Find Casinos by Country
         </h1>
         <p className="italic mb-8 text-lg text-gray-300">
-          Browse top-rated casinos available in your region for the best experience and localized offers.
+          Browse top-rated casinos available in your region for the best
+          experience and localized offers.
         </p>
 
         {/* Country Dropdown */}
@@ -68,20 +125,32 @@ const CountryCasinoList = () => {
               ))}
             </select>
           </div>
-         
         </div>
 
         {/* Casino Grid using Card Component */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {casinos.map((casino, index) => (
-            <Card
-              key={index}
-              rating={casino.rating}
-              bgImage={casino.logo}
-               flagCode={selectedCode}
-            />
-          ))}
-        </div>
+        {filteredCasinos.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {filteredCasinos.map((casino) => (
+              <Card
+                key={casino._id}
+                name={casino.name}
+                rating={casino.rating}
+                bgImage={casino.logo}
+                flagCode={selectedCode}
+                onClick={() =>
+                  (window.location.href = `/casinos/${casino.slug}`)
+                }
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-8">
+            <p className="text-xl text-gray-300">
+              No casinos available for {selectedCountry}.
+            </p>
+            <p className="mt-2">Try selecting a different country.</p>
+          </div>
+        )}
       </div>
     </div>
   );
