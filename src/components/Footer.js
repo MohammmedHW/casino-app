@@ -2,60 +2,96 @@ import React from 'react';
 import footerbg from '../assets/images/footer-bg.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 
 const Footer = () => {
   return (
-    <footer className="relative bg-cover bg-center py-10" style={{ backgroundImage: `url(${footerbg})` }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row justify-between items-center text-white space-y-6 lg:space-y-0 relative">
+    <footer className="bg-cover bg-center py-10 text-white" style={{ backgroundImage: `url(${footerbg})` }}>
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 mb-5 gap-12">
 
-       
-        <div className="w-full lg:w-auto text-center ml-0 sm:ml-0 lg:ml-10 lg:text-left" style={{
-          fontFamily: 'BigNoodleTitling',
-          lineHeight: '1.3',
-          wordSpacing: '0.1em',
-          fontWeight: '300',
-          letterSpacing: '0.2em',
-        }}>
-          <h2 className="text-3xl md:text-3xl lg:text-7xl mt-10 max-w-5xl text-white">MR GAMBLERS</h2>
-          <p className="text-lg md:text-xl">SUBSCRIBE TO OUR NEWSLETTER</p>
+        {/* Left Column: Newsletter */}
+        <div >
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl mt-10 text-white max-w-full">
+            MR GAMBLERS
+          </h2>
+          <p className="mt-2 text-lg font-semibold">SUBSCRIBE TO OUR NEWS LETTER</p>
+          <form className="mt-6 space-y-4 max-w-lg">
+            <div className="flex flex-col sm:flex-row sm:space-x-3 space-y-3 sm:space-y-0">
+              <input
+                type="email"
+                placeholder="Email ID"
+                className="flex-1 bg-white bg-opacity-20 py-3 px-4 rounded-md text-white placeholder-white focus:outline-none"
+              />
+              <button
+                type="submit"
+                className="bg-gradient-to-r from-red-600 to-red-500 text-white py-3 px-6 rounded-md font-bold whitespace-nowrap"
+              >
+                SUBSCRIBE
+              </button>
+            </div>
 
-          <form className="mt-10 space-y-3 w-full max-w-xs mx-auto">
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="w-full bg-white bg-opacity-20 py-3 px-4 rounded-md text-white placeholder-white focus:outline-none"
-            />
-            <input
-              type="email"
-              placeholder="Email ID"
-              className="w-full bg-white bg-opacity-20 py-3 px-4 rounded-md text-white placeholder-white focus:outline-none"
-            />
-            <button className="w-full bg-red-600 hover:bg-red-500 text-white py-3 px-6 rounded-md">
-              SUBSCRIBE
-            </button>
+            <div className="space-y-2 text-sm text-white">
+              <label className="flex items-start space-x-2">
+                <input type="checkbox" className="mt-1 accent-red-600" />
+                <span>I confirm I am over 18–24 years old, depending on my location.</span>
+              </label>
+              <label className="flex items-start space-x-2">
+                <input type="checkbox" className="mt-1 accent-red-600" />
+                <span>I agree that my contact data may be used to keep me informed about casino and sports betting products, services, and offerings.</span>
+              </label>
+            </div>
           </form>
         </div>
 
-       
-        <div className="w-full lg:w-auto text-center mr-0 sm:mr-0 lg:mr-10 lg:text-right flex  flex-col items-center lg:items-end lg:absolute lg:bottom-0 lg:right-10 space-y-6 lg:space-y-0 mt-10 pt-10 lg:mt-0">
-          <div className="text-sm flex flex-col items-center lg:items-end space-y-4">
-            <a href="#" className="hover:text-gray-300 border-b">Privacy Policy</a>
-            <a href="#" className="hover:text-gray-300 border-b">Terms & Conditions</a>
+        {/* Right Column: Links, Countries, Contact */}
+        <div className="flex flex-col md:flex-row gap-8 mt-10 mb-5 md:gap-12 lg:gap-16">
+          {/* Quick Links */}
+          <div className="flex-1">
+            <h3 className="font-bold text-lg mb-4">Links</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="hover:text-gray-300">Casino</a></li>
+              <li><a href="#" className="hover:text-gray-300">Bonus</a></li>
+              <li><a href="#" className="hover:text-gray-300">Games</a></li>
+              <li><a href="#" className="hover:text-gray-300">Betting</a></li>
+              <li><a href="#" className="hover:text-gray-300">Slots</a></li>
+            </ul>
           </div>
 
-          <div className="flex justify-center lg:justify-end space-x-8 text-xl md:text-2xl lg:text-4xl pt-10 mt-10">
-            <a href="#" className="text-white hover:opacity-80">
-              <FontAwesomeIcon icon={faLinkedin} />
-            </a>
-            <a href="#" className="text-white hover:opacity-80">
-              <FontAwesomeIcon icon={faFacebook} />
-            </a>
-            <a href="#" className="text-white hover:opacity-80">
-              <FontAwesomeIcon icon={faInstagram} />
-            </a>
-            <a href="#" className="text-white hover:opacity-80">
-              <FontAwesomeIcon icon={faYoutube} />
-            </a>
+          {/* Countries */}
+          <div className="flex-1">
+            <h3 className="font-bold text-lg mb-4">Countries</h3>
+            <ul className="space-y-3">
+              <li>United Arab Emirates</li>
+              <li>Australia</li>
+              <li>Canada</li>
+              <li>USA</li>
+              <li>Russia</li>
+            </ul>
+          </div>
+
+          {/* Contact & Social */}
+          <div className="flex-1">
+            <div className="mb-6">
+              <h3 className="font-bold text-lg mb-4">Contact Us</h3>
+              <p className="flex items-center gap-2">
+                <FontAwesomeIcon icon={faEnvelope} /> support@mrgamblers.com
+              </p>
+              <p className="flex items-center gap-2 mt-2">
+                <FontAwesomeIcon icon={faPhone} /> +91-12345 67890
+              </p>
+            </div>
+
+            <div className="flex space-x-6 text-2xl mb-6">
+              <a href="#" className="hover:opacity-80"><FontAwesomeIcon icon={faLinkedin} /></a>
+              <a href="#" className="hover:opacity-80"><FontAwesomeIcon icon={faFacebook} /></a>
+              <a href="#" className="hover:opacity-80"><FontAwesomeIcon icon={faInstagram} /></a>
+              <a href="#" className="hover:opacity-80"><FontAwesomeIcon icon={faYoutube} /></a>
+            </div>
+
+            <div className="space-y-1">
+              <a href="#" className="block text-sm hover:text-gray-300">Privacy Policy</a>
+              <a href="#" className="block text-sm hover:text-gray-300">Terms & Conditions</a>
+            </div>
           </div>
         </div>
 
