@@ -180,7 +180,7 @@ const filterCasinos = (data) => {
 
           <div className="flex justify-center mb-10 rounded-2xl mx-auto max-w-[900px] p-10 bg-green-800 sm:mx-6 mx-8 lg:mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-50 w-full">
-              {filteredData.slice(0, 4).map((casino, index) => (
+              {hotCasinos.slice(0, 4).map((casino, index) => (
                 <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} />
               ))}
             </div>
@@ -207,7 +207,7 @@ const filterCasinos = (data) => {
               ) : error ? (
                 <p>Error: {error}</p>
               ) : (
-                filteredData.slice(0, 6).map((casino, index) => (
+                recommendedByExpertss.slice(0, 6).map((casino, index) => (
                   <ExpertCard key={index} logo={casino.logo} name={casino.name} />
                 ))
               )}
@@ -245,7 +245,7 @@ const filterCasinos = (data) => {
                   ) : error ? (
                     <p>Error: {error}</p>
                   ) : (
-                    filteredData.slice(0, 6).map((casino, index) => (
+                    certifiedCasinos.slice(0, 6).map((casino, index) => (
                       <ExpertCard key={index} logo={casino.logo} name={casino.name} />
                     ))
                   )}
