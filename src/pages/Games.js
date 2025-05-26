@@ -66,53 +66,62 @@ const Games = ({ type }) => {
     fetchCasinos();
   }, [type]);
 
-  const filterCasinos = (data) => {
-    // If no type is provided, show all casinos
-    if (!type || typeof type !== "string") {
-      setFilteredData(data);
-      return;
-    }
+const [hotCasinos, setHotCasinos] = useState([]);
+const [recommendedByExpertss, setrecommendedByExperts] = useState([]);
+const [certifiedCasinos, setcertifiedCasinos] = useState([]);
 
-    // Get the exact tag from the mapping
-    const exactTag = TYPE_TO_TAG_MAP[type];
+const filterCasinos = (data) => {
+ 
+  const hot = data.filter(casino => casino.hotCasino === true);
+  const recExperts = data.filter(casino => casino.recommendedByExperts === true);
+  const certified = data.filter(casino => casino.certifiedCasino === true);
 
-    // If no matching tag found, use a more flexible matching
-    if (!exactTag) {
-      // Normalize the type by removing dashes and converting to lowercase
-      const normalizedType = type.replace(/-/g, '').toLowerCase();
+  setHotCasinos(hot);
+  setrecommendedByExperts(recExperts);
+  setcertifiedCasinos(certified);
 
-      const filtered = data.filter(casino => {
-        // Ensure tags exist and is an array
-        if (!Array.isArray(casino.tags)) return false;
+  // If no type is provided, show all casinos
+  if (!type || typeof type !== "string") {
+    setFilteredData(data);
+    return;
+  }
 
-        return casino.tags.some(tag => {
-          if (!tag) return false;
+  // Get the exact tag from the mapping
+  const exactTag = TYPE_TO_TAG_MAP[type];
 
-          // Normalize tag by removing dashes and converting to lowercase
-          const normalizedTag = tag.replace(/-/g, '').toLowerCase();
+  // If no matching tag found, use a more flexible matching
+  if (!exactTag) {
+    const normalizedType = type.replace(/-/g, '').toLowerCase();
 
-          // Multiple matching strategies
-          return (
-            normalizedTag.includes(normalizedType) || // Partial match
-            normalizedType.includes(normalizedTag) || // Reverse partial match
-            normalizedTag === normalizedType // Exact match without dashes
-          );
-        });
+    const filtered = data.filter(casino => {
+      if (!Array.isArray(casino.tags)) return false;
+
+      return casino.tags.some(tag => {
+        if (!tag) return false;
+
+        const normalizedTag = tag.replace(/-/g, '').toLowerCase();
+
+        return (
+          normalizedTag.includes(normalizedType) ||
+          normalizedType.includes(normalizedTag) ||
+          normalizedTag === normalizedType
+        );
       });
-
-      setFilteredData(filtered);
-      console.log(`Filtered for flexible type "${type}":`, filtered);
-      return;
-    }
-
-    // Filter using exact tag matching
-    const filtered = data.filter(casino => 
-      Array.isArray(casino.tags) && casino.tags.includes(exactTag)
-    );
+    });
 
     setFilteredData(filtered);
-    console.log(`Filtered for exact type "${type}":`, filtered);
-  };
+    console.log(`Filtered for flexible type "${type}":`, filtered);
+    return;
+  }
+
+  // Exact tag match
+  const filtered = data.filter(
+    casino => Array.isArray(casino.tags) && casino.tags.includes(exactTag)
+  );
+
+  setFilteredData(filtered);
+  console.log(`Filtered for exact type "${type}":`, filtered);
+};
 
 
 
@@ -202,7 +211,7 @@ const Games = ({ type }) => {
 
           <div className="flex justify-center mb-10 rounded-2xl mx-auto max-w-[900px] p-10 bg-green-800 sm:mx-6 mx-8 lg:mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-50 w-full">
-              {filteredData.map((casino, index) => (
+              {hotCasinos.map((casino, index) => (
                 <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} />
               ))}
             </div>
@@ -229,7 +238,7 @@ const Games = ({ type }) => {
               ) : error ? (
                 <p>Error: {error}</p>
               ) : (
-                filteredData.map((casino, index) => (
+                recommendedByExpertss.map((casino, index) => (
                   <ExpertCard key={index} logo={casino.logo} name={casino.name} />
                 ))
               )}
@@ -259,13 +268,7 @@ const Games = ({ type }) => {
             </div>
 
             <div className="flex justify-center items-center">
-              {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 m-10 mt-5">
-                <Card name="BULLETZ" rating="4.5" bgImage={cardImage1} />
-                <Card name="STARS" rating="4.7" bgImage={cardImage2} />
-                <Card name="SPINS" rating="4.8" bgImage={cardImage3} />
-                <Card name="BULLETZ" rating="4.5" bgImage={cardImage4} />
-
-              </div> */}
+              
                <div className="flex justify-center items-center">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
               {loading ? (
@@ -273,7 +276,7 @@ const Games = ({ type }) => {
               ) : error ? (
                 <p>Error: {error}</p>
               ) : (
-                filteredData.map((casino, index) => (
+                certifiedCasinos.map((casino, index) => (
                   <ExpertCard key={index} logo={casino.logo} name={casino.name} />
                 ))
               )}

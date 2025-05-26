@@ -57,9 +57,12 @@ useEffect(() => {
   fetchCasinos();
 }, [type]);
 const [filteredData, setFilteredData] = useState([]);
+const [hotCasinos, setHotCasinos] = useState([]);
+const [recommendedByExpertss, setrecommendedByExperts] = useState([]);
+const [certifiedCasinos, setcertifiedCasinos] = useState([]);
 
 function filt(data) {
-  if (!type || typeof type !== "string") return; //to prevent error of lowercase
+  if (!type || typeof type !== "string") return;
 
   const filtered = data.filter(casino =>
     Array.isArray(casino.tags) &&
@@ -67,8 +70,20 @@ function filt(data) {
       tag.toLowerCase().includes(type.toLowerCase())
     )
   );
-  setFilteredData(filtered); // set global state
-  console.log("filtered:", filtered);
+
+  const hot = data.filter(casino => casino.hotCasino === true);
+  const recExperts = data.filter(casino => casino.recommendedByExperts === true);
+  const certified = data.filter(casino => casino.certifiedCasino === true);
+
+  setFilteredData(filtered);
+  setHotCasinos(hot);
+  setrecommendedByExperts(recExperts);
+  setcertifiedCasinos(certified);
+
+  // console.log("filtered:", filtered);
+  // console.log("hotCasinos:", hot);
+  // console.log("hotCasinos:", hot);
+  // console.log("hotCasinos:", hot);
 }
 
 
@@ -167,7 +182,7 @@ function filt(data) {
 
           <div className="flex justify-center mb-10 rounded-2xl mx-auto max-w-[900px] p-10 bg-green-800 sm:mx-6 mx-8 lg:mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-50 w-full">
-              {filteredData.map((casino, index) => (
+              {hotCasinos.map((casino, index) => (
                 <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} />
               ))}
             </div>
@@ -194,7 +209,7 @@ function filt(data) {
               ) : error ? (
                 <p>Error: {error}</p>
               ) : (
-                filteredData.map((casino, index) => (
+                recommendedByExpertss.map((casino, index) => (
                   <ExpertCard key={index} logo={casino.logo} name={casino.name} />
                 ))
               )}
@@ -238,7 +253,7 @@ function filt(data) {
               ) : error ? (
                 <p>Error: {error}</p>
               ) : (
-                filteredData.map((casino, index) => (
+                certifiedCasinos.map((casino, index) => (
                   <ExpertCard key={index} logo={casino.logo} name={casino.name} />
                 ))
               )}
