@@ -1,11 +1,26 @@
 import API from "./axios";
 
+// export const getCasinos = async () => {
+//   try {
+//     const response = await API.get("/casinos");
+//     return response.data;
+//   } catch (error) {
+//     throw error.response.data.message || "Failed to fetch casinos";
+//   }
+// };
+
 export const getCasinos = async () => {
   try {
     const response = await API.get("/casinos");
     return response.data;
   } catch (error) {
-    throw error.response.data.message || "Failed to fetch casinos";
+    if (error.message.includes("ERR_BLOCKED_BY_CLIENT")) {
+      // Show user-friendly message about disabling ad blocker
+      throw new Error(
+        "Our API request was blocked by your browser extension. Please disable ad blockers for this site."
+      );
+    }
+    throw error.response?.data?.message || "Failed to fetch casinos";
   }
 };
 
@@ -41,7 +56,7 @@ export const getCasinoById = async (id) => {
     const response = await API.get(`/casinos/${id}`);
     return response.data;
   } catch (error) {
-    throw error.response.data.message || "Failed to fetch casino";
+    throw error.response.data.message || "Failed to fetch casino by id";
   }
 };
 
@@ -56,7 +71,10 @@ export const getCasinoBySlug = async (slug) => {
   try {
     // Add full URL in development or ensure proxy is working
     const baseUrl =
-      process.env.NODE_ENV === "development" ? "http://localhost:4000" : "";
+      // process.env.NODE_ENV === "development" ? "http://localhost:4000" : "https://casino-backened.onrender.com";
+      process.env.NODE_ENV === "development"
+        ? "https://casino-backened.onrender.com"
+        : "http://localhost:4000";
 
     const response = await fetch(`${baseUrl}/api/casinos/slug/${slug}`, {
       headers: {

@@ -267,42 +267,42 @@ const CasinosAdmin = () => {
   // };
 
   const onDragEnd = async (result) => {
-    if (!result.destination) return;
-    if (result.source.index === result.destination.index) return;
+  if (!result.destination) return;
+  if (result.source.index === result.destination.index) return;
 
-    setIsUpdating(true);
+  setIsUpdating(true);
+  const originalCasinos = [...casinos];
 
-    try {
-      // Create new ordered array
-      const newCasinos = Array.from(casinos);
-      const [movedCasino] = newCasinos.splice(result.source.index, 1);
-      newCasinos.splice(result.destination.index, 0, movedCasino);
+  try {
+    // Create new ordered array
+    const newCasinos = Array.from(casinos);
+    const [movedCasino] = newCasinos.splice(result.source.index, 1);
+    newCasinos.splice(result.destination.index, 0, movedCasino);
 
-      // Update order numbers sequentially starting from 1
-      const updatedCasinos = newCasinos.map((casino, index) => ({
-        ...casino,
-        order: index + 1,
-      }));
+    // Get the new order value from the destination index
+    const newOrder = result.destination.index + 1;
 
-      // Optimistic UI update
-      setCasinos(updatedCasinos);
+    // Optimistic UI update with actual order values
+    const updatedCasinos = newCasinos.map((casino, index) => ({
+      ...casino,
+      order: index + 1,
+    }));
 
-      // Update all orders in the backend
-      await Promise.all(
-        updatedCasinos.map((casino) =>
-          updateCasino(casino._id, { order: casino.order })
-        )
-      );
-    } catch (err) {
-      setError(err.message || "Failed to update order");
-      // Revert to previous state if update fails
-      const data = await getCasinos();
-      const sortedCasinos = [...data].sort((a, b) => a.order - b.order);
-      setCasinos(sortedCasinos);
-    } finally {
-      setIsUpdating(false);
-    }
-  };
+    setCasinos(updatedCasinos);
+
+    // Update backend with the new order for the moved casino only
+    await updateCasino(movedCasino._id, { order: newOrder });
+
+    // Refresh the list from server to get final order values
+    const data = await getCasinos();
+    setCasinos(data.sort((a, b) => a.order - b.order));
+  } catch (err) {
+    setError(err.message || "Failed to update order");
+    setCasinos(originalCasinos);
+  } finally {
+    setIsUpdating(false);
+  }
+};
 
   if (loading)
     return (

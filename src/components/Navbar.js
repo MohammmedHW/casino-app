@@ -83,7 +83,7 @@ const Navbar = () => {
 
   const toggleMobileMenu = () => {
     setMobileOpen(!mobileOpen);
-    setMobileSubmenuIndex(null); // Reset submenu when main toggles
+    setMobileSubmenuIndex(null);
   };
 
   const toggleMobileSubmenu = (index) => {
@@ -120,11 +120,10 @@ const Navbar = () => {
 
               {item.submenu.length > 0 && (
                 <div
-                  className={`absolute left-0 top-full pt-2 transition-all duration-300 ease-in-out ${
-                    activeMenuIndex === idx ? 'opacity-100 visible' : 'opacity-0 invisible'
-                  }`}
+                  className={`absolute left-0 top-full pt-2 transition-all duration-300 ease-in-out ${activeMenuIndex === idx ? 'opacity-100 visible' : 'opacity-0 invisible'
+                    }`}
                 >
-                  <div className="bg-black text-white rounded shadow-lg z-50 w-64 max-h-60 overflow-y-auto border border-gray-700">
+                  <div className="bg-black text-white rounded shadow-lg z-50 w-64 border border-gray-700 md:max-h-none md:overflow-visible max-h-60 overflow-y-auto">
                     {item.submenu.map((sub, subIdx) => (
                       <Link
                         key={subIdx}

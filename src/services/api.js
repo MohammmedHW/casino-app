@@ -1,7 +1,8 @@
 import axios from "axios";
 
 // Create axios instance with base URL
-const API_URL = "http://localhost:4000/api";
+// const API_URL = "http://localhost:4000/api";
+const API_URL = "https://casino-backened.onrender.com/api";
 
 const api = axios.create({
   baseURL: API_URL,
@@ -51,19 +52,29 @@ export const authApi = {
   initAdmin: () => api.post("/auth/init-admin"),
 };
 
-// Upload API calls - for handling file uploads
-export const uploadFile = async (file, type) => {
-  const formData = new FormData();
-  formData.append("file", file);
+export const uploadImage = async (file) => {
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
 
-  const response = await axios.post(`${API_URL}/upload/${type}`, formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      "x-auth-token": localStorage.getItem("token"),
-    },
-  });
+    // Add timeout to the request
+    const response = await api.post("/upload/image", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      timeout: 30000, // 30 seconds timeout
+    });
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    // Improved error handling
+    if (error.code === "ECONNABORTED") {
+      throw new Error("Request timeout. Please try again.");
+    }
+    throw (
+      error.response?.data?.message || error.message || "Failed to upload image"
+    );
+  }
 };
 
 export default api;
