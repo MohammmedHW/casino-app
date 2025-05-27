@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getCasinoById, updateCasino, getCasinos } from "../api/casinos";
 import { uploadImage } from "../api/upload";
 import Sidebar from "../components/Sidebar";
+import { Editor } from "@tinymce/tinymce-react";
 
 // List of all available tags
 const ALL_TAGS = [
@@ -118,6 +119,7 @@ const EditCasino = () => {
       support: "",
     },
     overview: "",
+    content: "",
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -298,6 +300,23 @@ const EditCasino = () => {
           (tool) => tool !== toolToRemove
         ),
       },
+    }));
+  };
+
+  const editorConfig = {
+    height: 500,
+    menubar: false,
+    plugins: "lists link image paste help wordcount",
+    toolbar:
+      "undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | help",
+    content_style:
+      "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+  };
+
+  const handleEditorChange = (content) => {
+    setCasino((prev) => ({
+      ...prev,
+      content: content,
     }));
   };
 
@@ -822,6 +841,18 @@ const EditCasino = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Rich Text Editor for Descriptions */}
+
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-4">Content Editor</h3>
+            <Editor
+              apiKey="your-api-key-here"
+              value={casino.content}
+              init={editorConfig}
+              onEditorChange={handleEditorChange}
+            />
           </div>
 
           {/* Overview */}
