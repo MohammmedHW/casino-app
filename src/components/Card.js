@@ -4,7 +4,7 @@ import crown from "../assets/images/crown.png";
 const Card = ({ rating, bgImage, flagCode, onClick }) => {
   return (
     <div
-      className="relative bg-white rounded-3xl shadow-lg w-48"
+      className="relative bg-white rounded-3xl shadow-lg w-48 transform transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl cursor-pointer"
       onClick={onClick}
     >
       {/* Flag or fallback crown inside circle */}

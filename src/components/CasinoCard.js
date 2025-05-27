@@ -21,10 +21,10 @@ const CasinoCard = ({
 
   return (
     <div className="flex flex-col justify-center items-center p-4">
-      <div
-        className="casino-card bg-cover w-full max-w-6xl bg-center p-6 flex flex-col md:flex-row justify-center md:justify-between m-3 border-2 border-black300 rounded-lg shadow-md"
-        style={{ backgroundColor: "#1d1d1d" }}
-      >
+       <div
+    className="casino-card bg-cover w-full max-w-6xl bg-center p-6 flex flex-col md:flex-row justify-center md:justify-between m-3 border-2 border-black300 rounded-lg shadow-md transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl"
+    style={{ backgroundColor: "#1d1d1d" }}
+  >
         <div className="casino-info flex flex-col md:flex-row items-center md:space-x-12 space-y-4 md:space-y-0 text-center md:text-left">
           <img
             src={image}

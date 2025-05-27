@@ -13,7 +13,11 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import certified from "../assets/images/Certified.png";
 import leftCircle from "../assets/images/lefteclipse.png";
 import rightCircle from "../assets/images/righteclipse.png";
-
+import GameIcon1 from '../assets/images/Game Icon.png';
+import GameIcon2 from '../assets/images/Game Icon (1).png';
+import GameIcon3 from '../assets/images/Game Icon (2).png';
+import GameIcon4 from '../assets/images/Game Icon (3).png';
+import GameIcon5 from '../assets/images/Game Icon 4.png';
 
 import Expert1 from "../assets/images/expert1.png";
 import Expert2 from "../assets/images/expert2.png";
@@ -294,6 +298,115 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+<section>
+        <div
+          className="flex flex-col m-10 items-center justify-center"
+          style={{
+            fontFamily: 'BigNoodleTitling',
+            lineHeight: '1.2',
+            wordSpacing: '0.1em',
+            fontWeight: '100',
+            letterSpacing: '0.05em',
+          }}
+        >
+          <h2 className="text-3xl md:text-3xl lg:text-5xl mt-10 max-w-5xl text-white">ARE YOU IN?</h2>
+
+          <div className="relative mt-6 w-full max-w-4xl ">
+            <div className="absolute inset-x-0 -top-4 flex justify-center z-10">
+  <p className="relative bg-[#1d1d1d] text-red-600 m-5 md:text-lg lg:text-2xl text-center px-8 py-2 z-10">
+    TABLE GAMING AT MR GAMBLERS
+  </p>
+</div>
+
+
+            <div
+              className="absolute inset-0 m-5 border-4 border-red-600 rounded-xl"
+              style={{
+                boxShadow: '0 4px 10px rgba(255, 0, 0, 0.5), inset 0 0 15px rgba(255, 0, 0, 0.3)',
+              }}
+            ></div>
+
+            <div className="flex flex-wrap justify-around m-10  items-center py-8 px-6 ">
+              <div className="text-center text-gray-400 mb-4  md:mb-0">
+                <div
+                  className="mb-0 w-20 h-20"
+                  style={{
+                    backgroundImage: `url(${GameIcon1})`,
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                    width: '120px',
+                    height: '120px',
+                  }}
+                ></div>
+                <span>POKER</span>
+              </div>
+
+              <div className="text-center text-gray-400 mb-4 md:mb-0">
+                <div
+                  className="mb-2 w-20 h-20"
+                  style={{
+                    backgroundImage: `url(${GameIcon2})`,
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                    width: '120px',
+                    height: '120px',
+                  }}
+                ></div>
+                <span>PURE 21.5 BLACKJACK</span>
+              </div>
+
+              <div className="text-center text-gray-400 mb-4 md:mb-0">
+                <div
+                  className="mb-2 w-20 h-20"
+                  style={{
+                    backgroundImage: `url(${GameIcon3})`,
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                    width: '120px',
+                    height: '120px',
+                  }}
+                ></div>
+                <span>BACCARAT</span>
+              </div>
+
+              <div className="text-center text-gray-400 mb-4 md:mb-0">
+                <div
+                  className="mb-2 w-20 h-20"
+                  style={{
+                    backgroundImage: `url(${GameIcon4})`,
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                    width: '120px',
+                    height: '120px',
+                  }}
+                ></div>
+                <span>AKA PAI GOW POKER</span>
+              </div>
+
+              <div className="text-center text-gray-400">
+                <div
+                  className="mb-2 w-20 h-20"
+                  style={{
+                    backgroundImage: `url(${GameIcon1})`,
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                    width: '120px',
+                    height: '120px',
+                  }}
+                ></div>
+                <span>PAI GOW TILES</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       <section className="relative bg-black100 text-center py-12 overflow-hidden">
         <div
