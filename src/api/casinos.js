@@ -67,39 +67,53 @@ export const updateCasinoOrder = async (id, newOrder) => {
   } catch (error) {}
 };
 
+// export const getCasinoBySlug = async (slug) => {
+//   try {
+//     // Add full URL in development or ensure proxy is working
+//     const baseUrl =
+//       // process.env.NODE_ENV === "development" ? "http://localhost:4000" : "https://casino-backened.onrender.com";
+//       process.env.NODE_ENV === "development"
+//         ? "https://casino-backened.onrender.com"
+//         : "http://localhost:4000";
+
+//     const response = await fetch(`${baseUrl}/api/casinos/slug/${slug}`, {
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json",
+//       },
+//       credentials: "include", // if using cookies
+//     });
+
+//     // First check if response is JSON
+//     const contentType = response.headers.get("content-type");
+//     if (!contentType || !contentType.includes("application/json")) {
+//       const text = await response.text();
+//       throw new Error(`Expected JSON but got: ${text.substring(0, 100)}`);
+//     }
+
+//     const data = await response.json();
+
+//     if (!response.ok) {
+//       throw new Error(data.message || "Failed to fetch casino");
+//     }
+
+//     return data;
+//   } catch (err) {
+//     console.error("Error fetching casino:", err);
+//     throw err;
+//   }
+// };
+
 export const getCasinoBySlug = async (slug) => {
   try {
-    // Add full URL in development or ensure proxy is working
-    const baseUrl =
-      // process.env.NODE_ENV === "development" ? "http://localhost:4000" : "https://casino-backened.onrender.com";
-      process.env.NODE_ENV === "development"
-        ? "https://casino-backened.onrender.com"
-        : "http://localhost:4000";
-
-    const response = await fetch(`${baseUrl}/api/casinos/slug/${slug}`, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      credentials: "include", // if using cookies
-    });
-
-    // First check if response is JSON
-    const contentType = response.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      const text = await response.text();
-      throw new Error(`Expected JSON but got: ${text.substring(0, 100)}`);
+    // Use the existing Axios instance that already handles base URLs
+    const response = await API.get(`/casinos/slug/${slug}`);
+    return response.data;
+  } catch (error) {
+    console.error("API Error:", error);
+    if (error.message.includes("ERR_BLOCKED_BY_CLIENT")) {
+      throw new Error("Please disable ad blockers for this site.");
     }
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.message || "Failed to fetch casino");
-    }
-
-    return data;
-  } catch (err) {
-    console.error("Error fetching casino:", err);
-    throw err;
+    throw error.response?.data?.message || "Failed to fetch casino";
   }
 };
