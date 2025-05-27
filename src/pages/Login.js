@@ -35,7 +35,16 @@ const Login = () => {
         ></div>
 
         {/* Right side login form */}
-        <div className="w-full lg:w-1/2 bg-black text-white flex flex-col justify-center items-center px-8 py-12 ">
+        <div className="relative w-full lg:w-1/2 bg-black text-white flex flex-col justify-center items-center px-8 py-12">
+          {/* Home Button */}
+          <button
+            className="absolute top-4 left-4 text-red-600 font-bold text-lg  hover:text-red-800  transition"
+            onClick={() => navigate("/")}
+          >
+            Home
+          </button>
+
+
           <div className="max-w-sm w-full">
             <h2 className="text-4xl font-semibold text-center mb-2">
               MR GAMBLERS
