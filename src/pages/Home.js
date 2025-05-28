@@ -167,42 +167,42 @@ const Home = () => {
       <Navbar />
 
       <header
-         className="relative bg-cover bg-center h-[60vh] min-h-[400px] md:h-screen"
+        className="relative bg-cover bg-center h-[60vh] min-h-[400px] md:h-screen"
         style={{ backgroundImage: `url(${homeBg})` }}
       >
-            <div className="absolute inset-0 bg-black/50 bg-gradient-to-t from-black100 to-transparent" />
+        <div className="absolute inset-0 bg-black/50 bg-gradient-to-t from-black100 to-transparent" />
         <div className="container mx-auto px-4 h-full flex items-center justify-center relative z-10">
 
-        <div className="container mx-auto text-center absolute z-10 top-5 h-full flex flex-col justify-center items-center px-2">
-          <h1
-            className="text-3xl md:text-5xl lg:text-6xl max-w-4xl text-white"
-            style={{
-              fontFamily: "BigNoodleTitling",
-              lineHeight: "1.2",
-              wordSpacing: "0.1em",
-              fontWeight: "100",
-              letterSpacing: "0.05em",
-            }}
-          >
-            Your Gateway to the Best Online Casinos & Big Wins!
-          </h1>
-          <p
-            className="mt-4 text-md md:text-lg max-w-2xl text-gray-200"
-            style={{
-              fontFamily: "BigNoodleTitling",
-              lineHeight: "1.4",
-              wordSpacing: "0.1em",
-              fontWeight: "300",
-              letterSpacing: "0.05em",
-            }}
-          >
-            Compare top-rated casino platforms, claim exclusive bonuses, and
-            start playing today!
-          </p>
-          <div className="m-10">
-            <SearchBox />
+          <div className="container mx-auto text-center absolute z-10 top-5 h-full flex flex-col justify-center items-center px-2">
+            <h1
+              className="text-3xl md:text-5xl lg:text-6xl max-w-4xl text-white"
+              style={{
+                fontFamily: "BigNoodleTitling",
+                lineHeight: "1.2",
+                wordSpacing: "0.1em",
+                fontWeight: "100",
+                letterSpacing: "0.05em",
+              }}
+            >
+              Your Gateway to the Best Online Casinos & Big Wins!
+            </h1>
+            <p
+              className="mt-4 text-md md:text-lg max-w-2xl text-gray-200"
+              style={{
+                fontFamily: "BigNoodleTitling",
+                lineHeight: "1.4",
+                wordSpacing: "0.1em",
+                fontWeight: "300",
+                letterSpacing: "0.05em",
+              }}
+            >
+              Compare top-rated casino platforms, claim exclusive bonuses, and
+              start playing today!
+            </p>
+            <div className="m-10">
+              <SearchBox />
+            </div>
           </div>
-        </div>
         </div>
       </header>
 
@@ -299,7 +299,7 @@ const Home = () => {
         </div>
       </section>
 
-<section>
+      <section>
         <div
           className="flex flex-col m-10 items-center justify-center"
           style={{
@@ -314,10 +314,10 @@ const Home = () => {
 
           <div className="relative mt-6 w-full max-w-4xl ">
             <div className="absolute inset-x-0 -top-4 flex justify-center z-10">
-  <p className="relative bg-[#1d1d1d] text-red-600 m-5 md:text-lg lg:text-2xl text-center px-8 py-2 z-10">
-    TABLE GAMING AT MR GAMBLERS
-  </p>
-</div>
+              <p className="relative bg-[#1d1d1d] text-red-600 m-5 md:text-lg lg:text-2xl text-center px-8 py-2 z-10">
+                TABLE GAMING AT MR GAMBLERS
+              </p>
+            </div>
 
 
             <div
@@ -555,10 +555,25 @@ const Home = () => {
 
       <section className="py-12 md:py-16 bg-black100">
         <div className="container mx-auto px-4">
+          <div className="flex flex-row sm:flex-row justify-center items-center text-center ">
+              <h2
+                className="text-3xl font-bold text-white mb-6 text-2xl md:text-4xl lg:text-5xl text-white"
+                style={{
+                  fontFamily: "BigNoodleTitling",
+                  lineHeight: "1.2",
+                  wordSpacing: "0.1em",
+                  fontWeight: "100",
+                  letterSpacing: "0.05em",
+                }}
+              >
+               ALL ONLINE CASINOS
+              </h2>
+            </div>
           <div className="space-y-6">
-            {currentCasinos.map((casino) => (
+            {currentCasinos.map((casino, index) => (
               <CasinoCard
                 key={casino._id}
+                number={(currentPage - 1) * casinosPerPage + index + 1} // ✅ Continuous numbering
                 image={casino.logo}
                 title={casino.name}
                 depositBonus={casino.depositBonus || 'Up to €1000 + 200 Free Spins'}
@@ -578,11 +593,11 @@ const Home = () => {
             >
               <FaChevronLeft className="w-5 h-5 text-white" />
             </button>
-            
+
             <span className="text-white text-lg">
               Page {currentPage} of {totalPages}
             </span>
-            
+
             <button
               onClick={handleNextPage}
               disabled={currentPage === totalPages}
@@ -593,7 +608,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-  
+
+
 
       <Footer />
       <CookieConsent />

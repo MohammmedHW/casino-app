@@ -2,6 +2,8 @@ import React from 'react';
 import footerbg from '../assets/images/footer-bg.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faTelegram, faWhatsapp, faMicrosoft } from "@fortawesome/free-brands-svg-icons";
+
 import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 const Footer = () => {
@@ -62,10 +64,10 @@ const Footer = () => {
             <h3 className="font-bold text-lg mb-4">Links</h3>
             <ul className="space-y-1">
               <li>
-                <Link to="/privacy-policy" className="hover:underline">Privacy & Policy</Link>
+                <Link to="/privacy-policy" className="hover:underline">Privacy Policy</Link>
               </li>
               <li>
-                <Link to="/terms-and-conditions" className="hover:underline">T & C</Link>
+                <Link to="/terms-and-conditions" className="hover:underline">Terms & Conditions</Link>
               </li>
               <li>
                 <Link to="/cookies-policy" className="hover:underline">Cookie Policy</Link>
@@ -89,16 +91,16 @@ const Footer = () => {
             </div>
 
             <div className="flex space-x-6 text-2xl mb-6">
-              <a href="#" className="hover:opacity-80"><FontAwesomeIcon icon={faLinkedin} /></a>
+              <a href="#" className="hover:opacity-80"><FontAwesomeIcon icon={faTelegram} /></a>
               <a href="#" className="hover:opacity-80"><FontAwesomeIcon icon={faFacebook} /></a>
-              <a href="#" className="hover:opacity-80"><FontAwesomeIcon icon={faInstagram} /></a>
-              <a href="#" className="hover:opacity-80"><FontAwesomeIcon icon={faYoutube} /></a>
+              <a href="#" className="hover:opacity-80"><FontAwesomeIcon icon={faMicrosoft} /></a>
+              <a href="#" className="hover:opacity-80"><FontAwesomeIcon icon={faWhatsapp} /></a>
             </div>
 
-            <div className="space-y-1">
+            {/* <div className="space-y-1">
               <a href="#" className="block text-sm hover:text-gray-300">Privacy Policy</a>
               <a href="#" className="block text-sm hover:text-gray-300">Terms & Conditions</a>
-            </div>
+            </div> */}
           </div>
         </div>
 
