@@ -3,7 +3,7 @@ import footerbg from '../assets/images/footer-bg.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
-
+import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <footer className="bg-cover bg-center py-10 text-white" style={{ backgroundImage: `url(${footerbg})` }}>
@@ -61,11 +61,18 @@ const Footer = () => {
           <div className="flex-1">
             <h3 className="font-bold text-lg mb-4">Links</h3>
             <ul className="space-y-1">
-              <li>Privacy & Policy</li>
-              <li>T & C</li>
-              <li>Cookie Policy</li>
-              <li>Responsible Gambling</li>
-              
+              <li>
+                <Link to="/privacy-policy" className="hover:underline">Privacy & Policy</Link>
+              </li>
+              <li>
+                <Link to="/terms-and-conditions" className="hover:underline">T & C</Link>
+              </li>
+              <li>
+                <Link to="/cookies-policy" className="hover:underline">Cookie Policy</Link>
+              </li>
+              <li>
+                <Link to="/responsible-gambling" className="hover:underline">Responsible Gambling</Link>
+              </li>
             </ul>
           </div>
 

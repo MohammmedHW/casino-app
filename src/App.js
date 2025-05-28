@@ -17,14 +17,11 @@ import CasinoDetail from "./pages/CasinoDetail";
 
 import Login from "./pages/Login";
 
-import CookieConsent from "./components/CookieConsent";
-// import LatestBonus from "./SubMenu/LatestBonus";
-// import ExclusiveBonus from "./SubMenu/ExclusiveBonus";
-// import WelcomeBonus from "./SubMenu/WelcomeBonus";
-// import NoDepositBonus from "./SubMenu/NoDeposit";
-// import FreeSpinsBonus from "./SubMenu/FreeSpinsBonus";
-// import CashbackBonus from "./SubMenu/CashbackBonus";
-// import NoWageringBonus from "./SubMenu/NoWageringBonus";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndCondition";
+import CookiesPolicy from "./pages/CookiesPolicies";
+import ResponsibleGambling from "./pages/ResponsibleGambling";
+
 
 import { trackPageView } from './utils/analytics';
 function App() {
@@ -99,6 +96,11 @@ function App() {
       <Route path="/games/bingo" element={<Games type="bingo" />} />
       <Route path="/games/lottery" element={<Games type="lottery" />} />
 
+
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+      <Route path="/cookies-policy" element={<CookiesPolicy />} />
+      <Route path="/responsible-gambling" element={<ResponsibleGambling />} />
     </Routes>
   );
 }

@@ -72,6 +72,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Disclaimer from '../assets/images/disclaimer.png';
 
 const AboutUs = () => {
   return (
@@ -200,14 +201,37 @@ const AboutUs = () => {
               </div>
             </div>
 
-            <div className="mt-8 bg-red-900/20 p-4 rounded-lg">
-              <p className="text-red-600 text-center">
-                By using MR Gambler, you agree to our Terms and confirm
-                compliance with local laws.
+
+
+          </div>
+        </section>
+
+        <section className="w-full bg-[#DE0F1F] py-8 px-4">
+          <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-6">
+
+            {/* Left side with background image */}
+            <div
+              className="w-full md:w-1/2 h-48 md:h-80 bg-no-repeat bg-contain bg-center"
+              style={{ backgroundImage: `url(${Disclaimer})` }}
+            ></div>
+
+            {/* Right side text */}
+            <div className="w-full md:w-1/2 text-white">
+              <h2 className="text-xl sm:text-xl md:text-2xl font-bold mb-4">Disclaimer</h2>
+              <p className="text-sm sm:text-base md:text-sm leading-relaxed">
+                Online gambling involves financial risk and can be addictive. Mr. Gambler provides information for entertainment and educational purposes only and does not offer or facilitate real-money gambling. We strongly encourage all users to gamble responsibly and be aware of the laws and regulations in their respective jurisdictions before participating in any online gambling activities.
+                <br /><br />
+                If you feel that gambling is negatively impacting your life or the lives of those around you, we recommend seeking help from a professional organization. Gambling should be viewed as a form of entertainment—not a way to make money.
+                <br /><br />
+                Users must be 18 years of age or older, or the legal gambling age in their country, to access and use services related to online gambling.
               </p>
             </div>
           </div>
         </section>
+
+
+
+
       </div>
       <Footer />
     </>
