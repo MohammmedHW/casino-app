@@ -848,7 +848,7 @@ const EditCasino = () => {
           <div className="mb-6">
             <h3 className="text-xl font-semibold mb-4">Content Editor</h3>
             <Editor
-              apiKey="your-api-key-here"
+              apiKey="sgqonpylyxmnpot9w1fgdcaq8fh1l86kcoyb8we397c0ni4m"
               value={casino.content}
               init={editorConfig}
               onEditorChange={handleEditorChange}
