@@ -59,13 +59,13 @@ const Footer = () => {
 
           {/* Countries */}
           <div className="flex-1">
-            <h3 className="font-bold text-lg mb-4">Countries</h3>
-            <ul className="space-y-3">
-              <li>United Arab Emirates</li>
-              <li>Australia</li>
-              <li>Canada</li>
-              <li>USA</li>
-              <li>Russia</li>
+            <h3 className="font-bold text-lg mb-4">Links</h3>
+            <ul className="space-y-1">
+              <li>Privacy & Policy</li>
+              <li>T & C</li>
+              <li>Cookie Policy</li>
+              <li>Responsible Gambling</li>
+              
             </ul>
           </div>
 
