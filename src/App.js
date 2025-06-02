@@ -22,8 +22,7 @@ import TermsAndConditions from "./pages/TermsAndCondition";
 import CookiesPolicy from "./pages/CookiesPolicies";
 import ResponsibleGambling from "./pages/ResponsibleGambling";
 
-
-import { trackPageView } from './utils/analytics';
+import { trackPageView } from "./utils/analytics";
 function App() {
   const location = useLocation();
 
@@ -95,7 +94,6 @@ function App() {
       <Route path="/games/poker" element={<Games type="poker" />} />
       <Route path="/games/bingo" element={<Games type="bingo" />} />
       <Route path="/games/lottery" element={<Games type="lottery" />} />
-
 
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
