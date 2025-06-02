@@ -12,7 +12,7 @@ const Navbar = () => {
   const getActiveClass = (path) =>
     location.pathname === path ? 'text-red-600' : 'hover:text-red-600';
 
-  const menuItems = [
+  const menuItems = [ 
     { name: 'Home', path: '/', submenu: [] },
     {
       name: 'Casinos',

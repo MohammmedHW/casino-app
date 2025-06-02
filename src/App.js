@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import Casinos from "./pages/casinos";
 import Bonuses from "./pages/Bonuses";
 import Games from "./pages/Games";
+import Slots from "./pages/slots";
+import Betting from "./pages/betting";
 import AboutUs from "./pages/AboutUs";
 import Dashboard from "./pages/Dashboard";
 import CasinosAdmin from "./pages/CasinosAdmin";
@@ -88,10 +90,21 @@ function App() {
       <Route path="/games/table" element={<Games type="table" />} />
       <Route path="/games/card" element={<Games type="card" />} />
       <Route path="/games/dice" element={<Games type="dice" />} />
+      {/* Slots Types */}
+      <Route path="/slots/video" element={<Slots type="video" />} />
+      <Route path="/slots/classic" element={<Slots type="classic" />} />
+      <Route path="/slots/progressive" element={<Slots type="progressive" />} />
+      <Route path="/slots/new" element={<Slots type="new" />} />
+
+      // Betting Routes
+      <Route path="/betting/sports" element={<Betting type="sports" />} />
+      <Route path="/betting/new-sites" element={<Betting type="new-sites" />} />
+      <Route path="/betting/types" element={<Betting type="types" />} />
+      <Route path="/betting/bonuses" element={<Betting type="bonuses" />} />
+      <Route path="/betting/free-bets" element={<Betting type="free-bets" />} />
+
       <Route
-        path="/games/real-money-slots"
-        element={<Games type="Real Money Online Slots" />}
-      />
+        path="/games/real-money-slots" element={<Games type="Real Money Online Slots" />} />
       <Route path="/games/poker" element={<Games type="poker" />} />
       <Route path="/games/bingo" element={<Games type="bingo" />} />
       <Route path="/games/lottery" element={<Games type="lottery" />} />
