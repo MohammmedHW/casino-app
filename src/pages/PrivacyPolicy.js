@@ -16,7 +16,7 @@ function PrivacyPolicy() {
       <div className="max-w-5xl mx-auto mt-20 mb-10 p-6" style={{ color: "white" }}>
         <h1 className="text-3xl font-bold mb-4 text-red-600">Privacy Policy</h1>
         <p className="mb-4">
-          At Mr Gambler, we are committed to respecting your privacy and protecting your personal information. This Privacy Policy explains how we collect, store, use, and disclose your personal data when you interact with our website and services.
+          At Mr Gamblers, we are committed to respecting your privacy and protecting your personal information. This Privacy Policy explains how we collect, store, use, and disclose your personal data when you interact with our website and services.
         </p>
 
         <h2 className="text-xl font-semibold mt-6 mb-2 text-red-600">1. Information We Collect</h2>

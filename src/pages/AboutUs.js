@@ -80,17 +80,17 @@ const AboutUs = () => {
       <Navbar />
       <div className="container mx-auto px-8 py-24 bg-[#181818] text-white min-h-screen">
         <h1 className="text-4xl font-bold text-center mb-8 text-red-600">
-          About MR Gambler
+          About MR Gamblers
         </h1>
 
         {/* About Section */}
         <section className="mb-12">
           <div className="bg-[#1e1e1e] rounded-lg p-6 shadow-lg">
             <h2 className="text-2xl font-semibold mb-4 text-red-600">
-              Welcome to MR Gambler
+              Welcome to MR Gamblers
             </h2>
             <p className="mb-4 text-gray-300">
-              At MR Gambler, we're redefining online casino entertainment with
+              At MR Gamblers, we're redefining online casino entertainment with
               cutting-edge gaming experiences. Established in 2020, we've become
               a trusted name in online gambling, offering premium casino games
               with fairness and transparency.

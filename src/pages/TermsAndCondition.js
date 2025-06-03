@@ -16,7 +16,7 @@ function TermsAndConditions() {
       <div className="max-w-5xl mx-auto mt-20 mb-10 p-6" style={{ backgroundColor: "#1d1d1d", color: "white" }}>
         <h1 className="text-3xl font-bold mb-4 text-red-600">Terms and Conditions</h1>
         <p className="mb-4">
-          By using our website, you agree to these terms and conditions. Please read them carefully. These terms govern your access to and use of the Mr Gambler platform, including all content, functionality, and services offered.
+          By using our website, you agree to these terms and conditions. Please read them carefully. These terms govern your access to and use of the Mr Gamblers platform, including all content, functionality, and services offered.
         </p>
 
         <h2 className="text-xl font-semibold mt-6 mb-2 text-red-600">1. User Responsibilities</h2>
@@ -57,7 +57,7 @@ function TermsAndConditions() {
 
         <h2 className="text-xl font-semibold mt-6 mb-2 text-red-600">5. Intellectual Property</h2>
         <p className="mb-4">
-          All content on this site, including text, graphics, logos, images, audio clips, video, and software, is the property of Mr Gambler or its content suppliers and is protected by copyright and trademark laws.
+          All content on this site, including text, graphics, logos, images, audio clips, video, and software, is the property of Mr Gamblers or its content suppliers and is protected by copyright and trademark laws.
         </p>
 
         <h2 className="text-xl font-semibold mt-6 mb-2 text-red-600">6. Privacy</h2>
