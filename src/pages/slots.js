@@ -138,9 +138,9 @@ const Slots = ({ type }) => {
           <h2 className="text-3xl font-bold text-white mb-6 text-2xl md:text-4xl lg:text-6xl">HOT SLOT CATEGORIES</h2>
 
           <div className="flex justify-center mb-10 rounded-2xl mx-auto max-w-[900px] p-10 bg-green-800 sm:mx-6 mx-8 lg:mx-auto">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-50 w-full">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 w-full">
               {hotSlots.slice(0, 4).map((casino, index) => (
-                <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} />
+                <ExpertCard key={index} logo={casino.logo} name={casino.name} />
               ))}
             </div>
           </div>
@@ -179,9 +179,9 @@ const Slots = ({ type }) => {
           <div className="relative text-white bg-black100 p-10 w-full max-w-full">
             <h2 className="text-3xl font-bold text-white mb-6 text-2xl md:text-4xl lg:text-5xl">Recently Added Slots</h2>
             <div className="flex justify-center items-center">
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-8">
                 {filteredData.slice(0, 6).map((casino, index) => (
-                  <ExpertCard key={index} logo={casino.logo} name={casino.name} />
+                  <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} />
                 ))}
               </div>
             </div>

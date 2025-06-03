@@ -110,9 +110,10 @@ const Betting = ({ type }) => {
                 <div className="relative z-10">
                     <h2 className="text-3xl font-bold text-white mb-6 text-2xl md:text-4xl lg:text-6xl">HOT BETTING SITES</h2>
                     <div className="flex justify-center mb-10 rounded-2xl mx-auto max-w-[900px] p-10 bg-green-800">
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-50 w-full">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 w-full">
                             {hot.slice(0, 4).map((item, index) => (
-                                <Card key={index} name={item.name} rating={item.rating} bgImage={item.logo} />
+
+                                <ExpertCard key={index} bgImage={item.logo} name={item.name} />
                             ))}
                         </div>
                     </div>
@@ -136,17 +137,30 @@ const Betting = ({ type }) => {
                             <h2 className="text-3xl font-bold text-white mb-6 text-2xl md:text-4xl lg:text-5xl">Certified Betting Sites</h2>
                         </div>
                         <div className="flex justify-center items-center">
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-                            {certifiedData.slice(0, 6).map((item, index) => (
-                                <ExpertCard key={index} logo={item.logo} name={item.name} />
-                            ))}
-                        </div>
+                            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                                {certifiedData.slice(0, 6).map((item, index) => (
+                                    <ExpertCard key={index} logo={item.logo} name={item.name} />
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-
+            <section className="py-10 bg-black100 text-center">
+                <div className="flex flex-col items-center">
+                    <div className="relative text-white bg-black100 p-10 w-full max-w-full">
+                        <h2 className="text-3xl font-bold text-white mb-6 text-2xl md:text-4xl lg:text-5xl">Recently Added </h2>
+                        <div className="flex justify-center items-center">
+                            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-8">
+                                {filteredData.slice(0, 6).map((casino, index) => (
+                                    <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <Footer />
         </>

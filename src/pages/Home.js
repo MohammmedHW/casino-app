@@ -1707,71 +1707,68 @@ const Home = () => {
         >
           NEW ON MR GAMBLERS
         </h2>
+       <div className="w-full overflow-x-auto px-4">
+  <div
+    className="inline-flex mb-10 space-x-0 text-bold justify-center w-max whitespace-nowrap"
+    style={{
+      fontFamily: "BigNoodleTitling",
+      wordSpacing: "0.1em",
+      fontWeight: "500",
+      letterSpacing: "0.05em",
+    }}
+  >
+    <button
+      onClick={() => handleSectionChange("casinos")}
+      className={`${activeSection === "casinos"
+          ? "bg-gradient-to-r from-red-500 to-red-700 text-white scale-125 py-4 px-8 sm:px-16"
+          : "bg-white text-red-800"
+        } py-3 px-6 sm:px-14 text-xl sm:text-3xl hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 hover:text-white hover:scale-125 hover:py-4 hover:px-8 sm:hover:px-16 transition-all duration-300 ease-in-out`}
+    >
+      Casinos
+    </button>
 
-        <div
-          className="inline-flex mb-10 space-x-0 text-bold justify-center w-full"
-          style={{
-            fontFamily: "BigNoodleTitling",
-            wordSpacing: "0.1em",
-            fontWeight: "500",
-            letterSpacing: "0.05em",
-          }}
-        >
-          <button
-            onClick={() => handleSectionChange("casinos")}
-            className={`${
-              activeSection === "casinos"
-                ? "bg-gradient-to-r from-red-500 to-red-700 text-white scale-125 py-4 px-8 sm:px-16"
-                : "bg-white text-red-800"
-            } py-3 px-6 sm:px-14 text-xl sm:text-3xl hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 hover:text-white hover:scale-125 hover:py-4 hover:px-8 sm:hover:px-16 transition-all duration-300 ease-in-out`}
-          >
-            Casinos
-          </button>
+    <button
+      onClick={() => handleSectionChange("bonuses")}
+      className={`${activeSection === "bonuses"
+          ? "bg-gradient-to-r from-red-500 to-red-700 text-white scale-125 py-4 px-8 sm:px-16"
+          : "bg-white text-red-800"
+        } py-3 px-6 sm:px-14 text-xl sm:text-3xl hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 hover:text-white hover:scale-125 hover:py-4 hover:px-8 sm:hover:px-16 transition-all duration-300 ease-in-out`}
+    >
+      Bonuses
+    </button>
 
-          <button
-            onClick={() => handleSectionChange("bonuses")}
-            className={`${
-              activeSection === "bonuses"
-                ? "bg-gradient-to-r from-red-500 to-red-700 text-white scale-125 py-4 px-8 sm:px-16"
-                : "bg-white text-red-800"
-            } py-3 px-6 sm:px-14 text-xl sm:text-3xl hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 hover:text-white hover:scale-125 hover:py-4 hover:px-8 sm:hover:px-16 transition-all duration-300 ease-in-out`}
-          >
-            Bonuses
-          </button>
+    <button
+      onClick={() => handleSectionChange("games")}
+      className={`${activeSection === "games"
+          ? "bg-gradient-to-r from-red-500 to-red-700 text-white scale-125 py-4 px-8 sm:px-16"
+          : "bg-white text-red-800"
+        } py-3 px-6 sm:px-14 text-xl sm:text-3xl hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 hover:text-white hover:scale-125 hover:py-4 hover:px-8 sm:hover:px-16 transition-all duration-300 ease-in-out`}
+    >
+      Games
+    </button>
 
-          <button
-            onClick={() => handleSectionChange("games")}
-            className={`${
-              activeSection === "games"
-                ? "bg-gradient-to-r from-red-500 to-red-700 text-white scale-125 py-4 px-8 sm:px-16"
-                : "bg-white text-red-800"
-            } py-3 px-6 sm:px-14 text-xl sm:text-3xl hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 hover:text-white hover:scale-125 hover:py-4 hover:px-8 sm:hover:px-16 transition-all duration-300 ease-in-out`}
-          >
-            Games
-          </button>
+    <button
+      onClick={() => handleSectionChange("Slot")}
+      className={`${activeSection === "Slot"
+          ? "bg-gradient-to-r from-red-500 to-red-700 text-white scale-125 py-4 px-8 sm:px-16"
+          : "bg-white text-red-800"
+        } py-3 px-6 sm:px-14 text-xl sm:text-3xl hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 hover:text-white hover:scale-125 hover:py-4 hover:px-8 sm:hover:px-16 transition-all duration-300 ease-in-out`}
+    >
+      Slots
+    </button>
 
-          <button
-            onClick={() => handleSectionChange("Slot")}
-            className={`${
-              activeSection === "Slot"
-                ? "bg-gradient-to-r from-red-500 to-red-700 text-white scale-125 py-4 px-8 sm:px-16"
-                : "bg-white text-red-800"
-            } py-3 px-6 sm:px-14 text-xl sm:text-3xl hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 hover:text-white hover:scale-125 hover:py-4 hover:px-8 sm:hover:px-16 transition-all duration-300 ease-in-out`}
-          >
-            Slots
-          </button>
+    <button
+      onClick={() => handleSectionChange("Betting")}
+      className={`${activeSection === "Betting"
+          ? "bg-gradient-to-r from-red-500 to-red-700 text-white scale-125 py-4 px-8 sm:px-16"
+          : "bg-white text-red-800"
+        } py-3 px-6 sm:px-14 text-xl sm:text-3xl hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 hover:text-white hover:scale-125 hover:py-4 hover:px-8 sm:hover:px-16 transition-all duration-300 ease-in-out`}
+    >
+      Betting
+    </button>
+  </div>
+</div>
 
-          <button
-            onClick={() => handleSectionChange("Betting")}
-            className={`${
-              activeSection === "Betting"
-                ? "bg-gradient-to-r from-red-500 to-red-700 text-white scale-125 py-4 px-8 sm:px-16"
-                : "bg-white text-red-800"
-            } py-3 px-6 sm:px-14 text-xl sm:text-3xl hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 hover:text-white hover:scale-125 hover:py-4 hover:px-8 sm:hover:px-16 transition-all duration-300 ease-in-out`}
-          >
-            Betting
-          </button>
-        </div>
 
         <div className="flex justify-center items-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 m-10">

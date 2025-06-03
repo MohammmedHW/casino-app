@@ -178,14 +178,13 @@ const filterCasinos = (data) => {
             HOT CASINO CATEGORIES
           </h2>
 
-          <div className="flex justify-center mb-10 rounded-2xl mx-auto max-w-[900px] p-10 bg-green-800 sm:mx-6 mx-8 lg:mx-auto">
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-50 w-full">
+         <div className="flex justify-center mb-10 rounded-2xl mx-auto max-w-[900px] p-10 bg-green-800 sm:mx-6 mx-8 lg:mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
               {hotCasinos.slice(0, 4).map((casino, index) => (
-                <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} />
+                 <ExpertCard key={index} logo={casino.logo} name={casino.name} />
               ))}
             </div>
           </div>
-
 
           <h2
             className="text-3xl font-bold text-white mb-10 mt-40 text-2xl md:text-3xl lg:text-4xl text-white"
@@ -277,14 +276,14 @@ const filterCasinos = (data) => {
             <div className="flex justify-center items-center">
              
               <div className="flex justify-center items-center">
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                   {loading ? (
                     <p>Loading...</p>
                   ) : error ? (
                     <p>Error: {error}</p>
                   ) : (
                     filteredData.slice(0, 6).map((casino, index) => (
-                      <ExpertCard key={index} logo={casino.logo} name={casino.name} />
+                      <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} />
                     ))
                   )}
                 </div>
