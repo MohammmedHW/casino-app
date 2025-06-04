@@ -805,7 +805,8 @@ const CasinoDetail = () => {
 
           {casino && (
             <div className="relative z-10 pt-24 pb-8 px-4 sm:px-6 md:px-20">
-              <div className="relative w-full max-w-6xl">
+              <div className="relative w-full max-w-6xl mx-auto flex justify-center">
+
                 {/* Crown */}
                 <div
                   className="absolute -top-7 left-1/2 transform -translate-x-1/2 bg-white w-12 h-12 sm:w-14 sm:h-14 rounded-full border-4 border-white z-20 flex items-center justify-center"

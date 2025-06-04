@@ -90,7 +90,7 @@ const Navbar = () => {
     setMobileSubmenuIndex(mobileSubmenuIndex === index ? null : index);
   };
 
-  return (
+  return (  
     <nav className="bg-black bg-opacity-80 text-white fixed w-full top-0 z-50">
       <div className="container mx-auto flex justify-between items-center px-4 py-3">
         <div className="text-3xl" style={{ fontFamily: 'BigNoodleTitling', letterSpacing: '0.1em' }}>

@@ -3,6 +3,7 @@ import footerbg from '../assets/images/footer-bg.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faFacebook, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faTelegram, faWhatsapp, faMicrosoft } from "@fortawesome/free-brands-svg-icons";
+import logo from '../assets/images/mr_logo.png';
 
 import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -32,7 +33,7 @@ const Footer = () => {
               </button>
             </div>
 
-            <div className="space-y-2 text-sm text-white">
+            <div className="space-y-2 text-sm text-white" >
               <label className="flex items-start space-x-2">
                 <input type="checkbox" className="mt-1 accent-red-600" />
                 <span>I confirm I am over 18–24 years old, depending on my location.</span>

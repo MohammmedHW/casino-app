@@ -436,7 +436,7 @@ const Home = () => {
         </div>
 
 
-        <div className="relative w-full">
+        <div className="relative w-full ">
           {/* Left Button */}
           <button
             onClick={scrollLeft}
@@ -456,11 +456,11 @@ const Home = () => {
           {/* Scrollable Card Container */}
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto scrollbar-hide px-10 py-8"
+            className="flex overflow-x-auto scrollbar-hide px-10 py-4"
           >
-            <div className="flex gap-6 mx-auto">
+            <div className="flex gap-4  mx-auto ">
               {getCurrentSectionData().map((casino) => (
-                <div key={casino._id} className="shrink-0">
+                <div key={casino._id} >
                   <Card
                     name={casino.name}
                     rating={casino.rating}
