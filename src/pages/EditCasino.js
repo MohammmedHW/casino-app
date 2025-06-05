@@ -223,20 +223,25 @@ const EditCasino = () => {
   };
 
   const handleAddFeature = () => {
-    if (
-      newFeature.trim() &&
-      !casino.generalInfo.features.includes(newFeature)
-    ) {
-      setCasino((prev) => ({
-        ...prev,
-        generalInfo: {
-          ...prev.generalInfo,
-          features: [...prev.generalInfo.features, newFeature.trim()],
-        },
-      }));
-      setNewFeature("");
-    }
-  };
+  const newFeatures = newFeature
+    .split(",")
+    .map((f) => f.trim())
+    .filter(
+      (f) => f && !casino.generalInfo.features.includes(f)
+    );
+
+  if (newFeatures.length > 0) {
+    setCasino((prev) => ({
+      ...prev,
+      generalInfo: {
+        ...prev.generalInfo,
+        features: [...prev.generalInfo.features, ...newFeatures],
+      },
+    }));
+    setNewFeature("");
+  }
+};
+
 
   const handleRemoveFeature = (featureToRemove) => {
     setCasino((prev) => ({
@@ -279,17 +284,25 @@ const EditCasino = () => {
   };
 
   const handleAddTool = () => {
-    if (newTool.trim() && !casino.responsibleGaming.tools.includes(newTool)) {
-      setCasino((prev) => ({
-        ...prev,
-        responsibleGaming: {
-          ...prev.responsibleGaming,
-          tools: [...prev.responsibleGaming.tools, newTool.trim()],
-        },
-      }));
-      setNewTool("");
-    }
-  };
+  const newTools = newTool
+    .split(",")
+    .map((t) => t.trim())
+    .filter(
+      (t) => t && !casino.responsibleGaming.tools.includes(t)
+    );
+
+  if (newTools.length > 0) {
+    setCasino((prev) => ({
+      ...prev,
+      responsibleGaming: {
+        ...prev.responsibleGaming,
+        tools: [...prev.responsibleGaming.tools, ...newTools],
+      },
+    }));
+    setNewTool("");
+  }
+};
+
 
   const handleRemoveTool = (toolToRemove) => {
     setCasino((prev) => ({
