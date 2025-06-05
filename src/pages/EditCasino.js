@@ -303,14 +303,15 @@ const EditCasino = () => {
     }));
   };
 
+  // TinyMCE editor configuration
   const editorConfig = {
     height: 500,
     menubar: false,
     plugins: "lists link image paste help wordcount",
     toolbar:
-      "undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | help",
-    content_style:
-      "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+      "undo redo | formatselect | bold italic | \
+            alignleft aligncenter alignright | \
+            bullist numlist outdent indent | help",
   };
 
   const handleEditorChange = (content) => {
@@ -410,7 +411,7 @@ const EditCasino = () => {
                   required
                 />
               </div>
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium mb-1">Order</label>
                 <input
                   type="number"
@@ -424,7 +425,7 @@ const EditCasino = () => {
                 <p className="text-xs text-gray-500 mt-1">
                   Current order range: 1 - {maxOrder + 1}
                 </p>
-              </div>
+              </div> */}
               <div className="flex items-center">
                 <input
                   type="checkbox"
@@ -562,7 +563,7 @@ const EditCasino = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">
-                  Editor View
+                  Affiliate Program Link
                 </label>
                 <input
                   type="text"
@@ -585,7 +586,7 @@ const EditCasino = () => {
             </div>
 
             {/* Casino Type */}
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <label className="block text-sm font-medium mb-1">
                 Casino Types
               </label>
@@ -622,7 +623,7 @@ const EditCasino = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Features */}
             <div className="mt-4">
@@ -672,7 +673,7 @@ const EditCasino = () => {
                   Minimum Deposit
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="paymentInfo.minimumDeposit"
                   className="w-full p-2 border rounded"
                   value={casino.paymentInfo.minimumDeposit}
@@ -717,7 +718,7 @@ const EditCasino = () => {
           </div>
 
           {/* Games Section */}
-          <div className="mb-6">
+          {/* <div className="mb-6">
             <h3 className="text-xl font-semibold mb-4">Games</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="flex items-center">
@@ -786,7 +787,7 @@ const EditCasino = () => {
                 </label>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Responsible Gaming */}
           <div className="mb-6">
@@ -805,14 +806,14 @@ const EditCasino = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Tools</label>
+                <label className="block text-sm font-medium mb-1">Games</label>
                 <div className="flex gap-2 mb-2">
                   <input
                     type="text"
                     value={newTool}
                     onChange={(e) => setNewTool(e.target.value)}
                     className="flex-1 p-2 border rounded"
-                    placeholder="Add tool"
+                    placeholder="Add game"
                   />
                   <button
                     type="button"
@@ -846,12 +847,12 @@ const EditCasino = () => {
           {/* Rich Text Editor for Descriptions */}
 
           <div className="mb-6">
-            <h3 className="text-xl font-semibold mb-4">Content Editor</h3>
+            <h3 className="text-xl font-semibold mb-4">Editor View</h3>
             <Editor
               apiKey="sgqonpylyxmnpot9w1fgdcaq8fh1l86kcoyb8we397c0ni4m"
               value={casino.content}
               init={editorConfig}
-              onEditorChange={handleEditorChange}
+              onEditorChange={(content) => setCasino({ ...casino, content })}
             />
           </div>
 
@@ -901,7 +902,7 @@ const EditCasino = () => {
 
           {/* Tags */}
           <div className="mb-6">
-            <h3 className="text-xl font-semibold mb-4">Tags</h3>
+            <h3 className="text-xl font-semibold mb-4">Casino Type</h3>
             <div className="mb-4">
               <label className="block text-sm font-medium mb-2">
                 Available Tags

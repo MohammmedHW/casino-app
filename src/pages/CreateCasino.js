@@ -1965,7 +1965,7 @@ const CreateCasino = () => {
                   required
                 />
               </div>
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium mb-1">Order</label>
                 <input
                   type="number"
@@ -1974,7 +1974,7 @@ const CreateCasino = () => {
                   value={casino.order}
                   onChange={handleChange}
                 />
-              </div>
+              </div> */}
               <div className="flex items-center">
                 <input
                   type="checkbox"
@@ -2112,7 +2112,7 @@ const CreateCasino = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">
-                  Editor View
+                  Affiliate Program Link
                 </label>
                 <input
                   type="text"
@@ -2135,7 +2135,7 @@ const CreateCasino = () => {
             </div>
 
             {/* Casino Type */}
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <label className="block text-sm font-medium mb-1">
                 Casino Types
               </label>
@@ -2172,7 +2172,7 @@ const CreateCasino = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Features */}
             <div className="mt-4">
@@ -2222,7 +2222,7 @@ const CreateCasino = () => {
                   Minimum Deposit
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="paymentInfo.minimumDeposit"
                   className="w-full p-2 border rounded"
                   value={casino.paymentInfo.minimumDeposit}
@@ -2267,7 +2267,7 @@ const CreateCasino = () => {
           </div>
 
           {/* Games Section */}
-          <div className="mb-6">
+          {/* <div className="mb-6">
             <h3 className="text-xl font-semibold mb-4">Games</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="flex items-center">
@@ -2336,7 +2336,7 @@ const CreateCasino = () => {
                 </label>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Responsible Gaming */}
           <div className="mb-6">
@@ -2355,14 +2355,14 @@ const CreateCasino = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Tools</label>
+                <label className="block text-sm font-medium mb-1">Games</label>
                 <div className="flex gap-2 mb-2">
                   <input
                     type="text"
                     value={newTool}
                     onChange={(e) => setNewTool(e.target.value)}
                     className="flex-1 p-2 border rounded"
-                    placeholder="Add tool"
+                    placeholder="Add games"
                   />
                   <button
                     type="button"
@@ -2395,7 +2395,9 @@ const CreateCasino = () => {
 
           {/* Rich Text Editor for Descriptions */}
           <div className="mb-6">
-            <label className="block text-sm font-medium mb-2">Content</label>
+            <label className="block text-sm font-medium mb-2">
+              Editor View
+            </label>
             <Editor
               apiKey="sgqonpylyxmnpot9w1fgdcaq8fh1l86kcoyb8we397c0ni4m"
               value={casino.content}
@@ -2450,7 +2452,7 @@ const CreateCasino = () => {
 
           {/* Tags */}
           <div className="mb-6">
-            <h3 className="text-xl font-semibold mb-4">Tags</h3>
+            <h3 className="text-xl font-semibold mb-4">Casino Type</h3>
             <div className="mb-4">
               <label className="block text-sm font-medium mb-2">
                 Available Tags
