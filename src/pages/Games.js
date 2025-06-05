@@ -58,34 +58,27 @@ const [recommendedByExpertss, setrecommendedByExperts] = useState([]);
 const [certifiedCasinos, setcertifiedCasinos] = useState([]);
 
 const filterCasinos = (data) => {
- 
-  const hot = data.filter(casino => casino.hotCasino === true);
-  const recExperts = data.filter(casino => casino.recommendedByExperts === true);
-  const certified = data.filter(casino => casino.certifiedCasino === true);
-
-  setHotCasinos(hot);
-  setrecommendedByExperts(recExperts);
-  setcertifiedCasinos(certified);
-
-  // If no type is provided, show all casinos
+  // If no type is provided, use full data
   if (!type || typeof type !== "string") {
     setFilteredData(data);
+    setHotCasinos(data.filter(casino => casino.hotCasino === true));
+    setrecommendedByExperts(data.filter(casino => casino.recommendedByExperts === true));
+    setcertifiedCasinos(data.filter(casino => casino.certifiedCasino === true));
     return;
   }
 
-  // Get the exact tag from the mapping
+  // Determine tag filtering logic
   const exactTag = TYPE_TO_TAG_MAP[type];
+  let tagFiltered = [];
 
-  // If no matching tag found, use a more flexible matching
   if (!exactTag) {
     const normalizedType = type.replace(/-/g, '').toLowerCase();
 
-    const filtered = data.filter(casino => {
+    tagFiltered = data.filter(casino => {
       if (!Array.isArray(casino.tags)) return false;
 
       return casino.tags.some(tag => {
         if (!tag) return false;
-
         const normalizedTag = tag.replace(/-/g, '').toLowerCase();
 
         return (
@@ -96,18 +89,20 @@ const filterCasinos = (data) => {
       });
     });
 
-    setFilteredData(filtered);
-    console.log(`Filtered for flexible type "${type}":`, filtered);
-    return;
+    console.log(`Filtered for flexible type "${type}":`, tagFiltered);
+  } else {
+    tagFiltered = data.filter(
+      casino => Array.isArray(casino.tags) && casino.tags.includes(exactTag)
+    );
+
+    console.log(`Filtered for exact type "${type}":`, tagFiltered);
   }
 
-  // Exact tag match
-  const filtered = data.filter(
-    casino => Array.isArray(casino.tags) && casino.tags.includes(exactTag)
-  );
-
-  setFilteredData(filtered);
-  console.log(`Filtered for exact type "${type}":`, filtered);
+  // Set all filtered results based on tag-matched data
+  setFilteredData(tagFiltered);
+  setHotCasinos(tagFiltered.filter(casino => casino.hotCasino === true));
+  setrecommendedByExperts(tagFiltered.filter(casino => casino.recommendedByExperts === true));
+  setcertifiedCasinos(tagFiltered.filter(casino => casino.certifiedCasino === true));
 };
 
 

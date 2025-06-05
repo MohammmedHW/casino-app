@@ -20,7 +20,7 @@ import GameIcon1 from "../assets/images/Game Icon.png";
 import GameIcon2 from "../assets/images/Game Icon (1).png";
 import GameIcon3 from "../assets/images/Game Icon (2).png";
 import GameIcon4 from "../assets/images/Game Icon (3).png";
-import GameIcon5 from "../assets/images/Game Icon 4.png";
+
 
 import Expert1 from "../assets/images/expert1.png";
 import Expert2 from "../assets/images/expert2.png";
@@ -55,19 +55,9 @@ const Home = () => {
   const [bettingFilteredData, setBettingFilteredData] = useState([]);
   const [certifiedCasinos, setCertifiedCasinos] = useState([]);
   const [recentCasinos, setRecentCasinos] = useState([]);
-  const scrollRef = useRef(null);
+ 
 
-  const scrollLeft = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
-    }
-  };
 
-  const scrollRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
-    }
-  };
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -436,42 +426,23 @@ const Home = () => {
         </div>
 
 
-        <div className="relative w-full ">
-          {/* Left Button */}
-          <button
-            onClick={scrollLeft}
-            className="absolute left-0 ml-4 top-1/2 -translate-y-1/2 z-10 bg-red-600 hover:bg-red-700 text-white p-3 rounded-full"
-          >
-            <FaChevronLeft />
-          </button>
+         <div className="flex justify-center items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 m-10 mt-5">
 
-          {/* Right Button */}
-          <button
-            onClick={scrollRight}
-            className="absolute right-0 mr-4 top-1/2 -translate-y-1/2 z-10 bg-red-600 hover:bg-red-700 text-white p-3 rounded-full"
-          >
-            <FaChevronRight />
-          </button>
-
-          {/* Scrollable Card Container */}
-          <div
-            ref={scrollRef}
-            className="flex overflow-x-auto scrollbar-hide px-10 py-4"
-          >
-            <div className="flex gap-4  mx-auto ">
+         
               {getCurrentSectionData().map((casino) => (
-                <div key={casino._id} >
+               
                   <Card
                     name={casino.name}
                     rating={casino.rating}
                     bgImage={casino.logo}
                     onClick={() => handlePlayClick(casino.name)}
                   />
-                </div>
+              
               ))}
             </div>
           </div>
-        </div>
+    
 
 
 

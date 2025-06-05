@@ -51,33 +51,29 @@ const Casinos = ({ type }) => {
     fetchCasinos();
   }, [type]);
   const [filteredData, setFilteredData] = useState([]);
-const [hotCasinos, setHotCasinos] = useState([]);
-const [recommendedByExpertss, setrecommendedByExperts] = useState([]);
-const [certifiedCasinos, setcertifiedCasinos] = useState([]);
+  const [hotCasinos, setHotCasinos] = useState([]);
+  const [recommendedByExpertss, setrecommendedByExperts] = useState([]);
+  const [certifiedCasinos, setcertifiedCasinos] = useState([]);
 
-function filt(data) {
+  function filt(data) {
   if (!type || typeof type !== "string") return;
 
-  const filtered = data.filter(casino =>
-    Array.isArray(casino.tags) &&
-    casino.tags.some(tag =>
-      tag.toLowerCase().includes(type.toLowerCase())
-    )
+  // Filter all by tag first
+  const tagFiltered = data.filter(
+    casino =>
+      Array.isArray(casino.tags) &&
+      casino.tags.some(tag => tag.toLowerCase().includes(type.toLowerCase()))
   );
 
-  const hot = data.filter(casino => casino.hotCasino === true);
-  const recExperts = data.filter(casino => casino.recommendedByExperts === true);
-  const certified = data.filter(casino => casino.certifiedCasino === true);
+  // Now filter by specific flags *within* the tag-matching data
+  const hot = tagFiltered.filter(casino => casino.hotCasino === true);
+  const recExperts = tagFiltered.filter(casino => casino.recommendedByExperts === true);
+  const certified = tagFiltered.filter(casino => casino.certifiedCasino === true);
 
-  setFilteredData(filtered);
+  setFilteredData(tagFiltered);
   setHotCasinos(hot);
   setrecommendedByExperts(recExperts);
   setcertifiedCasinos(certified);
-
-  // console.log("filtered:", filtered);
-  // console.log("hotCasinos:", hot);
-  // console.log("hotCasinos:", hot);
-  // console.log("hotCasinos:", hot);
 }
 
 
@@ -98,39 +94,39 @@ function filt(data) {
         className="relative bg-cover bg-center h-[60vh] min-h-[400px] md:h-screen"
         style={{ backgroundImage: `url(${casinoBg})` }}
       >
-      <div className="absolute inset-0 bg-black/50 bg-gradient-to-t from-black100 to-transparent" />
+        <div className="absolute inset-0 bg-black/50 bg-gradient-to-t from-black100 to-transparent" />
         <div className="container mx-auto px-4 h-full flex items-center justify-center relative z-10">
 
-        <div className="container mx-auto text-center absolute z-10 top-5 h-full flex flex-col justify-center items-center px-2">
-          <h1
-            className="text-3xl md:text-5xl lg:text-6xl max-w-4xl text-white"
-            style={{
-              fontFamily: 'BigNoodleTitling',
-              lineHeight: '1.2',
-              wordSpacing: '0.1em',
-              fontWeight: '100',
-              letterSpacing: '0.05em',
-            }}
-          >
-            Your Gateway to the Best Online Casinos & Big Wins!
-          </h1>
-          <p
-            className="mt-4 text-md md:text-lg max-w-2xl text-gray-200"
-            style={{
-              fontFamily: 'BigNoodleTitling',
-              lineHeight: '1.4',
-              wordSpacing: '0.1em',
-              fontWeight: '300',
-              letterSpacing: '0.05em',
-            }}
-          >
-            Compare top-rated casino platforms, claim exclusive bonuses, and start playing today!
-          </p>
-          <div className="m-10">
-            <SearchBox />
+          <div className="container mx-auto text-center absolute z-10 top-5 h-full flex flex-col justify-center items-center px-2">
+            <h1
+              className="text-3xl md:text-5xl lg:text-6xl max-w-4xl text-white"
+              style={{
+                fontFamily: 'BigNoodleTitling',
+                lineHeight: '1.2',
+                wordSpacing: '0.1em',
+                fontWeight: '100',
+                letterSpacing: '0.05em',
+              }}
+            >
+              Your Gateway to the Best Online Casinos & Big Wins!
+            </h1>
+            <p
+              className="mt-4 text-md md:text-lg max-w-2xl text-gray-200"
+              style={{
+                fontFamily: 'BigNoodleTitling',
+                lineHeight: '1.4',
+                wordSpacing: '0.1em',
+                fontWeight: '300',
+                letterSpacing: '0.05em',
+              }}
+            >
+              Compare top-rated casino platforms, claim exclusive bonuses, and start playing today!
+            </p>
+            <div className="m-10">
+              <SearchBox />
+            </div>
           </div>
         </div>
-         </div>
       </header>
 
       <section className="py-10 bg-black100 text-center">
@@ -142,7 +138,7 @@ function filt(data) {
             ) : error ? (
               <p className="text-red-500">Error: {error}</p>
             ) : (
-                filteredData.slice(0, 5).map((casino, index) => (
+              filteredData.slice(0, 5).map((casino, index) => (
                 <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} />
               ))
             )}
@@ -178,7 +174,7 @@ function filt(data) {
           <div className="flex justify-center mb-10 rounded-2xl mx-auto max-w-[900px] p-10 bg-green-800 sm:mx-6 mx-8 lg:mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
               {hotCasinos.slice(0, 4).map((casino, index) => (
-                 <ExpertCard key={index} logo={casino.logo} name={casino.name} />
+                <ExpertCard key={index} logo={casino.logo} name={casino.name} />
               ))}
             </div>
           </div>
@@ -235,7 +231,7 @@ function filt(data) {
             </div>
 
             <div className="flex justify-center items-center">
-             
+
               <div className="flex justify-center items-center">
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                   {loading ? (
@@ -273,7 +269,7 @@ function filt(data) {
             </div>
 
             <div className="flex justify-center items-center">
-            
+
               <div className="flex justify-center items-center">
                 <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                   {loading ? (
@@ -283,11 +279,11 @@ function filt(data) {
                   ) : (
                     filteredData.slice(0, 6).map((casino, index) => (
                       <Card
-                  key={index}
-                  name={casino.name}
-                  rating={casino.rating}
-                  bgImage={casino.logo}
-                />
+                        key={index}
+                        name={casino.name}
+                        rating={casino.rating}
+                        bgImage={casino.logo}
+                      />
                     ))
                   )}
                 </div>
@@ -300,7 +296,7 @@ function filt(data) {
 
 
 
-    
+
       <Footer />
     </>
   );

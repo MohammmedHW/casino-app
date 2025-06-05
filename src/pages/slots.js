@@ -52,39 +52,38 @@ const Slots = ({ type }) => {
     fetchSlots();
   }, [type]);
 
-  const filterSlots = (data) => {
-    const hot = data.filter(casino => casino.hotCasino === true);
-    const recExperts = data.filter(casino => casino.recommendedByExperts === true);
-    const certified = data.filter(casino => casino.certifiedCasino === true);
+ const filterSlots = (data) => {
+  if (!type || typeof type !== "string") {
+    setFilteredData(data);
+    setHotSlots(data.filter(slot => slot.hotCasino === true));
+    setExpertSlots(data.filter(slot => slot.recommendedByExperts === true));
+    setCertifiedSlots(data.filter(slot => slot.certifiedCasino === true));
+    return;
+  }
 
-    setHotSlots(hot);
-    setExpertSlots(recExperts);
-    setCertifiedSlots(certified);
+  const tag = SLOT_TYPE_TAGS[type];
+  let tagFiltered = [];
 
-    if (!type || typeof type !== "string") {
-      setFilteredData(data);
-      return;
-    }
-
-    const tag = SLOT_TYPE_TAGS[type];
-
-    if (!tag) {
-      const normalizedType = type.replace(/-/g, '').toLowerCase();
-      const filtered = data.filter(casino =>
-        Array.isArray(casino.tags) &&
-        casino.tags.some(tag =>
-          tag?.replace(/-/g, '').toLowerCase().includes(normalizedType)
-        )
-      );
-      setFilteredData(filtered);
-      return;
-    }
-
-    const filtered = data.filter(casino =>
-      Array.isArray(casino.tags) && casino.tags.includes(tag)
+  if (!tag) {
+    const normalizedType = type.replace(/-/g, '').toLowerCase();
+    tagFiltered = data.filter(slot =>
+      Array.isArray(slot.tags) &&
+      slot.tags.some(tag =>
+        tag?.replace(/-/g, '').toLowerCase().includes(normalizedType)
+      )
     );
-    setFilteredData(filtered);
-  };
+  } else {
+    tagFiltered = data.filter(slot =>
+      Array.isArray(slot.tags) && slot.tags.includes(tag)
+    );
+  }
+
+  setFilteredData(tagFiltered);
+  setHotSlots(tagFiltered.filter(slot => slot.hotCasino === true));
+  setExpertSlots(tagFiltered.filter(slot => slot.recommendedByExperts === true));
+  setCertifiedSlots(tagFiltered.filter(slot => slot.certifiedCasino === true));
+};
+
 
   return (
     <>
