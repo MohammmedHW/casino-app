@@ -25,7 +25,7 @@ const Card = ({ rating, bgImage, flagCode, onClick }) => {
 
       {/* Background image */}
       <div
-        className="mt-10 h-32 flex items-center justify-center bg-gray-100 rounded-t-3xl"
+        className="mt-10 h-32 flex items-center justify-center bg-white rounded-t-3xl"
         style={{
           backgroundImage: `url(${bgImage})`,
           backgroundSize: "contain",
