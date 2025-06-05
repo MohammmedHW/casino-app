@@ -306,13 +306,28 @@ const EditCasino = () => {
   // TinyMCE editor configuration
   const editorConfig = {
     height: 500,
-    menubar: false,
-    plugins: "lists link image paste help wordcount",
+    menubar: true,
+    plugins: [
+      "advlist", "autolink", "lists", "link", "image", "charmap", "preview",
+      "anchor", "searchreplace", "visualblocks", "code", "fullscreen",
+      "insertdatetime", "media", "table", "code", "help", "wordcount"
+    ],
     toolbar:
-      "undo redo | formatselect | bold italic | \
-            alignleft aligncenter alignright | \
-            bullist numlist outdent indent | help",
+      "undo redo | styles | fontselect fontsizeselect | bold italic underline strikethrough | " +
+      "forecolor backcolor | alignleft aligncenter alignright alignjustify | " +
+      "bullist numlist outdent indent | removeformat | code | help",
+    font_size_formats: "8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt 60pt 72pt",
+    content_style: `
+    body {
+      font-family:Helvetica,Arial,sans-serif;
+      font-size:14px;
+    }
+  `,
+    convert_fonts_to_spans: true,
+    style_formats_merge: true,
+    forced_root_block: "div", // Use <div> instead of <p>
   };
+
 
   const handleEditorChange = (content) => {
     setCasino((prev) => ({
@@ -913,11 +928,10 @@ const EditCasino = () => {
                     key={tag}
                     type="button"
                     onClick={() => handleAddTag(tag)}
-                    className={`px-3 py-1 rounded-full text-sm ${
-                      casino.tags.includes(tag)
+                    className={`px-3 py-1 rounded-full text-sm ${casino.tags.includes(tag)
                         ? "bg-green-500 text-white"
                         : "bg-gray-200 hover:bg-gray-300"
-                    }`}
+                      }`}
                     disabled={casino.tags.includes(tag)}
                   >
                     {tag}
@@ -966,11 +980,10 @@ const EditCasino = () => {
                     key={country}
                     type="button"
                     onClick={() => handleAddCountry(country)}
-                    className={`px-3 py-1 rounded-full text-sm ${
-                      casino.availableCountries.includes(country)
+                    className={`px-3 py-1 rounded-full text-sm ${casino.availableCountries.includes(country)
                         ? "bg-green-500 text-white"
                         : "bg-gray-200 hover:bg-gray-300"
-                    }`}
+                      }`}
                     disabled={casino.availableCountries.includes(country)}
                   >
                     {country}

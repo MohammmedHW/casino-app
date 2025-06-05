@@ -1673,16 +1673,18 @@ const ALL_COUNTRIES = [
   "Global",
 ];
 
-// TinyMCE editor configuration
-const editorConfig = {
-  height: 500,
-  menubar: false,
-  plugins: "lists link image paste help wordcount",
-  toolbar:
-    "undo redo | formatselect | bold italic | \
-            alignleft aligncenter alignright | \
-            bullist numlist outdent indent | help",
-};
+// // TinyMCE editor configuration
+// const editorConfig = {
+//   height: 500,
+//   menubar: true,
+//   plugins: "lists link image paste help wordcount",
+//   toolbar:
+//     "undo redo | formatselect | bold italic | \
+//             alignleft aligncenter alignright | \
+//             bullist numlist outdent indent | help",
+// };
+ // TinyMCE editor configuration
+  
 
 const CreateCasino = () => {
   const [casino, setCasino] = useState({
@@ -1760,6 +1762,29 @@ const CreateCasino = () => {
         [name]: value,
       }));
     }
+  };
+const editorConfig = {
+    height: 500,
+    menubar: true,
+    plugins: [
+      "advlist", "autolink", "lists", "link", "image", "charmap", "preview",
+      "anchor", "searchreplace", "visualblocks", "code", "fullscreen",
+      "insertdatetime", "media", "table", "code", "help", "wordcount"
+    ],
+    toolbar:
+      "undo redo | styles | fontselect fontsizeselect | bold italic underline strikethrough | " +
+      "forecolor backcolor | alignleft aligncenter alignright alignjustify | " +
+      "bullist numlist outdent indent | removeformat | code | help",
+    font_size_formats: "8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt 60pt 72pt",
+    content_style: `
+    body {
+      font-family:Helvetica,Arial,sans-serif;
+      font-size:14px;
+    }
+  `,
+    convert_fonts_to_spans: true,
+    style_formats_merge: true,
+    forced_root_block: "div", 
   };
 
   const handleEditorChange = (fieldName, content) => {
