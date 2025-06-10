@@ -255,21 +255,25 @@ const EditCasino = () => {
     }));
   };
 
-  const handleAddCasinoType = () => {
-    if (
-      newCasinoType.trim() &&
-      !casino.generalInfo.casinoType.includes(newCasinoType)
-    ) {
+   const handleAddCasinoType = () => {
+  if (newCasinoType.trim()) {
+    const newTypes = newCasinoType
+      .split(',')
+      .map(type => type.trim())
+      .filter(type => type && !casino.generalInfo.casinoType.includes(type));
+
+    if (newTypes.length > 0) {
       setCasino((prev) => ({
         ...prev,
         generalInfo: {
           ...prev.generalInfo,
-          casinoType: [...prev.generalInfo.casinoType, newCasinoType.trim()],
+          casinoType: [...prev.generalInfo.casinoType, ...newTypes],
         },
       }));
-      setNewCasinoType("");
     }
-  };
+    setNewCasinoType("");
+  }
+};
 
   const handleRemoveCasinoType = (typeToRemove) => {
     setCasino((prev) => ({
@@ -302,7 +306,7 @@ const EditCasino = () => {
     setNewTool("");
   }
 };
-
+ 
 
   const handleRemoveTool = (toolToRemove) => {
     setCasino((prev) => ({
@@ -614,9 +618,9 @@ const EditCasino = () => {
             </div>
 
             {/* Casino Type */}
-            {/* <div className="mt-4">
+            <div className="mt-4">
               <label className="block text-sm font-medium mb-1">
-                Casino Types
+                Deposit Bonuses
               </label>
               <div className="flex gap-2 mb-2">
                 <input
@@ -624,7 +628,7 @@ const EditCasino = () => {
                   value={newCasinoType}
                   onChange={(e) => setNewCasinoType(e.target.value)}
                   className="flex-1 p-2 border rounded"
-                  placeholder="Add casino type"
+                  placeholder="Add Deposit Bonuses"
                 />
                 <button
                   type="button"
@@ -651,7 +655,7 @@ const EditCasino = () => {
                   </div>
                 ))}
               </div>
-            </div> */}
+            </div>
 
             {/* Features */}
             <div className="mt-4">
@@ -710,7 +714,7 @@ const EditCasino = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">
-                  Withdrawal Methods
+                   Deposit Methods
                 </label>
                 <input
                   type="text"
@@ -733,7 +737,7 @@ const EditCasino = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Fees</label>
+                <label className="block text-sm font-medium mb-1">Currencies</label>
                 <input
                   type="text"
                   name="paymentInfo.fees"

@@ -9,6 +9,7 @@ import SearchBox from "../components/searchbox";
 import Card from "../components/Card";
 import CasinoCard from "../components/CasinoCard";
 import CategoryCard from "../components/CategoryCard";
+
 import ExpertCard from "../components/ExpertCard";
 import { getCasinos } from "../api/casinos.js";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -54,6 +55,7 @@ const Home = () => {
   const [slotFilteredData, setSlotFilteredData] = useState([]);
   const [bettingFilteredData, setBettingFilteredData] = useState([]);
   const [certifiedCasinos, setCertifiedCasinos] = useState([]);
+  const [hotCasinos, sethotCasinos] = useState([]);
   const [recentCasinos, setRecentCasinos] = useState([]);
  
 
@@ -220,18 +222,21 @@ const Home = () => {
     setGameFilteredData(filteredGames.slice(0, 5));
     setSlotFilteredData(filteredSlots.slice(0, 5));
     setBettingFilteredData(filteredBetting.slice(0, 5));
+    sethotCasinos(filteredCertified.slice(0, 6));
     setCertifiedCasinos(filteredCertified.slice(0, 4));
     setRecentCasinos(sortedByDate.slice(0, 5));
   };
 
-  const categories = [
-    { icon: categoriesImg1, label: "Casino Review" },
-    { icon: categoriesImg2, label: "Newest Casino" },
-    { icon: categoriesImg3, label: "Video Reviews" },
-    { icon: categoriesImg4, label: "Awarded Casinos" },
-    { icon: categoriesImg5, label: "Mobile Casinos" },
-    { icon: categoriesImg6, label: "Instant Play" },
-  ];
+const categories = [
+  { icon: categoriesImg1, label: "Casino Review", link: "/casinos/certified" },
+  { icon: categoriesImg2, label: "Newest Casino", link: "/casinos/newest" },
+  { icon: categoriesImg3, label: "Video Reviews", link: "/slots/video" }, // Define this route if needed
+  { icon: categoriesImg4, label: "Bonuses", link: "/betting/bonuses" }, // Create this route if needed
+  { icon: categoriesImg5, label: "Mobile Casinos", link: "/casinos/mobile" },
+  { icon: categoriesImg6, label: "Instant Play", link: "/games/lottery" }, // Create this route if needed
+];
+
+
 
   const recommendedCasinos = [
     { logo: Expert1, name: "Winnerz Casino" },
@@ -590,6 +595,7 @@ const Home = () => {
                   key={index}
                   icon={category.icon}
                   label={category.label}
+                  link = {category.link}
                 />
               ))}
             </div>
@@ -610,8 +616,14 @@ const Home = () => {
 
           <div className="flex justify-center items-center">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-              {recommendedCasinos.map((casino, index) => (
-                <ExpertCard key={index} logo={casino.logo} name={casino.name} />
+             {hotCasinos.map((casino) => (
+               
+                  <ExpertCard
+                    name={casino.name}
+                    logo={casino.logo}
+                    onClick={() => handlePlayClick(casino.name)}
+                  />
+              
               ))}
             </div>
           </div>

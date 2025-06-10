@@ -18,10 +18,11 @@ const Navbar = () => {
       name: 'Casinos',
       submenu: [
         { name: 'Crypto Casino', path: '/casinos/crypto' },
+        { name: 'Newest Casino', path: '/casinos/newest' },
         { name: 'Online Casino', path: '/casinos/online' },
         { name: 'Certified Casino', path: '/casinos/certified' },
         { name: 'Mobile Casino', path: '/casinos/mobile' },
-        { name: 'Newest Casino', path: '/casinos/newest' },
+        
       ],
     },
     {
@@ -43,7 +44,7 @@ const Navbar = () => {
         { name: 'Table Games', path: '/games/table' },
         { name: 'Card Games', path: '/games/card' },
         { name: 'Dice Games', path: '/games/dice' },
-        { name: 'Real Money Online Slots', path: '/games/real-money-slots' },
+        { name: 'Online Slots', path: '/games/real-money-slots' },
         { name: 'Poker', path: '/games/poker' },
         { name: 'Bingo', path: '/games/bingo' },
         { name: 'Lottery Games', path: '/games/lottery' },

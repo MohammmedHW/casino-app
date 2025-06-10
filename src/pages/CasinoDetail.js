@@ -134,14 +134,14 @@ const CasinoDetail = () => {
                   {casino.generalInfo?.companyName || "Not specified"}
                 </span>
               </div>
-              <div>
+              {/* <div>
                 <p className="text-xl font-noodle inline text-white">
                   Casino Type:{" "}
                 </p>
                 <span className="ml-1 text-lg">
                   {safeJoin(casino.generalInfo?.casinoType, "Online Casino")}
                 </span>
-              </div>
+              </div> */}
               <div>
                 <p className="text-xl font-noodle inline text-white">
                   Established:{" "}
@@ -158,14 +158,14 @@ const CasinoDetail = () => {
                   {safeJoin(casino.generalInfo?.licences, "Not specified")}
                 </span>
               </div>
-              <div>
+              {/* <div>
                 <p className="text-xl font-noodle inline text-white">
                   Editor View:{" "}
                 </p>
                 <span className="ml-1">
                   {casino.editorView || "Not specified"}
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
         );
@@ -184,7 +184,7 @@ const CasinoDetail = () => {
               </div>
               <div>
                 <p className="text-xl text-white font-semibold inline">
-                  Withdrawal Methods:{" "}
+                  Deposit Methods:{" "}
                 </p>
                 <span className="text-lg text-gray-300 inline">
                   {safeJoin(
@@ -203,7 +203,7 @@ const CasinoDetail = () => {
               </div>
               <div>
                 <p className="text-xl text-white font-semibold inline">
-                  Fees:{" "}
+                  Currencies:{" "}
                 </p>
                 <span className="text-lg text-gray-300 inline">
                   {casino.paymentInfo?.fees || "Not specified"}
@@ -215,43 +215,25 @@ const CasinoDetail = () => {
 
       case "games":
         return (
-          <div className="space-y-4 text-sm text-gray-100 mt-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-28 gap-4">
-              <div className="flex items-center">
-                <span
-                  className={`h-3 w-3 rounded-full mr-2 ${
-                    casino.games?.slots ? "bg-green-500" : "bg-red-500"
-                  }`}
-                ></span>
-                <p>
-                  Slots: {casino.games?.slots ? "Available" : "Not available"}
-                </p>
-              </div>
-              <div className="flex items-center">
-                <span
-                  className={`h-3 w-3 rounded-full mr-2 ${
-                    casino.games?.liveCasino ? "bg-green-500" : "bg-red-500"
-                  }`}
-                ></span>
-                <p>
-                  Live Casino:{" "}
-                  {casino.games?.liveCasino ? "Available" : "Not available"}
-                </p>
-              </div>
-              <div className="flex items-center">
-                <span
-                  className={`h-3 w-3 rounded-full mr-2 ${
-                    casino.games?.sportsBetting ? "bg-green-500" : "bg-red-500"
-                  }`}
-                ></span>
-                <p>
-                  Sports Betting:{" "}
-                  {casino.games?.sportsBetting ? "Available" : "Not available"}
-                </p>
-              </div>
-            </div>
-          </div>
-        );
+  <div className="flex flex-col items-center justify-center mt-4">
+    <div className="text-sm text-gray-100 w-full max-w-md">
+      <div className="flex flex-col items-center space-y-3">
+        <div className="w-full text-center">
+          <p className="text-lg font-medium text-white">
+            {
+              Array.isArray(casino.generalInfo?.casinoType)
+                ? casino.generalInfo.casinoType.map((item, index) => (
+                    <span key={index}>{item}<br /></span>
+                  ))
+                : null 
+            }
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
       case "responsible":
         return (
           <div className="space-y-4 text-sm text-gray-100 mt-4">
@@ -354,7 +336,7 @@ const CasinoDetail = () => {
                         ref={imgRef}
                         src={casino.logo}
                         alt={casino.name || "Casino"}
-                        className="max-h-20 sm:max-h-24 object-contain"
+                        className="max-h-24 sm:max-h-48 object-contain"
                         crossOrigin="anonymous"
                         onError={(e) => {
                           e.target.src = "https://via.placeholder.com/150";
@@ -370,8 +352,7 @@ const CasinoDetail = () => {
                   {/* Details */}
                   <div className="p-4 sm:p-6 md:p-8 pt-10 text-left md:w-2/3">
                     <p className="text-xs text-gray-400 uppercase font-semibold tracking-widest text-center md:text-left">
-                      Online Casino of the Month {casino.month || "May"}{" "}
-                      {casino.year || "2025"}
+                      Online Casino of the Year
                     </p>
 
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-2 gap-2">
@@ -475,21 +456,20 @@ const CasinoDetail = () => {
         <main className="max-w-6xl mx-auto px-8 py-8">
           {/* Tab Buttons */}
           <div className="flex justify-start sm:justify-center pb-4 overflow-x-auto scrollbar-hide space-x-6 sm:space-x-20">
-            {["general", "payment",  "responsible"].map(
+            {["general", "payment", "games", "responsible"].map(
               (tab, index) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`flex-shrink-0 text-sm sm:text-lg font-semibold px-6 sm:px-10 py-2 sm:py-4 border border-[#3d3d3d] rounded-[30px] whitespace-nowrap ${
-                    activeTab === tab
+                  className={`flex-shrink-0 text-sm sm:text-lg font-semibold px-6 sm:px-10 py-2 sm:py-4 border border-[#3d3d3d] rounded-[30px] whitespace-nowrap ${activeTab === tab
                       ? "bg-[#00000040] text-white"
                       : "text-white hover:text-red-600"
-                  }`}
+                    }`}
                 >
                   {tab === "general" && "General Info"}
-                  {tab === "payment" && "Payment Info"}
-                  {tab === "games" && "Games"}
-                  {tab === "responsible" && "Responsible Gaming"}
+                  {tab === "payment" && "Banking Info"}
+                  {tab === "games" && "Deposit Bonuses"}
+                  {tab === "responsible" && "Gaming"}
                 </button>
               )
             )}
@@ -501,13 +481,13 @@ const CasinoDetail = () => {
       </section>
 
       {/* New Rich Text Content Section */}
-       <h1 className="text-3xl lg:text-4xl font-bold text-red-500 mt-10 lg:mt-20 text-center">
+      <h1 className="text-3xl lg:text-4xl font-bold text-red-500 mt-10 lg:mt-20 text-center">
         Editor's View
       </h1>
       {casino?.content && (
-        <section className="bg-[#1e1e1e] py-12">
-          <div className="max-w-6xl mx-auto px-0">
-            
+        <section className="bg-[#1e1e1e] py-6">
+          <div className="max-w-6xl mx-auto px-4">
+
             <div
               className="prose prose-invert max-w-none text-gray-100"
               dangerouslySetInnerHTML={{ __html: casino.content }}
