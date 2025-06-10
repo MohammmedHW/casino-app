@@ -142,6 +142,7 @@ const CasinoDetail = () => {
                   {safeJoin(casino.generalInfo?.casinoType, "Online Casino")}
                 </span>
               </div> */}
+              
               <div>
                 <p className="text-xl font-noodle inline text-white">
                   Established:{" "}
@@ -166,6 +167,14 @@ const CasinoDetail = () => {
                   {casino.editorView || "Not specified"}
                 </span>
               </div> */}
+              <div>
+                <p className="text-xl font-noodle inline text-white">
+                  Support:
+                </p>
+                <span className="ml-1 text-lg">
+                  {casino.responsibleGaming?.support || "Not specified"}
+                </span>
+              </div>
             </div>
           </div>
         );
@@ -244,14 +253,7 @@ const CasinoDetail = () => {
                   {safeJoin(casino.responsibleGaming?.tools, "Not specified")}
                 </span>
               </div>
-              <div>
-                <p className="text-xl font-noodle inline text-white">
-                  Support:
-                </p>
-                <span className="ml-1 text-lg">
-                  {casino.responsibleGaming?.support || "Not specified"}
-                </span>
-              </div>
+              
             </div>
           </div>
         );
@@ -352,7 +354,7 @@ const CasinoDetail = () => {
                   {/* Details */}
                   <div className="p-4 sm:p-6 md:p-8 pt-10 text-left md:w-2/3">
                     <p className="text-xs text-gray-400 uppercase font-semibold tracking-widest text-center md:text-left">
-                      Online Casino of the Year
+                     
                     </p>
 
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-2 gap-2">
@@ -469,7 +471,7 @@ const CasinoDetail = () => {
                   {tab === "general" && "General Info"}
                   {tab === "payment" && "Banking Info"}
                   {tab === "games" && "Deposit Bonuses"}
-                  {tab === "responsible" && "Gaming"}
+                  {tab === "responsible" && "Games"}
                 </button>
               )
             )}
