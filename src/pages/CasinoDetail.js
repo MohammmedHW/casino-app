@@ -108,7 +108,7 @@ const CasinoDetail = () => {
                   {casino.generalInfo?.website || "Not available"}
                 </a>
               </div>
-              <div>
+              {/* <div>
                 <p className="text-xl font-noodle inline text-white">
                   Affiliate Program:{" "}
                 </p>
@@ -117,7 +117,7 @@ const CasinoDetail = () => {
                     ? "Available"
                     : "Not available"}
                 </span>
-              </div>
+              </div> */}
               <div>
                 <p className="text-xl font-noodle inline text-white">
                   Languages:{" "}

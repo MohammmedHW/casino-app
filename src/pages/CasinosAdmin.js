@@ -1,200 +1,11 @@
-// import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { getCasinos, deleteCasino, updateCasinoOrder } from "../api/casinos";
-// import Sidebar from "../components/Sidebar";
-// import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
-// const CasinosAdmin = () => {
-//   const [casinos, setCasinos] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState("");
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     const fetchCasinos = async () => {
-//       try {
-//         const data = await getCasinos();
-//         // Sort casinos by order before setting state
-//         const sortedCasinos = [...data].sort((a, b) => a.order - b.order);
-//         setCasinos(sortedCasinos);
-//       } catch (err) {
-//         setError(err.message || "Failed to load casinos");
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-//     fetchCasinos();
-//   }, []);
-
-//   const handleDelete = async (id) => {
-//     try {
-//       await deleteCasino(id);
-//       setCasinos(casinos.filter((casino) => casino._id !== id));
-//     } catch (err) {
-//       setError(err.message || "Failed to delete casino");
-//     }
-//   };
-
-//   const onDragEnd = async (result) => {
-//     if (!result.destination) return;
-
-//     const items = Array.from(casinos);
-//     const [reorderedItem] = items.splice(result.source.index, 1);
-//     items.splice(result.destination.index, 0, reorderedItem);
-
-//     // Update local state immediately for smooth UI
-//     setCasinos(items);
-
-//     try {
-//       // Update order in backend
-//       await updateCasinoOrder(reorderedItem._id, result.destination.index + 1);
-
-//       // Update local order values
-//       const updatedCasinos = items.map((casino, index) => ({
-//         ...casino,
-//         order: index + 1,
-//       }));
-
-//       setCasinos(updatedCasinos);
-//     } catch (err) {
-//       setError(err.message || "Failed to update order");
-//       // Revert to previous state if update fails
-//       const data = await getCasinos();
-//       const sortedCasinos = [...data].sort((a, b) => a.order - b.order);
-//       setCasinos(sortedCasinos);
-//     }
-//   };
-
-//   if (loading)
-//     return (
-//       <div className="flex">
-//         <Sidebar />
-//         <div className="flex-1 p-6 flex items-center justify-center">
-//           <div>Loading casinos...</div>
-//         </div>
-//       </div>
-//     );
-
-//   if (error)
-//     return (
-//       <div className="flex">
-//         <Sidebar />
-//         <div className="flex-1 p-6 flex items-center justify-center">
-//           <div className="text-red-500">{error}</div>
-//         </div>
-//       </div>
-//     );
-
-//   return (
-//     <div className="flex">
-//       <Sidebar />
-//       <div className="flex-1 p-6">
-//         <h2 className="text-2xl font-bold mb-6">Manage Casinos</h2>
-//         <button
-//           className="bg-green-500 text-white px-4 py-2 rounded mb-4 hover:bg-green-600 transition"
-//           onClick={() => navigate("/create-casino")}
-//         >
-//           Create Casino
-//         </button>
-//         {error && <div className="text-red-500 mb-4">{error}</div>}
-
-//         <div className="bg-white shadow-md rounded-lg overflow-hidden">
-//           <DragDropContext onDragEnd={onDragEnd}>
-//             <Droppable droppableId="casinos">
-//               {(provided) => (
-//                 <table
-//                   className="w-full"
-//                   {...provided.droppableProps}
-//                   ref={provided.innerRef}
-//                 >
-//                   <thead className="bg-gray-200">
-//                     <tr>
-//                       <th className="p-3 text-left">Order</th>
-//                       <th className="p-3 text-left">Logo</th>
-//                       <th className="p-3 text-left">Name</th>
-//                       <th className="p-3 text-left">Rating</th>
-//                       <th className="p-3 text-left">Actions</th>
-//                     </tr>
-//                   </thead>
-//                   <tbody>
-//                     {casinos.map((casino, index) => (
-//                       <Draggable
-//                         key={casino._id}
-//                         draggableId={casino._id}
-//                         index={index}
-//                       >
-//                         {(provided) => (
-//                           <tr
-//                             ref={provided.innerRef}
-//                             {...provided.draggableProps}
-//                             className="border-b hover:bg-gray-50"
-//                           >
-//                             <td className="p-3" {...provided.dragHandleProps}>
-//                               <div className="flex items-center">
-//                                 <svg
-//                                   xmlns="http://www.w3.org/2000/svg"
-//                                   className="h-5 w-5 text-gray-400 mr-2"
-//                                   viewBox="0 0 20 20"
-//                                   fill="currentColor"
-//                                 >
-//                                   <path
-//                                     fillRule="evenodd"
-//                                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-//                                     clipRule="evenodd"
-//                                   />
-//                                 </svg>
-//                                 {casino.order}
-//                               </div>
-//                             </td>
-//                             <td className="p-3">
-//                               <img
-//                                 src={casino.logo}
-//                                 alt={casino.name}
-//                                 className="h-10"
-//                               />
-//                             </td>
-//                             <td className="p-3">{casino.name}</td>
-//                             <td className="p-3">{casino.rating} ⭐</td>
-//                             <td className="p-3">
-//                               <button
-//                                 className="bg-red-500 text-white px-3 py-1 rounded mr-2 hover:bg-red-600 transition"
-//                                 onClick={() => handleDelete(casino._id)}
-//                               >
-//                                 Delete
-//                               </button>
-//                               <button
-//                                 className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
-//                                 onClick={() =>
-//                                   navigate(`/edit-casino/${casino._id}`)
-//                                 }
-//                               >
-//                                 Edit
-//                               </button>
-//                             </td>
-//                           </tr>
-//                         )}
-//                       </Draggable>
-//                     ))}
-//                     {provided.placeholder}
-//                   </tbody>
-//                 </table>
-//               )}
-//             </Droppable>
-//           </DragDropContext>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default CasinosAdmin;
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCasinos, deleteCasino, updateCasino } from "../api/casinos";
 import Sidebar from "../components/Sidebar";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-
+import Swal from 'sweetalert2';
 const CasinosAdmin = () => {
   const [casinos, setCasinos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -267,42 +78,42 @@ const CasinosAdmin = () => {
   // };
 
   const onDragEnd = async (result) => {
-  if (!result.destination) return;
-  if (result.source.index === result.destination.index) return;
+    if (!result.destination) return;
+    if (result.source.index === result.destination.index) return;
 
-  setIsUpdating(true);
-  const originalCasinos = [...casinos];
+    setIsUpdating(true);
+    const originalCasinos = [...casinos];
 
-  try {
-    // Create new ordered array
-    const newCasinos = Array.from(casinos);
-    const [movedCasino] = newCasinos.splice(result.source.index, 1);
-    newCasinos.splice(result.destination.index, 0, movedCasino);
+    try {
+      // Create new ordered array
+      const newCasinos = Array.from(casinos);
+      const [movedCasino] = newCasinos.splice(result.source.index, 1);
+      newCasinos.splice(result.destination.index, 0, movedCasino);
 
-    // Get the new order value from the destination index
-    const newOrder = result.destination.index + 1;
+      // Get the new order value from the destination index
+      const newOrder = result.destination.index + 1;
 
-    // Optimistic UI update with actual order values
-    const updatedCasinos = newCasinos.map((casino, index) => ({
-      ...casino,
-      order: index + 1,
-    }));
+      // Optimistic UI update with actual order values
+      const updatedCasinos = newCasinos.map((casino, index) => ({
+        ...casino,
+        order: index + 1,
+      }));
 
-    setCasinos(updatedCasinos);
+      setCasinos(updatedCasinos);
 
-    // Update backend with the new order for the moved casino only
-    await updateCasino(movedCasino._id, { order: newOrder });
+      // Update backend with the new order for the moved casino only
+      await updateCasino(movedCasino._id, { order: newOrder });
 
-    // Refresh the list from server to get final order values
-    const data = await getCasinos();
-    setCasinos(data.sort((a, b) => a.order - b.order));
-  } catch (err) {
-    setError(err.message || "Failed to update order");
-    setCasinos(originalCasinos);
-  } finally {
-    setIsUpdating(false);
-  }
-};
+      // Refresh the list from server to get final order values
+      const data = await getCasinos();
+      setCasinos(data.sort((a, b) => a.order - b.order));
+    } catch (err) {
+      setError(err.message || "Failed to update order");
+      setCasinos(originalCasinos);
+    } finally {
+      setIsUpdating(false);
+    }
+  };
 
   if (loading)
     return (
@@ -368,9 +179,8 @@ const CasinosAdmin = () => {
                           <tr
                             ref={provided.innerRef}
                             {...provided.draggableProps}
-                            className={`border-b hover:bg-gray-50 ${
-                              isUpdating ? "opacity-50" : ""
-                            }`}
+                            className={`border-b hover:bg-gray-50 ${isUpdating ? "opacity-50" : ""
+                              }`}
                           >
                             <td className="p-3" {...provided.dragHandleProps}>
                               <div className="flex items-center">
@@ -397,11 +207,32 @@ const CasinosAdmin = () => {
                             <td className="p-3">
                               <button
                                 className="bg-red-500 text-white px-3 py-1 rounded mr-2 hover:bg-red-600 transition disabled:opacity-50"
-                                onClick={() => handleDelete(casino._id)}
+                                onClick={() => {
+                                  Swal.fire({
+                                    title: 'Are you sure?',
+                                    text: "Do you really want to delete this casino? This action cannot be undone.",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#d33',
+                                    cancelButtonColor: '#3085d6',
+                                    confirmButtonText: 'Yes, delete it!',
+                                    cancelButtonText: 'Cancel',
+                                  }).then((result) => {
+                                    if (result.isConfirmed) {
+                                      handleDelete(casino._id);
+                                      Swal.fire(
+                                        'Deleted!',
+                                        'The casino has been deleted.',
+                                        'success'
+                                      );
+                                    }
+                                  });
+                                }}
                                 disabled={isUpdating}
                               >
                                 Delete
                               </button>
+
                               <button
                                 className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition disabled:opacity-50"
                                 onClick={() =>
