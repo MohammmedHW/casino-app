@@ -94,9 +94,13 @@ const Navbar = () => {
   return (  
     <nav className="bg-black bg-opacity-80 text-white fixed w-full top-0 z-50">
       <div className="container mx-auto flex justify-between items-center px-4 py-3">
-        <div className="text-3xl" style={{ fontFamily: 'BigNoodleTitling', letterSpacing: '0.1em' }}>
-          MR GAMBLERS
-        </div>
+       <div
+  className="text-4xl text-red-600"
+  style={{ fontFamily: 'BigNoodleTitling', letterSpacing: '0.1em' }}
+>
+  MR GAMBLERS
+</div>
+
 
         {/* Hamburger */}
         <div className="md:hidden text-2xl" onClick={toggleMobileMenu}>
@@ -115,7 +119,7 @@ const Navbar = () => {
               onMouseEnter={() => handleMouseEnter(idx)}
               onMouseLeave={handleMouseLeave}
             >
-              <Link to={item.path} className={`block ${getActiveClass(item.path)} px-2`}>
+              <Link to={item.path} className={`block ${getActiveClass(item.path)} px-2  text-xl`}>
                 {item.name}
               </Link>
 
@@ -124,7 +128,7 @@ const Navbar = () => {
                   className={`absolute left-0 top-full pt-2 transition-all duration-300 ease-in-out ${activeMenuIndex === idx ? 'opacity-100 visible' : 'opacity-0 invisible'
                     }`}
                 >
-                  <div className="bg-black text-white rounded shadow-lg z-50 w-64 border border-gray-700 md:max-h-none md:overflow-visible max-h-60 overflow-y-auto">
+                  <div className=" bg-black text-white rounded shadow-lg z-50 w-64 border border-gray-700 md:max-h-none md:overflow-visible max-h-60 overflow-y-auto">
                     {item.submenu.map((sub, subIdx) => (
                       <Link
                         key={subIdx}

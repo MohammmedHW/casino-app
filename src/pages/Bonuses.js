@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Navbar from '../components/Navbar';
 import casinoBg from '../assets/images/bonuses-bg.png';
 import SearchBox from '../components/searchbox';
@@ -29,7 +30,7 @@ const Bonuses = ({ type }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+const navigate = useNavigate();
   useEffect(() => {
     document.body.style.backgroundColor = "#1e1e1e";
     return () => {
@@ -53,6 +54,10 @@ const Bonuses = ({ type }) => {
 
     fetchCasinos();
   }, [type]);
+
+   const handlePlayClick = (name) => {
+    navigate(`/casinos/${name.toLowerCase().replace(/\s+/g, "-")}`);
+  };
 const [hotCasinos, setHotCasinos] = useState([]);
 const [recommendedByExpertss, setrecommendedByExperts] = useState([]);
 const [certifiedCasinos, setcertifiedCasinos] = useState([]);
@@ -145,7 +150,7 @@ const filterCasinos = (data) => {
               <p className="text-red-500">Error: {error}</p>
             ) : (
                filteredData.slice(0, 5).map((casino, index) => (
-                <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} />
+                <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} onClick={() => handlePlayClick(casino.name)} />
               ))
             )}
           </div>
@@ -180,7 +185,7 @@ const filterCasinos = (data) => {
          <div className="flex justify-center mb-10 rounded-2xl mx-auto max-w-[900px] p-10 bg-green-800 sm:mx-6 mx-8 lg:mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
               {hotCasinos.slice(0, 4).map((casino, index) => (
-                 <ExpertCard key={index} logo={casino.logo} name={casino.name} />
+                 <ExpertCard key={index} logo={casino.logo} name={casino.name} onClick={() => handlePlayClick(casino.name)} />
               ))}
             </div>
           </div>
@@ -207,7 +212,7 @@ const filterCasinos = (data) => {
                 <p>Error: {error}</p>
               ) : (
                 recommendedByExpertss.slice(0, 6).map((casino, index)=> (
-                  <ExpertCard key={index} logo={casino.logo} name={casino.name} />
+                  <ExpertCard key={index} logo={casino.logo} name={casino.name} onClick={() => handlePlayClick(casino.name)} />
                 ))
               )}
             </div>
@@ -245,7 +250,7 @@ const filterCasinos = (data) => {
                     <p>Error: {error}</p>
                   ) : (
                     certifiedCasinos.slice(0, 6).map((casino, index) => (
-                      <ExpertCard key={index} logo={casino.logo} name={casino.name} />
+                      <ExpertCard key={index} logo={casino.logo} name={casino.name} onClick={() => handlePlayClick(casino.name)} />
                     ))
                   )}
                 </div>

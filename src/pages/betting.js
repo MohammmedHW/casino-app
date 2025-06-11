@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import API from "../api/axios";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import SearchBox from "../components/searchbox";
 import Card from "../components/Card";
@@ -27,6 +28,7 @@ const Betting = ({ type }) => {
     const [certifiedData, setCertifiedData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         document.body.style.backgroundColor = "#1e1e1e";
@@ -52,7 +54,9 @@ const Betting = ({ type }) => {
 
         fetchBettingSites();
     }, [type]);
-
+ const handlePlayClick = (name) => {
+    navigate(`/casinos/${name.toLowerCase().replace(/\s+/g, "-")}`);
+  };
     const filterDataByType = (data) => {
         const tag = BETTING_TYPE_TAGS[type];
         const filtered = data.filter(
@@ -90,7 +94,7 @@ const Betting = ({ type }) => {
                             <p className="text-red-500">Error: {error}</p>
                         ) : (
                             filteredData.slice(0, 5).map((item, index) => (
-                                <Card key={index} name={item.name} rating={item.rating} bgImage={item.logo} />
+                                <Card key={index} name={item.name} rating={item.rating} bgImage={item.logo} onClick={() => handlePlayClick(item.name)} />
                             ))
                         )}
                     </div>
@@ -113,7 +117,7 @@ const Betting = ({ type }) => {
                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 w-full">
                             {hot.slice(0, 4).map((item, index) => (
 
-                                <ExpertCard key={index} bgImage={item.logo} name={item.name} />
+                                <ExpertCard key={index} bgImage={item.logo} name={item.name} onClick={() => handlePlayClick(item.name)} />
                             ))}
                         </div>
                     </div>
@@ -122,7 +126,7 @@ const Betting = ({ type }) => {
                     <div className="flex justify-center items-center">
                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                             {expert.slice(0, 6).map((item, index) => (
-                                <ExpertCard key={index} logo={item.logo} name={item.name} />
+                                <ExpertCard key={index} logo={item.logo} name={item.name} onClick={() => handlePlayClick(item.name)} />
                             ))}
                         </div>
                     </div>
@@ -139,7 +143,7 @@ const Betting = ({ type }) => {
                         <div className="flex justify-center items-center">
                             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                                 {certifiedData.slice(0, 6).map((item, index) => (
-                                    <ExpertCard key={index} logo={item.logo} name={item.name} />
+                                    <ExpertCard key={index} logo={item.logo} name={item.name} onClick={() => handlePlayClick(item.name)}/>
                                 ))}
                             </div>
                         </div>
@@ -154,7 +158,7 @@ const Betting = ({ type }) => {
                         <div className="flex justify-center items-center">
                             <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-8">
                                 {filteredData.slice(0, 6).map((casino, index) => (
-                                    <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} />
+                                    <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo}/>
                                 ))}
                             </div>
                         </div>

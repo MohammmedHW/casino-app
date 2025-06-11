@@ -23,12 +23,6 @@ import GameIcon3 from "../assets/images/Game Icon (2).png";
 import GameIcon4 from "../assets/images/Game Icon (3).png";
 
 
-import Expert1 from "../assets/images/expert1.png";
-import Expert2 from "../assets/images/expert2.png";
-import Expert3 from "../assets/images/expert3.png";
-import Expert4 from "../assets/images/expert4.png";
-import Expert5 from "../assets/images/expert5.png";
-import Expert6 from "../assets/images/expert6.png";
 
 // Category images
 import categoriesImg1 from "../assets/images/image15.png";
@@ -238,14 +232,7 @@ const categories = [
 
 
 
-  const recommendedCasinos = [
-    { logo: Expert1, name: "Winnerz Casino" },
-    { logo: Expert2, name: "WazBee Casino" },
-    { logo: Expert3, name: "Spirit Casino" },
-    { logo: Expert4, name: "RoySpins Casino" },
-    { logo: Expert5, name: "Vavada Casino" },
-    { logo: Expert6, name: "Wintopia Casino" },
-  ];
+ 
 
   const handlePlayClick = (name) => {
     navigate(`/casinos/${name.toLowerCase().replace(/\s+/g, "-")}`);

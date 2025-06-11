@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Navbar from '../components/Navbar';
 import casinoBg from '../assets/images/casino-bg.png';
 import SearchBox from '../components/searchbox';
@@ -26,6 +27,7 @@ const Casinos = ({ type }) => {
   const [casinosData, setCasinosData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.body.style.backgroundColor = "#1e1e1e";
@@ -50,31 +52,36 @@ const Casinos = ({ type }) => {
 
     fetchCasinos();
   }, [type]);
+  
+  const handlePlayClick = (name) => {
+    navigate(`/casinos/${name.toLowerCase().replace(/\s+/g, "-")}`);
+  };
   const [filteredData, setFilteredData] = useState([]);
   const [hotCasinos, setHotCasinos] = useState([]);
   const [recommendedByExpertss, setrecommendedByExperts] = useState([]);
   const [certifiedCasinos, setcertifiedCasinos] = useState([]);
 
   function filt(data) {
-  if (!type || typeof type !== "string") return;
+    if (!type || typeof type !== "string") return;
 
-  // Filter all by tag first
-  const tagFiltered = data.filter(
-    casino =>
-      Array.isArray(casino.tags) &&
-      casino.tags.some(tag => tag.toLowerCase().includes(type.toLowerCase()))
-  );
+    // Filter all by tag first
+    const tagFiltered = data.filter(
+      casino =>
+        Array.isArray(casino.tags) &&
+        casino.tags.some(tag => tag.toLowerCase().includes(type.toLowerCase()))
+    );
 
-  // Now filter by specific flags *within* the tag-matching data
-  const hot = tagFiltered.filter(casino => casino.hotCasino === true);
-  const recExperts = tagFiltered.filter(casino => casino.recommendedByExperts === true);
-  const certified = tagFiltered.filter(casino => casino.certifiedCasino === true);
 
-  setFilteredData(tagFiltered);
-  setHotCasinos(hot);
-  setrecommendedByExperts(recExperts);
-  setcertifiedCasinos(certified);
-}
+    // Now filter by specific flags *within* the tag-matching data
+    const hot = tagFiltered.filter(casino => casino.hotCasino === true);
+    const recExperts = tagFiltered.filter(casino => casino.recommendedByExperts === true);
+    const certified = tagFiltered.filter(casino => casino.certifiedCasino === true);
+
+    setFilteredData(tagFiltered);
+    setHotCasinos(hot);
+    setrecommendedByExperts(recExperts);
+    setcertifiedCasinos(certified);
+  }
 
 
   const categories = [
@@ -139,7 +146,7 @@ const Casinos = ({ type }) => {
               <p className="text-red-500">Error: {error}</p>
             ) : (
               filteredData.slice(0, 5).map((casino, index) => (
-                <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} />
+                <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} onClick={() => handlePlayClick(casino.name)} />
               ))
             )}
           </div>
@@ -174,7 +181,7 @@ const Casinos = ({ type }) => {
           <div className="flex justify-center mb-10 rounded-2xl mx-auto max-w-[900px] p-10 bg-green-800 sm:mx-6 mx-8 lg:mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
               {hotCasinos.slice(0, 4).map((casino, index) => (
-                <ExpertCard key={index} logo={casino.logo} name={casino.name} />
+                <ExpertCard key={index} logo={casino.logo} name={casino.name} onClick={() => handlePlayClick(casino.name)} />
               ))}
             </div>
           </div>
@@ -202,7 +209,7 @@ const Casinos = ({ type }) => {
                 <p>Error: {error}</p>
               ) : (
                 recommendedByExpertss.slice(0, 6).map((casino, index) => (
-                  <ExpertCard key={index} logo={casino.logo} name={casino.name} />
+                  <ExpertCard key={index} logo={casino.logo} name={casino.name} onClick={() => handlePlayClick(casino.name)} />
                 ))
               )}
             </div>
@@ -240,7 +247,7 @@ const Casinos = ({ type }) => {
                     <p>Error: {error}</p>
                   ) : (
                     certifiedCasinos.slice(0, 6).map((casino, index) => (
-                      <ExpertCard key={index} logo={casino.logo} name={casino.name} />
+                      <ExpertCard key={index} logo={casino.logo} name={casino.name} onClick={() => handlePlayClick(casino.name)} />
                     ))
                   )}
                 </div>
@@ -283,6 +290,7 @@ const Casinos = ({ type }) => {
                         name={casino.name}
                         rating={casino.rating}
                         bgImage={casino.logo}
+                        onClick={() => handlePlayClick(casino.name)}
                       />
                     ))
                   )}
