@@ -152,7 +152,7 @@ const navigate = useNavigate();
           <div className="flex justify-center items-center">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
               {expertSlots.slice(0, 6).map((casino, index) => (
-                <ExpertCard key={index} logo={casino.logo} name={casino.name} onClick={() => handlePlayClick(casino.name)} />
+               <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} onClick={() => handlePlayClick(casino.name)} />
               ))}
             </div>
           </div>
@@ -169,7 +169,7 @@ const navigate = useNavigate();
             <div className="flex justify-center items-center">
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                 {certifiedSlots.slice(0, 6).map((casino, index) => (
-                  <ExpertCard key={index} logo={casino.logo} name={casino.name} onClick={() => handlePlayClick(casino.name)} />
+                  <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} onClick={() => handlePlayClick(casino.name)} />
                 ))}
               </div>
             </div>

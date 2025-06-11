@@ -100,7 +100,7 @@ const CasinoDetail = () => {
                   Website:{" "}
                 </p>
                 <a
-                  href={casino.generalInfo?.website || "#"}
+                  href={casino.editorView || "#"}
                   className="text-blue-400 underline text-lg break-all ml-1"
                   target="_blank"
                   rel="noopener noreferrer"
