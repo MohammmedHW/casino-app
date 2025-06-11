@@ -12,7 +12,7 @@ import certified from "../assets/images/Certified.png";
 import leftCircle from "../assets/images/lefteclipse.png";
 import rightCircle from "../assets/images/righteclipse.png";
 
-// Mapping slot types to their tag names in the DB
+
 const SLOT_TYPE_TAGS = {
   video: "Video Slots",
   classic: "Classic Slots",

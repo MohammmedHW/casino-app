@@ -207,7 +207,7 @@ const filterCasinos = (data) => {
                 <p>Error: {error}</p>
               ) : (
                 recommendedByExpertss.slice(0, 6).map((casino, index) => (
-                  <ExpertCard key={index} logo={casino.logo} name={casino.name} onClick={() => handlePlayClick(casino.name)} />
+                 <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} onClick={() => handlePlayClick(casino.name)} />
                 ))
               )}
             </div>
@@ -245,7 +245,7 @@ const filterCasinos = (data) => {
                     <p>Error: {error}</p>
                   ) : (
                     certifiedCasinos.slice(0, 6).map((casino, index) => (
-                      <ExpertCard key={index} logo={casino.logo} name={casino.name} onClick={() => handlePlayClick(casino.name)} />
+                     <Card key={index} name={casino.name} rating={casino.rating} bgImage={casino.logo} onClick={() => handlePlayClick(casino.name)} />
                     ))
                   )}
                 </div>
